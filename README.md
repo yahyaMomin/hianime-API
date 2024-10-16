@@ -1,5 +1,7 @@
 # Bun + Hono Hianime Webscraper API 🚀
 
+# project still on construction
+
 ![Bun](https://img.shields.io/badge/bun-fast--runtime-blue)
 ![Hono](https://img.shields.io/badge/hono-ultrafast--framework-green)
 ![License](https://img.shields.io/badge/license-MIT-brightgreen)
