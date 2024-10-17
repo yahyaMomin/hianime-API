@@ -1,8 +1,8 @@
 import { interceptor } from "../axios/interceptor";
-import { extractSpotlight, extractTrending } from "../extractor/extractor";
+import { extractHomePage } from "../extractor/extractor";
 import { setResponse, setError } from "../helper/response";
 
-export const getSpotlight = async (c) => {
+export const getHomePage = async (c) => {
    try {
       const obj = await interceptor("/home");
 
@@ -10,23 +10,12 @@ export const getSpotlight = async (c) => {
          return setError(c, 400, "make sure given endpoint is correct");
       }
 
-      const response = extractSpotlight(obj.data);
+      const response = extractHomePage(obj.data);
 
       return setResponse(c, 200, response);
    } catch (error) {
-      return setError(c, 500, "something went wrong");
-   }
-};
+      console.log(error.message);
 
-export const getTrending = async (c) => {
-   try {
-      const obj = await interceptor("/home");
-
-      if (!obj.status) setError(c, 400, "make sure the given endpoint is correct");
-      const response = extractTrending(obj.data);
-
-      return setResponse(c, 200, response);
-   } catch (error) {
       return setError(c, 500, "something went wrong");
    }
 };

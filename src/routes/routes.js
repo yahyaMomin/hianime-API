@@ -1,9 +1,8 @@
 import { Hono } from "hono";
-import { getSpotlight, getTrending } from "../parser/parser";
+import { getHomePage } from "../parser/parser";
 
 const routes = new Hono();
 
-routes.get("/spotlight", getSpotlight);
-routes.get("/trending", getTrending);
+routes.get("/home", getHomePage);
 
 export default routes;

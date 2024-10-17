@@ -1,11 +1,28 @@
 import * as cheerio from "cheerio";
 
-export const extractSpotlight = (html) => {
+export const extractHomePage = (html) => {
    const $ = cheerio.load(html);
 
-   const response = [];
+   const response = {
+      spotlight: [],
+      trending: [],
+      topAiring: [],
+      mostPopular: [],
+      mostFavorite: [],
+      latestCompleted: [],
+      latestEpisode: [],
+      newAdded: [],
+      topUpcoming: [],
+      genres: [],
+   };
 
-   $(".deslide-wrap .swiper-wrapper .swiper-slide").each((i, el) => {
+   const $spotlight = $(".deslide-wrap .swiper-wrapper .swiper-slide");
+   const $trending = $("#trending-home .swiper-container .swiper-slide");
+   const $featured = $("#anime-featured .anif-blocks .row .anif-block");
+   const $home = $(".block_area.block_area_home");
+   const $genres = $(".sb-genre-list");
+
+   $($spotlight).each((i, el) => {
       const obj = {
          title: null,
          alternativeTitle: null,
@@ -23,7 +40,6 @@ export const extractSpotlight = (html) => {
             eps: null,
          },
       };
-
       obj.rank = i + 1;
       obj.id = $(el).find(".desi-buttons a").first().attr("href").split("/").at(-1);
       obj.poster = $(el).find(".deslide-cover .film-poster-img").attr("data-src");
@@ -48,18 +64,9 @@ export const extractSpotlight = (html) => {
          : details.find(".tick-sub").text().trim();
       obj.episodes.eps = Number(epsText);
 
-      response.push(obj);
+      response.spotlight.push(obj);
    });
-
-   return response;
-};
-
-export const extractTrending = (html) => {
-   const $ = cheerio.load(html);
-
-   const response = [];
-
-   $("#trending-home .swiper-container .swiper-slide").each((i, el) => {
+   $($trending).each((i, el) => {
       const obj = {
          title: null,
          alternativeTitle: null,
@@ -79,7 +86,101 @@ export const extractTrending = (html) => {
       obj.poster = imageEl.find("img").attr("data-src");
       obj.id = imageEl.attr("href").split("/").at(-1);
 
-      response.push(obj);
+      response.trending.push(obj);
    });
+
+   $($featured).each((i, el) => {
+      const data = $(el)
+         .find(".anif-block-ul ul li")
+         .map((index, item) => {
+            const obj = {
+               title: null,
+               alternativeTitle: null,
+               id: null,
+               poster: null,
+               type: null,
+               episodes: {
+                  sub: null,
+                  dub: null,
+                  eps: null,
+               },
+            };
+            const titleEl = $(item).find(".film-detail .film-name a");
+            obj.title = titleEl.attr("title");
+            obj.alternativeTitle = titleEl.attr("data-jname");
+            obj.id = titleEl.attr("href").split("/").at(-1);
+
+            obj.poster = $(item).find(".film-poster .film-poster-img").attr("data-src");
+            obj.type = $(item).find(".fd-infor .fdi-item").text();
+
+            obj.episodes.sub = Number($(item).find(".fd-infor .tick-sub").text());
+            obj.episodes.dub = Number($(item).find(".fd-infor .tick-dub").text());
+
+            const epsText = $(item).find(".fd-infor .tick-eps").length
+               ? $(item).find(".fd-infor .tick-eps").text()
+               : $(item).find(".fd-infor .tick-sub").text();
+
+            obj.episodes.eps = Number(epsText);
+
+            return obj;
+         })
+         .get();
+
+      const dataType = $(el).find(".anif-block-header").text().replace(/\s+/g, "");
+      const normalizedDataType = dataType.charAt(0).toLowerCase() + dataType.slice(1);
+
+      response[normalizedDataType] = data;
+   });
+
+   $($home).each((i, el) => {
+      const data = $(el)
+         .find(".tab-content .film_list-wrap .flw-item")
+         .map((index, item) => {
+            const obj = {
+               title: null,
+               alternativeTitle: null,
+               id: null,
+               poster: null,
+               episodes: {
+                  sub: null,
+                  dub: null,
+                  eps: null,
+               },
+            };
+            const titleEl = $(item).find(".film-detail .film-name .dynamic-name");
+            obj.title = titleEl.attr("title");
+            obj.alternativeTitle = titleEl.attr("data-jname");
+            obj.id = titleEl.attr("href").split("/").at(-1);
+
+            obj.poster = $(item).find(".film-poster img").attr("data-src");
+
+            const episodesEl = $(item).find(".film-poster .tick");
+            obj.episodes.sub = Number($(episodesEl).find(".tick-sub").text());
+            obj.episodes.dub = Number($(episodesEl).find(".tick-dub").text());
+
+            const epsText = $(episodesEl).find(".tick-eps").length
+               ? $(episodesEl).find(".tick-eps").text()
+               : $(episodesEl).find(".tick-sub").text();
+
+            obj.episodes.eps = Number(epsText);
+
+            return obj;
+         })
+         .get();
+
+      const dataType = $(el).find(".cat-heading").text().replace(/\s+/g, "");
+      const normalizedDataType = dataType.charAt(0).toLowerCase() + dataType.slice(1);
+
+      normalizedDataType === "newOnHiAnime"
+         ? (response.newAdded = data)
+         : (response[normalizedDataType] = data);
+   });
+
+   $($genres)
+      .find("li")
+      .each((i, el) => {
+         const genre = $(el).find("a").attr("title").toLocaleLowerCase();
+         response.genres.push(genre);
+      });
    return response;
 };
