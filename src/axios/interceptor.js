@@ -2,6 +2,8 @@ import axios from "axios";
 
 const baseUrl = "https://hianime.to";
 export const interceptor = async (endpoint) => {
+   console.log(baseUrl + endpoint);
+
    try {
       const { data } = await axios.get(`${baseUrl}/${endpoint}`);
 
