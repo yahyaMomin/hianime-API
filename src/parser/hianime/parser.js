@@ -1,4 +1,5 @@
 import { interceptor } from "../../axios/interceptor";
+import { extractListPage } from "../../extractor/hianime/az_list";
 import { extractHomePage } from "../../extractor/hianime/home_page";
 import { extractInfoPage } from "../../extractor/hianime/info_page";
 import { setResponse, setError } from "../../helper/response";
@@ -31,6 +32,28 @@ export const getInfo = async (c) => {
       }
       const response = extractInfoPage(obj.data);
 
+      return setResponse(c, 200, response);
+   } catch (error) {
+      console.log(error.message);
+
+      return setError(c, 500, "something went wrong");
+   }
+};
+
+export const getAzAnime = async (c) => {
+   try {
+      const category = c.req.param("category") || null;
+      const page = c.req.query("page") || 1;
+      const endpoint = category ? `/az-list/${category}?page=${page}` : `/az-list?page=${page}`;
+
+      const obj = await interceptor(endpoint);
+
+      if (!obj.status) {
+         return setError(c, 400, "make sure given endpoint is correct");
+      }
+      const response = extractListPage(obj.data);
+
+      if (response.response.length < 1) return setError(c, 404, "page not found");
       return setResponse(c, 200, response);
    } catch (error) {
       console.log(error.message);
