@@ -1,5 +1,5 @@
 import { interceptor } from "../../axios/interceptor";
-import { extractListPage } from "../../extractor/hianime/az_list";
+import { extractListPage } from "../../extractor/hianime/list_page";
 import { extractHomePage } from "../../extractor/hianime/home_page";
 import { extractInfoPage } from "../../extractor/hianime/info_page";
 import { setResponse, setError } from "../../helper/response";
@@ -40,11 +40,27 @@ export const getInfo = async (c) => {
    }
 };
 
-export const getAzAnime = async (c) => {
+export const getListPage = async (c) => {
    try {
+      const validateQueries = [
+         "top-airing",
+         "most-popular",
+         "most-favorite",
+         "completed",
+         "recently-added",
+         "recently-updated",
+         "top-upcoming",
+         "genre",
+         "az-list",
+      ];
+      let query = c.req.param("query") || null;
+      query = query ? query.toLowerCase() : query;
+
+      if (!query && !validateQueries.includes(query)) return setError(c, 404, "invalid query");
+
       const category = c.req.param("category") || null;
       const page = c.req.query("page") || 1;
-      const endpoint = category ? `/az-list/${category}?page=${page}` : `/az-list?page=${page}`;
+      const endpoint = category ? `/${query}/${category}?page=${page}` : `/${query}?page=${page}`;
 
       const obj = await interceptor(endpoint);
 
@@ -57,7 +73,6 @@ export const getAzAnime = async (c) => {
       return setResponse(c, 200, response);
    } catch (error) {
       console.log(error.message);
-
       return setError(c, 500, "something went wrong");
    }
 };

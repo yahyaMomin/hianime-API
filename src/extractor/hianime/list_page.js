@@ -22,11 +22,11 @@ export const extractListPage = (html) => {
       obj.poster = $(el).find(".film-poster .film-poster-img").attr("data-src");
       obj.episodes.sub = Number($(el).find(".film-poster .tick .tick-sub").text());
       obj.episodes.dub = Number($(el).find(".film-poster .tick .tick-dub").text());
-      obj.episodes.eps = Number(
-         $(el).find(".film-poster .tick .tick-eps")
-            ? $(el).find(".film-poster .tick .tick-eps").text()
-            : $(el).find(".film-poster .tick .tick-sub").text()
-      );
+
+      const epsEl = $(el).find(".film-poster .tick .tick-eps").length
+         ? $(el).find(".film-poster .tick .tick-eps").text()
+         : $(el).find(".film-poster .tick .tick-sub").text();
+      obj.episodes.eps = Number(epsEl);
 
       const titleEL = $(el).find(".film-detail .film-name .dynamic-name");
 

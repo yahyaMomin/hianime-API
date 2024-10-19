@@ -1,10 +1,13 @@
 import { Hono } from "hono";
-import { getAzAnime, getHomePage, getInfo } from "../../parser/hianime/parser";
+import { getHomePage, getInfo, getListPage } from "../../parser/hianime/parser";
 
 const router = new Hono();
 
+router.get("/", (c) => {
+   return c.text("welcome to hianime API ▶︎  ");
+});
 router.get("/home", getHomePage);
-router.get("/az-list/:category?", getAzAnime);
-router.get("/:id", getInfo);
+router.get("/info/:id", getInfo);
+router.get("/all/:query/:category?", getListPage);
 
 export default router;

@@ -42,11 +42,11 @@ export const extractInfoPage = (html) => {
    const info = main.find(".film-stats .tick");
 
    obj.rating = info.find(".tick-pg").text();
-   obj.episodes.sub = info.find(".tick-sub").text();
-   obj.episodes.dub = info.find(".tick-dub").text();
+   obj.episodes.sub = Number(info.find(".tick-sub").text());
+   obj.episodes.dub = Number(info.find(".tick-dub").text());
    obj.episodes.eps = info.find(".tick-eps").length
-      ? info.find(".tick-eps").text()
-      : info.find(".tick-sub").text();
+      ? Number(info.find(".tick-eps").text())
+      : Number(info.find(".tick-sub").text());
 
    obj.type = info.find(".item").first().text();
 
