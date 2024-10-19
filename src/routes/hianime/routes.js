@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import { getHomePage, getInfo, getListPage } from "../../parser/hianime/parser";
+import { getHomePage, getInfo, getListPage, getSearchPage } from "../../parser/hianime/parser";
 
 const router = new Hono();
 
@@ -9,5 +9,6 @@ router.get("/", (c) => {
 router.get("/home", getHomePage);
 router.get("/info/:id", getInfo);
 router.get("/all/:query/:category?", getListPage);
+router.get("/search", getSearchPage);
 
 export default router;

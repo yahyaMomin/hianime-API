@@ -76,3 +76,25 @@ export const getListPage = async (c) => {
       return setError(c, 500, "something went wrong");
    }
 };
+
+export const getSearchPage = async (c) => {
+   try {
+      const keyword = c.req.query("keyword") || null;
+      const page = c.req.query("page") || 1;
+
+      if (!keyword) return setError(c, 404, "query is required");
+
+      const endpoint = `/search?keyword=${keyword.toLowerCase().replace(" ", "+")}&page=${page}`;
+      const obj = await interceptor(endpoint);
+
+      if (!obj.status) {
+         return setError(c, 400, "make sure given endpoint is correct");
+      }
+      const response = extractListPage(obj.data);
+
+      return setResponse(c, 200, response);
+   } catch (error) {
+      console.log(error.message);
+      return setError(c, 500, "something went wrong");
+   }
+};
