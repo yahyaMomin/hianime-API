@@ -6,9 +6,3 @@ const server = Bun.serve({
 });
 
 console.log("server is running on port " + server.port);
-
-const url = "https://hianime.to/watch/one-piece-100?ep=123";
-
-const newUrl = new URL(url.split("?ep=")[0]).href;
-
-console.log(newUrl);

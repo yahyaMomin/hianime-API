@@ -1,10 +1,7 @@
 import axios from "axios";
-import { serveStatic } from "hono/serve-static";
 
 const baseUrl = "https://hianime.to";
 export const interceptor = async (endpoint) => {
-   console.log(baseUrl + endpoint);
-
    try {
       const { data } = await axios.get(baseUrl + endpoint);
 
@@ -24,11 +21,6 @@ export const interceptor = async (endpoint) => {
    }
 };
 export const fetchFromApi = async (Referer, endpoint) => {
-   console.log("_________________");
-   console.log("referer is -->  " + baseUrl + Referer);
-   console.log("endpoint is --> " + baseUrl + endpoint);
-   console.log("_________________");
-
    const headers = {
       Referer: baseUrl + Referer,
       "User-Agent":
@@ -44,9 +36,6 @@ export const fetchFromApi = async (Referer, endpoint) => {
 
       if (!html) throw new Error("page not found");
 
-      const blob = new Blob([html], { type: "text/html" });
-
-      await Bun.write("response.html", blob);
       const obj = {
          status: true,
          data: html,
@@ -63,11 +52,6 @@ export const fetchFromApi = async (Referer, endpoint) => {
    }
 };
 export const fetchSources = async (Referer, endpoint) => {
-   console.log("_________________");
-   console.log("referer is -->  " + baseUrl + Referer);
-   console.log("endpoint is --> " + baseUrl + endpoint);
-   console.log("_________________");
-
    const headers = {
       Referer: baseUrl + Referer,
       "User-Agent":

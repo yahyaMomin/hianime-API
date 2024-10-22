@@ -160,6 +160,8 @@ export const getSources = async (c) => {
 
       if (!episodeId) return setError(c, 400, "episodeId is required");
 
+      const episode = episodeId.includes("ep=");
+      if (!episode) return setError(c, 400, "episode  is required");
       const serverIdsHTML = await fetchFromApi(
          episodeId,
          `/ajax/v2/episode/servers?episodeId=${episodeId.split("ep=").at(-1)}`
@@ -175,14 +177,16 @@ export const getSources = async (c) => {
          return setError(c, 400, "make sure given endpoint is correct");
       }
 
-      const response = await extractSource(obj.data, audio, episodeId, server);
+      const params = {
+         data: obj.data,
+         audio,
+         episodeId,
+         server,
+      };
+      const response = await extractSource(params);
       return setResponse(c, 200, response);
    } catch (error) {
       console.log(error.message);
       return setError(c, 500, "something went wrong");
    }
 };
-
-//  1) get the episode id from episode list     -->              /ajax/v2/episode/list/${idNum}
-//  2) get the servers by episode id given by episode list   --> /ajax/v2/episode/servers?episodeId=${episodeId}
-//  3) get the source url by serverId given by servers        --> /ajax/v2/episode/sources?id=${serverId}
