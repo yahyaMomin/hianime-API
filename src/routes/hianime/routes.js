@@ -4,6 +4,7 @@ import {
    getHomePage,
    getInfo,
    getListPage,
+   getRecommendation,
    getSearchPage,
    getServers,
    getSources,
@@ -18,6 +19,7 @@ router.get("/home", getHomePage);
 router.get("/anime/:id", getInfo);
 router.get("/animes/:query/:category?", getListPage);
 router.get("/search", getSearchPage);
+router.get("/recommendation/:id", getRecommendation);
 router.get("/episodes/:id", getEpisodes);
 router.get("/servers", getServers);
 router.get("/sources", getSources);

@@ -6,6 +6,7 @@ import { setResponse, setError } from "../../helper/response";
 import { extractEpisodes } from "../../extractor/hianime/episode_page";
 import { extractServers } from "../../extractor/hianime/servers";
 import { extractSource } from "../../extractor/hianime/episode_sources";
+import { extractRecommendation } from "../../extractor/hianime/recommendation";
 
 export const getHomePage = async (c) => {
    try {
@@ -43,6 +44,25 @@ export const getInfo = async (c) => {
    }
 };
 
+export const getRecommendation = async (c) => {
+   try {
+      const id = c.req.param("id");
+
+      if (!id) return setError(c, 404, "id is required");
+
+      const obj = await interceptor(`/${id}`);
+      if (!obj.status) {
+         return setError(c, 400, "make sure given endpoint is correct");
+      }
+      const response = extractRecommendation(obj.data);
+
+      if (response.length < 1) return setError(c, 404, "page not found");
+      return setResponse(c, 200, response);
+   } catch (error) {
+      console.log(error.message);
+      return setError(c, 500, "something went wrong");
+   }
+};
 export const getListPage = async (c) => {
    try {
       const validateQueries = [
