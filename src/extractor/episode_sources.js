@@ -14,6 +14,7 @@ export const extractSource = async (res) => {
    const { data } = await axios.get(url + id, {
       headers: {
          Referer: urlObj.href,
+         "Accept-Encoding": "gzip, deflate",
          "User-Agent":
             "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:131.0) Gecko/20100101 Firefox/131.0",
          "X-Requested-With": "XMLHttpRequest",
