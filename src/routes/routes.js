@@ -8,7 +8,7 @@ import {
    getSearchPage,
    getServers,
    getSources,
-} from "../../parser/hianime/parser";
+} from "../parser/parser";
 
 const router = new Hono();
 

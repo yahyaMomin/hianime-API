@@ -1,12 +1,12 @@
-import { fetchFromApi, fetchSources, interceptor } from "../../axios/interceptor";
-import { extractListPage } from "../../extractor/hianime/list_page";
-import { extractHomePage } from "../../extractor/hianime/home_page";
-import { extractInfoPage } from "../../extractor/hianime/info_page";
-import { setResponse, setError } from "../../helper/response";
-import { extractEpisodes } from "../../extractor/hianime/episode_page";
-import { extractServers } from "../../extractor/hianime/servers";
-import { extractSource } from "../../extractor/hianime/episode_sources";
-import { extractRecommendation } from "../../extractor/hianime/recommendation";
+import { fetchFromApi, fetchSources, interceptor } from "../axios/interceptor.js";
+import { extractListPage } from "../extractor/list_page.js";
+import { extractHomePage } from "../extractor/home_page.js";
+import { extractInfoPage } from "../extractor/info_page.js";
+import { setResponse, setError } from "../helper/response.js";
+import { extractEpisodes } from "../extractor/episode_page.js";
+import { extractServers } from "../extractor/servers.js";
+import { extractSource } from "../extractor/episode_sources.js";
+import { extractRecommendation } from "../extractor/recommendation.js";
 
 export const getHomePage = async (c) => {
    try {

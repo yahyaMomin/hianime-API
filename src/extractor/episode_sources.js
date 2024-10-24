@@ -1,5 +1,5 @@
 import axios from "axios";
-import extract from "../../utils/megacloud";
+import extract from "../utils/megacloud";
 
 export const extractSource = async (res) => {
    const { link } = res.data;
