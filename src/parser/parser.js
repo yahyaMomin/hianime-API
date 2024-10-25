@@ -7,6 +7,10 @@ import { extractEpisodes } from "../extractor/episode_page.js";
 import { extractServers } from "../extractor/servers.js";
 import { extractSource } from "../extractor/episode_sources.js";
 import { extractRecommendation } from "../extractor/recommendation.js";
+import { extractCharacters } from "../extractor/characters.js";
+import { extractRelated } from "../extractor/related.js";
+import { extractCharacterInfo } from "../extractor/character_info.js";
+import { extractActor } from "../extractor/actor_info.js";
 
 export const getHomePage = async (c) => {
    try {
@@ -63,6 +67,89 @@ export const getRecommendation = async (c) => {
       return setError(c, 500, "something went wrong");
    }
 };
+export const getCharacters = async (c) => {
+   try {
+      const id = c.req.param("id");
+      const page = c.req.query("page") || 1;
+
+      if (!id) return setError(c, 404, "id is required");
+
+      const idNum = id.split("-").pop();
+      const endpoint = `/ajax/character/list/${idNum}?page=${page}`;
+      const obj = await fetchFromApi(id, endpoint);
+      if (!obj.status) {
+         return setError(c, 400, "make sure given endpoint is correct");
+      }
+
+      const response = extractCharacters(obj.data);
+
+      if (response.length < 1) return setError(c, 404, "page not found");
+      return setResponse(c, 200, response);
+   } catch (error) {
+      console.log(error.message);
+      return setError(c, 500, "something went wrong");
+   }
+};
+export const getCharacter_info = async (c) => {
+   try {
+      const id = c.req.param("id");
+
+      if (!id) return setError(c, 404, "id is required");
+
+      const obj = await interceptor(`/character/${id}`);
+      if (!obj.status) {
+         return setError(c, 400, "make sure given endpoint is correct");
+      }
+
+      const response = extractActor(obj.data);
+
+      if (response.length < 1) return setError(c, 404, "page not found");
+      return setResponse(c, 200, response);
+   } catch (error) {
+      console.log(error.message);
+      return setError(c, 500, "something went wrong");
+   }
+};
+export const getActor_info = async (c) => {
+   try {
+      const id = c.req.param("id");
+
+      if (!id) return setError(c, 404, "id is required");
+
+      const obj = await interceptor(`/people/${id}`);
+      if (!obj.status) {
+         return setError(c, 400, "make sure given endpoint is correct");
+      }
+
+      const response = extractActor(obj.data);
+
+      if (response.length < 1) return setError(c, 404, "page not found");
+      return setResponse(c, 200, response);
+   } catch (error) {
+      console.log(error.message);
+      return setError(c, 500, "something went wrong");
+   }
+};
+export const getRelated = async (c) => {
+   try {
+      const id = c.req.param("id");
+
+      if (!id) return setError(c, 404, "id is required");
+
+      const obj = await interceptor(`/${id}`);
+      if (!obj.status) {
+         return setError(c, 400, "make sure given endpoint is correct");
+      }
+
+      const response = extractRelated(obj.data);
+
+      return setResponse(c, 200, response);
+   } catch (error) {
+      console.log(error.message);
+      return setError(c, 500, "something went wrong");
+   }
+};
+
 export const getListPage = async (c) => {
    try {
       const validateQueries = [
@@ -75,11 +162,18 @@ export const getListPage = async (c) => {
          "top-upcoming",
          "genre",
          "az-list",
+         "subbed-anime",
+         "dubbed-anime",
+         "movie",
+         "tv",
+         "ova",
+         "ona",
+         "special",
+         "events",
       ];
-      let query = c.req.param("query") || null;
-      query = query ? query.toLowerCase() : query;
+      const query = c.req.param("query").toLowerCase() || null;
 
-      if (!query && !validateQueries.includes(query)) return setError(c, 404, "invalid query");
+      if (!validateQueries.includes(query)) return setError(c, 404, "invalid query");
 
       const category = c.req.param("category") || null;
       const page = c.req.query("page") || 1;
@@ -107,12 +201,17 @@ export const getSearchPage = async (c) => {
 
       if (!keyword) return setError(c, 404, "query is required");
 
-      const endpoint = `/search?keyword=${keyword.toLowerCase().replace(" ", "+")}&page=${page}`;
+      const noSpaceKeyword = keyword.trim().toLowerCase().replace(/\s+/g, "+");
+
+      console.log(noSpaceKeyword);
+
+      const endpoint = `/search?keyword=${noSpaceKeyword}&page=${page}`;
       const obj = await interceptor(endpoint);
 
       if (!obj.status) {
          return setError(c, 400, "make sure given endpoint is correct");
       }
+
       const response = extractListPage(obj.data);
 
       return setResponse(c, 200, response);

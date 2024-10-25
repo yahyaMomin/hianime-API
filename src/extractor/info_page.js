@@ -29,9 +29,11 @@ export const extractInfoPage = (html) => {
       genres: [],
       studios: null,
       producers: [],
+      moreSeasons: [],
    };
 
    const main = $("#ani_detail .anis-content");
+   const moreSeasons = $("#main-content .block_area-seasons");
 
    obj.poster = main.find(".film-poster .film-poster-img").attr("src");
 
@@ -69,8 +71,17 @@ export const extractInfoPage = (html) => {
             break;
          case "Aired:":
             const aired = $(el).find(".name").text().split("to");
+            console.log(aired);
+
             obj.aired.from = aired[0].trim();
-            obj.aired.to = aired[1].trim() === "?" ? null : aired[1].trim();
+
+            if (aired.length > 1) {
+               const secondPart = aired[1].trim();
+               obj.aired.to = secondPart === "?" ? null : secondPart; // Set to null if "?"
+            } else {
+               obj.aired.to = null; // Explicitly set to null if there's no second part
+            }
+
             break;
          case "Premiered:":
             obj.premiered = $(el).find(".name").text();
@@ -104,6 +115,30 @@ export const extractInfoPage = (html) => {
       }
    });
 
+   if (!moreSeasons.length) return obj;
+
+   $(moreSeasons)
+      .find(".os-list .os-item")
+      .each((i, el) => {
+         const innerObj = {
+            title: null,
+            alternativeTitle: null,
+            id: null,
+            poster: null,
+            isActive: false,
+         };
+         innerObj.title = $(el).attr("title");
+         innerObj.id = $(el).attr("href").split("/").pop();
+         innerObj.alternativeTitle = $(el).find(".title").text();
+         const posterEl = $(el).find(".season-poster").attr("style");
+
+         const match = posterEl.match(/url\((['"])?(.*?)\1\)/);
+         innerObj.poster = match ? match[2] : null;
+
+         innerObj.isActive = $(el).hasClass("active");
+
+         obj.moreSeasons.push(innerObj);
+      });
    return obj;
 };
 

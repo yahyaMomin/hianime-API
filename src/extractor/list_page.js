@@ -41,11 +41,19 @@ export const extractListPage = (html) => {
    });
 
    const paginationEl = $(".pre-pagination .pagination .page-item");
-   const currentPage = Number(paginationEl.find(".active .page-link").text());
-   const hasNextPage = !paginationEl.last().hasClass("active");
-   const totalPages = hasNextPage
-      ? Number(paginationEl.last().find(".page-link").attr("href").split("page=").at(-1))
-      : Number(paginationEl.last().find(".page-link").text());
+
+   let currentPage, hasNextPage, totalPages;
+   if (!paginationEl.length) {
+      currentPage = 1;
+      hasNextPage = false;
+      totalPages = 1;
+   } else {
+      currentPage = Number(paginationEl.find(".active .page-link").text());
+      hasNextPage = !paginationEl.last().hasClass("active");
+      totalPages = hasNextPage
+         ? Number(paginationEl.last().find(".page-link").attr("href").split("page=").at(-1))
+         : Number(paginationEl.last().find(".page-link").text());
+   }
 
    const pageInfo = {
       totalPages,

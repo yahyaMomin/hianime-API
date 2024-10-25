@@ -19,7 +19,7 @@ export const extractRecommendation = (html) => {
             dub: null,
             eps: null,
          },
-         rated: null,
+         is18Plus: false,
       };
       const titleEl = $(el).find(".film-detail .film-name .dynamic-name");
       obj.title = titleEl.text();
@@ -29,9 +29,7 @@ export const extractRecommendation = (html) => {
       obj.duration = $(el).find(".fd-infor .fdi-duration").text();
 
       obj.poster = $(el).find(".film-poster .film-poster-img").attr("data-src");
-      obj.rated = $(el).find(".film-poster .tick-rate").length
-         ? $(el).find(".film-poster .tick-rate").text()
-         : null;
+      obj.is18Plus = $(el).find(".film-poster").has(".tick-rate").length > 0;
 
       obj.episodes.sub = Number($(el).find(".film-poster .tick .tick-sub").text());
       obj.episodes.dub = Number($(el).find(".film-poster .tick .tick-dub").text());
