@@ -11,5 +11,11 @@
    },
    "devDependencies": {
       "@types/bun": "latest"
+   },
+   "compilerOptions": {
+      "skipLibCheck": true
+   },
+   "define": {
+      "global": {}
    }
 }
