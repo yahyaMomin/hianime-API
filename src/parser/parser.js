@@ -11,7 +11,6 @@ import { extractCharacters } from "../extractor/characters.js";
 import { extractRelated } from "../extractor/related.js";
 import { extractCharacterInfo } from "../extractor/character_info.js";
 import { extractActor } from "../extractor/actor_info.js";
-import { write } from "bun";
 
 export const home = async (c) => {
    try {
@@ -73,8 +72,6 @@ export const getHomePage = async (c) => {
       }
 
       const response = extractHomePage(obj.data);
-
-      await write("./r.html", obj.data);
 
       return setResponse(c, 200, response);
    } catch (error) {
