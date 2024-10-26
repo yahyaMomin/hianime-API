@@ -1,4 +1,4 @@
-import { fetchFromApi, fetchSources, interceptor } from "../axios/interceptor.js";
+import { fetchFromApi, fetchSources, interceptor } from "../axiosInstances/interceptor.js";
 import { extractListPage } from "../extractor/list_page.js";
 import { extractHomePage } from "../extractor/home_page.js";
 import { extractInfoPage } from "../extractor/info_page.js";
