@@ -3,8 +3,6 @@ import * as cheerio from "cheerio";
 export const extractHomePage = (html) => {
    const $ = cheerio.load(html);
 
-   console.log(html);
-
    const response = {
       spotlight: [],
       trending: [],
@@ -15,6 +13,11 @@ export const extractHomePage = (html) => {
       latestEpisode: [],
       newAdded: [],
       topUpcoming: [],
+      top10: {
+         today: null,
+         week: null,
+         month: null,
+      },
       genres: [],
    };
 
@@ -22,6 +25,7 @@ export const extractHomePage = (html) => {
    const $trending = $("#trending-home .swiper-container .swiper-slide");
    const $featured = $("#anime-featured .anif-blocks .row .anif-block");
    const $home = $(".block_area.block_area_home");
+   const $top10 = $(".block_area .cbox");
    const $genres = $(".sb-genre-list");
 
    $($spotlight).each((i, el) => {
@@ -178,6 +182,33 @@ export const extractHomePage = (html) => {
          : (response[normalizedDataType] = data);
    });
 
+   const extractTopTen = (id) => {
+      const res = $top10
+         .find(`${id} ul li`)
+         .map((i, el) => {
+            const obj = {
+               title: $(el).find(".film-name a").text() || null,
+               rank: i + 1,
+               alternativeTitle: $(el).find(".film-name a").attr("data-jname") || null,
+               id: $(el).find(".film-name a").attr("href").split("/").pop() || null,
+               poster: $(el).find(".film-poster img").attr("data-src") || null,
+               episodes: {
+                  sub: Number($(el).find(".tick-item.tick-sub").text()),
+                  dub: Number($(el).find(".tick-item.tick-dub").text()),
+                  eps: $(el).find(".tick-item.tick-eps").length
+                     ? Number($(el).find(".tick-item.tick-eps").text())
+                     : Number($(el).find(".tick-item.tick-sub").text()),
+               },
+            };
+            return obj;
+         })
+         .get();
+      return res;
+   };
+
+   response.top10.today = extractTopTen("#top-viewed-day");
+   response.top10.week = extractTopTen("#top-viewed-week");
+   response.top10.month = extractTopTen("#top-viewed-month");
    $($genres)
       .find("li")
       .each((i, el) => {
