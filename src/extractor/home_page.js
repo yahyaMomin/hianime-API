@@ -184,5 +184,5 @@ export const extractHomePage = (html) => {
          const genre = $(el).find("a").attr("title").toLocaleLowerCase();
          response.genres.push(genre);
       });
-   return { response, html };
+   return response;
 };
