@@ -5,7 +5,7 @@ const baseUrl = "https://hianime.to";
 // Updated headers to exclude Brotli (br) compression
 const axiosInstance = axios.create({
    headers: {
-      "Accept-Encoding": "gzip, deflate", // Exclude 'br' to avoid Brotli compression
+      "Accept-Encoding": "gzip, deflate, br, zstd", // Exclude 'br' to avoid Brotli compression
       "User-Agent":
          "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:131.0) Gecko/20100101 Firefox/131.0",
       "X-Requested-With": "XMLHttpRequest",

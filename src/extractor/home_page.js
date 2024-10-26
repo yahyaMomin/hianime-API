@@ -1,4 +1,5 @@
 import * as cheerio from "cheerio";
+import { write } from "bun";
 
 export const extractHomePage = (html) => {
    const $ = cheerio.load(html);
