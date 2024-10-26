@@ -2,17 +2,26 @@ import axios from "axios";
 
 const baseUrl = "https://hianime.to";
 
+const headers = {
+   USER_AGENT: "Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0",
+   ACCEPT_ENCODING: "gzip, deflate, br",
+   ACCEPT: "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+   X_REQUESTED_WITH: "XMLHttpRequest",
+};
+
 const axiosInstance = axios.create({
    headers: {
-      "Accept-Encoding": "gzip, deflate, br, zstd",
-      "User-Agent":
-         "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:131.0) Gecko/20100101 Firefox/131.0",
+      "Accept-Encoding": headers.ACCEPT_ENCODING,
+      "User-Agent": headers.USER_AGENT,
+      Accept: headers.ACCEPT,
    },
 });
 
 export const interceptor = async (endpoint) => {
    try {
       const { data } = await axiosInstance.get(baseUrl + endpoint);
+
+      console.log(data);
 
       const obj = {
          status: true,

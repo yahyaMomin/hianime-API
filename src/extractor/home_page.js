@@ -1,8 +1,9 @@
 import * as cheerio from "cheerio";
-import { write } from "bun";
 
 export const extractHomePage = (html) => {
    const $ = cheerio.load(html);
+
+   console.log(html);
 
    const response = {
       spotlight: [],
@@ -183,5 +184,5 @@ export const extractHomePage = (html) => {
          const genre = $(el).find("a").attr("title").toLocaleLowerCase();
          response.genres.push(genre);
       });
-   return response;
+   return { response, html };
 };
