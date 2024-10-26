@@ -2,17 +2,11 @@ import axios from "axios";
 
 const baseUrl = "https://hianime.to";
 
-// USER_AGENT_HEADER: "Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0",
-// ACCEPT_ENCODEING_HEADER: "gzip, deflate, br",
-// ACCEPT_HEADER: "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8"
-
-// Updated headers to exclude Brotli (br) compression
 const axiosInstance = axios.create({
    headers: {
-      "Accept-Encoding": "gzip, deflate, br",
-      "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0",
-      Accept:
-         "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+      "Accept-Encoding": "gzip, deflate, br, zstd",
+      "User-Agent":
+         "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:131.0) Gecko/20100101 Firefox/131.0",
    },
 });
 
