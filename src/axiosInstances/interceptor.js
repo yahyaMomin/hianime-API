@@ -38,7 +38,6 @@ export const interceptor = async (endpoint) => {
 export const fetchFromApi = async (Referer, endpoint) => {
    const headers = {
       Referer: baseUrl + Referer,
-      "X-Requested-With": HEADERS.X_REQUESTED_WITH,
    };
    try {
       const {
@@ -68,7 +67,6 @@ export const fetchFromApi = async (Referer, endpoint) => {
 export const fetchSources = async (Referer, endpoint) => {
    const headers = {
       Referer: baseUrl + Referer,
-      "X-Requested-With": HEADERS.X_REQUESTED_WITH,
    };
    try {
       const { data } = await axiosInstance.get(baseUrl + endpoint, {
