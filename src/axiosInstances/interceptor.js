@@ -4,7 +4,7 @@ const baseUrl = "https://hianime.to";
 
 const HEADERS = {
    USER_AGENT: "Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0",
-   ACCEPT_ENCODING: "gzip, deflate, br",
+   ACCEPT_ENCODING: "gzip, deflate",
    X_REQUESTED_WITH: "XMLHttpRequest",
 };
 
