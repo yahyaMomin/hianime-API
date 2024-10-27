@@ -12,13 +12,12 @@ import {
    getSearchPage,
    getServers,
    getSources,
+   home,
 } from "../parser/parser";
 
 const router = new Hono();
 
-router.get("/", (c) => {
-   return c.text("welcome to hianime API ▶︎  ");
-});
+router.get("/", home);
 router.get("/home", getHomePage);
 router.get("/anime/:id", getInfo);
 router.get("/animes/:query/:category?", getListPage);

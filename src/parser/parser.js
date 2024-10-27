@@ -11,58 +11,16 @@ import { extractCharacters } from "../extractor/characters.js";
 import { extractRelated } from "../extractor/related.js";
 import { extractCharacterInfo } from "../extractor/character_info.js";
 import { extractActor } from "../extractor/actor_info.js";
+import apiDocumentation from "../utils/documentation.js";
 
-// export const home = async (c) => {
-//    try {
-//       const apiDocumentation = {
-//          generalInfo: {
-//             baseUrl: "https://hianime-api-production.up.railway.app/api/v1",
-//             documentationUrl: "https://github.com/yahyaMomin/hianime-API/blob/main/README.md",
-//          },
-//          endpoints: [
-//             {
-//                name: "Home",
-//                endpoint: "/home",
-//                hasParams: false,
-//                hasQueries: false,
-//                description:
-//                   "Fetches the homepage content of hianime such as spotlight , , including featured anime and recent updates.",
-//             },
-//             {
-//                name: "A-Z List",
-//                endpoint: "/az-list",
-//                hasParams: true,
-//                hasQueries: true,
-//                paramsList: ["a-z", "0-9", "other", "all"],
-//                queriesList: ["page", "limit"],
-//                defaultQueries: {
-//                   page: 1,
-//                   limit: 10,
-//                },
-//                description: "Retrieves anime titles based on alphabetical and numerical filters.",
-//             },
-//             {
-//                name: "Top Airing",
-//                endpoint: "/top-airing",
-//                hasParams: false,
-//                hasQueries: true,
-//                queriesList: ["page", "limit", "sort"],
-//                defaultQueries: {
-//                   page: 1,
-//                   limit: 5,
-//                   sort: "popularity",
-//                },
-//                description:
-//                   "Fetches a list of the top currently airing anime with optional sorting by popularity.",
-//             },
-//          ],
-//       };
-//    } catch (error) {
-//       console.log(error.message);
-
-//       return setError(c, 500, "something went wrong");
-//    }
-// };
+export const home = async (c) => {
+   try {
+      return c.json(apiDocumentation);
+   } catch (error) {
+      console.log(error.message);
+      return setError(c, 500, "something went wrong");
+   }
+};
 export const getHomePage = async (c) => {
    try {
       const obj = await interceptor("/home");
