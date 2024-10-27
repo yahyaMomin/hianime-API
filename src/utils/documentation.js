@@ -9,19 +9,21 @@ const apiDocumentation = {
          endpoint: "/home",
          hasParams: false,
          hasQueries: false,
+         example: "/home",
          description:
             "Fetches the homepage content of hianime such as spotlight, top Airing, trending, mostPopular, mostFavorite, newAdded, latest Updated, top10 and genres.",
       },
       {
          name: "A-Z List",
-         endpoint: "/animes/az-list",
+         endpoint: "/animes/az-list/:letter?",
          hasParams: true,
          hasQueries: true,
-         paramsList: ["a , b , c ....", "0-9", "other", "all"],
+         paramsList: ["a , b , c ...", "0-9", "other", "all"],
          queriesList: ["page"],
          defaultQueries: {
             page: 1,
          },
+         example: "/animes/az-list/a?page=2",
          description: "Retrieves anime titles based on alphabetical and numerical filters.",
       },
       {
@@ -33,6 +35,7 @@ const apiDocumentation = {
          defaultQueries: {
             page: 1,
          },
+         example: "/animes/top-airing?page=3",
          description: "Fetches a list of the top currently airing anime.",
       },
       {
@@ -44,6 +47,7 @@ const apiDocumentation = {
          defaultQueries: {
             page: 1,
          },
+         example: "/animes/most-popular?page=3",
          description: "Fetches a list of the most popular anime.",
       },
       {
@@ -55,6 +59,7 @@ const apiDocumentation = {
          defaultQueries: {
             page: 1,
          },
+         example: "/animes/most-favorite?page=3",
          description: "Fetches a list of the most favorite anime.",
       },
       {
@@ -66,6 +71,7 @@ const apiDocumentation = {
          defaultQueries: {
             page: 1,
          },
+         example: "/animes/completed?page=3",
          description: "Fetches a list of completed anime series.",
       },
       {
@@ -77,6 +83,7 @@ const apiDocumentation = {
          defaultQueries: {
             page: 1,
          },
+         example: "/animes/recently-added?page=3",
          description: "Fetches a list of recently added anime.",
       },
       {
@@ -88,6 +95,7 @@ const apiDocumentation = {
          defaultQueries: {
             page: 1,
          },
+         example: "/animes/recently-updated?page=3",
          description: "Fetches a list of recently updated anime.",
       },
       {
@@ -99,6 +107,7 @@ const apiDocumentation = {
          defaultQueries: {
             page: 1,
          },
+         example: "/animes/top-upcoming?page=3",
          description: "Fetches a list of the top upcoming anime.",
       },
       {
@@ -154,6 +163,7 @@ const apiDocumentation = {
          defaultQueries: {
             page: 1,
          },
+         example: "/animes/genre/action?page=3",
          description: "Fetches anime based on specific genres.",
       },
 
@@ -166,6 +176,7 @@ const apiDocumentation = {
          defaultQueries: {
             page: 1,
          },
+         example: "/animes/subbed-anime?page=3",
          description: "Fetches a list of subbed anime.",
       },
       {
@@ -177,6 +188,7 @@ const apiDocumentation = {
          defaultQueries: {
             page: 1,
          },
+         example: "/animes/dubbed-anime?page=3",
          description: "Fetches a list of dubbed anime.",
       },
       {
@@ -188,6 +200,7 @@ const apiDocumentation = {
          defaultQueries: {
             page: 1,
          },
+         example: "/animes/movie?page=3",
          description: "Fetches a list of anime movies.",
       },
       {
@@ -199,6 +212,7 @@ const apiDocumentation = {
          defaultQueries: {
             page: 1,
          },
+         example: "/animes/tv?page=3",
          description: "Fetches a list of anime TV series.",
       },
       {
@@ -210,6 +224,7 @@ const apiDocumentation = {
          defaultQueries: {
             page: 1,
          },
+         example: "/animes/ova?page=3",
          description: "Fetches a list of anime OVAs.",
       },
       {
@@ -221,6 +236,7 @@ const apiDocumentation = {
          defaultQueries: {
             page: 1,
          },
+         example: "/animes/ova?page=3",
          description: "Fetches a list of anime ONAs.",
       },
       {
@@ -232,6 +248,7 @@ const apiDocumentation = {
          defaultQueries: {
             page: 1,
          },
+         example: "/animes/special?page=3",
          description: "Fetches a list of anime specials.",
       },
       {
@@ -243,6 +260,7 @@ const apiDocumentation = {
          defaultQueries: {
             page: 1,
          },
+         example: "/animes/events?page=3",
          description: "Fetches a list of anime events.",
       },
       {
@@ -250,13 +268,7 @@ const apiDocumentation = {
          endpoint: "/anime/:id",
          hasParams: true,
          hasQueries: false,
-         description: "fetches complete information of anime based on id.",
-      },
-      {
-         name: "information",
-         endpoint: "/anime/:id",
-         hasParams: true,
-         hasQueries: false,
+         example: "/anime/one-piece-100",
          description: "fetches complete information of anime based on id.",
       },
       {
@@ -268,6 +280,7 @@ const apiDocumentation = {
          defaultQueries: {
             page: 1,
          },
+         example: "/search?keyword=death+note&page=2",
          description: "fetches animes based on keyword.",
       },
       {
@@ -275,7 +288,7 @@ const apiDocumentation = {
          endpoint: "/recommendation/:id",
          hasParams: true,
          hasQueries: false,
-
+         example: "/recommendation/one-piece-100",
          description: "fetches recommended animes based on id.",
       },
       {
@@ -283,7 +296,7 @@ const apiDocumentation = {
          endpoint: "/related/:id",
          hasParams: true,
          hasQueries: false,
-
+         example: "/related/one-piece-100",
          description: "fetches related animes based on id.",
       },
       {
@@ -295,6 +308,7 @@ const apiDocumentation = {
          defaultQueries: {
             page: 1,
          },
+         example: "/characters/one-piece-100",
          description: "fetches characters of anime based on id.",
       },
       {
@@ -302,7 +316,7 @@ const apiDocumentation = {
          endpoint: "/character/:characterId",
          hasParams: true,
          hasQueries: false,
-
+         example: "/character/roronoa-zoro-7",
          description: "fetches character information based on id.",
       },
       {
@@ -310,7 +324,7 @@ const apiDocumentation = {
          endpoint: "/actor/:actorId",
          hasParams: true,
          hasQueries: false,
-
+         example: "/actor/kana-hanazawa-1",
          description: "fetches actor information based on id.",
       },
       {
@@ -318,7 +332,7 @@ const apiDocumentation = {
          endpoint: "/episodes/:id",
          hasParams: true,
          hasQueries: false,
-
+         example: "/episodes/one-piece-100",
          description: "fetches all episodes of anime based on id.",
       },
       {
@@ -328,6 +342,7 @@ const apiDocumentation = {
          hasQueries: true,
          queriesList: ["episodeId"],
          defaultQueries: {},
+         example: "/servers?episodeId=/watch/steinsgate-3?ep=213",
          description: "fetches servers of episode based on id.",
       },
       {
@@ -337,6 +352,7 @@ const apiDocumentation = {
          hasQueries: true,
          queriesList: ["episodeId", "audio", "server"],
          defaultQueries: { audio: "sub", server: 4 },
+         example: "/sources?episodeId=/watch/steinsgate-3?ep=213&audio=dub&server=1",
          description: "fetches episode source based on episode id.",
       },
    ],
