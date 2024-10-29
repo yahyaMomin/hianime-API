@@ -4,6 +4,7 @@ import {
    getCharacter_info,
    getCharacters,
    getEpisodes,
+   getEpisodesInChunks,
    getHomePage,
    getInfo,
    getListPage,
@@ -30,5 +31,6 @@ router.get("/actor/:id", getActor_info);
 router.get("/episodes/:id", getEpisodes);
 router.get("/servers", getServers);
 router.get("/sources", getSources);
+router.get("/chunks/episodes/:id", getEpisodesInChunks);
 
 export default router;

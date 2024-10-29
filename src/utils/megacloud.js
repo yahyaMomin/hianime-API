@@ -96,6 +96,7 @@ function getSecret(encryptedString, values) {
 
       for (let i = start; i < end; i++) {
          secret += encryptedString[i];
+
          encryptedSourceArray[i] = "";
       }
       currentIndex += index[1];
@@ -142,51 +143,7 @@ async function decrypt(encrypted, keyOrSecret, maybe_iv) {
       return decrypted;
    }
 }
-// async function decrypt(encrypted, keyOrSecret, maybe_iv) {
-//    if (maybe_iv) {
-//       // AES decryption (when IV is provided)
-//       const key = await crypto.subtle.importKey(
-//          "raw",
-//          new TextEncoder().encode(keyOrSecret),
-//          { name: "AES-CBC", length: 256 },
-//          false,
-//          ["decrypt"]
-//       );
-//       const iv = new Uint8Array(maybe_iv);
-//       const decrypted = await crypto.subtle.decrypt(
-//          { name: "AES-CBC", iv },
-//          key,
-//          new TextEncoder().encode(encrypted)
-//       );
-//       return new TextDecoder().decode(decrypted);
-//    } else {
-//       // Custom decryption similar to Node's `crypto` logic
-//       const cypher = new Uint8Array(Buffer.from(encrypted, "base64"));
-//       const salt = cypher.subarray(8, 16);
-//       const password = Buffer.concat([Buffer.from(keyOrSecret, "binary"), salt]);
 
-//       const md5Hashes = [];
-//       let digest = password;
-//       for (let i = 0; i < 3; i++) {
-//          const hash = await crypto.subtle.digest("MD5", digest);
-//          md5Hashes[i] = new Uint8Array(hash);
-//          digest = Buffer.concat([md5Hashes[i], password]);
-//       }
-
-//       const key = Buffer.concat([md5Hashes[0], md5Hashes[1]]);
-//       const iv = md5Hashes[2];
-//       const contents = cypher.subarray(16);
-
-//       const aesKey = await crypto.subtle.importKey("raw", key, { name: "AES-CBC" }, false, [
-//          "decrypt",
-//       ]);
-//       const decrypted = await crypto.subtle.decrypt({ name: "AES-CBC", iv }, aesKey, contents);
-
-//       return new TextDecoder().decode(decrypted);
-//    }
-// }
-
-// Helper function to find matching keys
 function matchingKey(value, script) {
    const regex = new RegExp(`,${value}=((?:0x)?([0-9a-fA-F]+))`);
    const match = script.match(regex);

@@ -12,6 +12,7 @@ import { extractRelated } from "../extractor/related.js";
 import { extractCharacterInfo } from "../extractor/character_info.js";
 import { extractActor } from "../extractor/actor_info.js";
 import apiDocumentation from "../utils/documentation.js";
+import { extractEpisodesInChunks } from "../extractor/extractEpisodes.js";
 
 export const home = async (c) => {
    try {
@@ -313,6 +314,25 @@ export const getSources = async (c) => {
       };
       const response = await extractSource(params);
       return setResponse(c, 200, response);
+   } catch (error) {
+      console.log(error.message);
+      return setError(c, 500, "something went wrong");
+   }
+};
+
+export const getEpisodesInChunks = async (c) => {
+   try {
+      const id = c.req.param("id");
+      if (!id) return setError(c, 400, "id is required");
+
+      const obj = await interceptor(`/${id}`);
+      if (!obj.status) return setError(c, 400, "make sure the id is correct");
+
+      const response = await extractEpisodesInChunks(obj.data);
+
+      if (!response.status)
+         return setError(c, 400, "some thing went wrong while fetching chunks episodes");
+      return setResponse(c, 200, response.data);
    } catch (error) {
       console.log(error.message);
       return setError(c, 500, "something went wrong");

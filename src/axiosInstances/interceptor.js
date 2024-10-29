@@ -8,7 +8,7 @@ const HEADERS = {
    X_REQUESTED_WITH: "XMLHttpRequest",
 };
 
-const axiosInstance = axios.create({
+export const axiosInstance = axios.create({
    headers: {
       "Accept-Encoding": HEADERS.ACCEPT_ENCODING,
       "User-Agent": HEADERS.USER_AGENT,

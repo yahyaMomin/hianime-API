@@ -9,8 +9,6 @@ export const extractSource = async (res) => {
 
    const id = urlObj.pathname.split("/").at(-1);
 
-   console.log(url + id);
-
    const { data } = await axios.get(url + id, {
       headers: {
          Referer: urlObj.href,
