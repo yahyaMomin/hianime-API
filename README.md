@@ -3,11 +3,11 @@
 <p align="center">
   <img src="https://skillicons.dev/icons?i=js,bun,hono,docker" />
   <br/>
-  <a href="https://api-anime-rouge.vercel.app"><kbd>api-anime-rouge.vercel.app</kbd></a>
+  <a href="https://hianime-api-production.up.railway.app/api/v1"><kbd>https://hianime-api-production.up.railway.app/api/v1</kbd></a>
 </p>
 <br/><br/>
 
-Check it out at <a href="https://api-anime-rouge.vercel.app"><kbd>api-anime-rouge.vercel.app</kbd></a>.
+Check it out at <a href="https://hianime-api-production.up.railway.app/api/v1"><kbd>https://hianime-api-production.up.railway.app/api/v1</kbd></a>.
 
 <break>
 
@@ -33,13 +33,13 @@ Check it out at <a href="https://api-anime-rouge.vercel.app"><kbd>api-anime-roug
 #### Endpoint
 
 ```url
-https://api-anime-rouge.vercel.app/hianime/home
+https://hianime-api-production.up.railway.app/api/v1/home
 ```
 
 #### Request sample
 
 ```javascript
-const resp = await fetch("https://api-anime-rouge.vercel.app/hianime/home");
+const resp = await fetch("https://hianime-api-production.up.railway.app/api/v1/home");
 const data = await resp.json();
 console.log(data);
 ```
@@ -954,7 +954,7 @@ console.log(data);
 #### Endpoint
 
 ```url
-https://api-anime-rouge.vercel.app/hianime/animes/az-list?page=${page}
+https://hianime-api-production.up.railway.app/api/v1/animes/az-list?page=${page}
 ```
 
 #### Query Parameters
@@ -966,7 +966,7 @@ https://api-anime-rouge.vercel.app/hianime/animes/az-list?page=${page}
 #### Request sample
 
 ```typescript
-const resp = await fetch("https://api-anime-rouge.vercel.app/hianime/animes/az-list?page=69");
+const resp = await fetch("https://hianime-api-production.up.railway.app/api/v1/animes/az-list?page=69");
 const data = await resp.json();
 console.log(data);
 ```
@@ -1018,7 +1018,7 @@ console.log(data);
 #### Endpoint
 
 ```sh
-https://api-anime-rouge.vercel.app/hianime/anime/:id
+https://hianime-api-production.up.railway.app/api/v1/anime/:id
 ```
 
 #### Query Parameters
@@ -1033,7 +1033,7 @@ https://api-anime-rouge.vercel.app/hianime/anime/:id
 #### Request sample
 
 ```javascript
-const resp = await fetch("https://api-anime-rouge.vercel.app/hianime/anime/one-piece-100");
+const resp = await fetch("https://hianime-api-production.up.railway.app/api/v1/anime/one-piece-100");
 const data = await res.json();
 console.log(data);
 ```
@@ -1093,7 +1093,7 @@ console.log(data);
 #### Endpoint
 
 ```sh
-https://api-anime-rouge.vercel.app/hianime/search?keyword=$(query)&page=$(page)
+https://hianime-api-production.up.railway.app/api/v1/search?keyword={}&page={}
 ```
 
 #### Query Parameters
@@ -1112,7 +1112,7 @@ https://api-anime-rouge.vercel.app/hianime/search?keyword=$(query)&page=$(page)
 
 ```javascript
 const resp = await fetch(
-   "https://api-anime-rouge.vercel.app/hianime/search?keyword=one+piece&page=1"
+   "https://hianime-api-production.up.railway.app/api/v1/search?keyword=one+piece&page=1"
 );
 const data = await res.json();
 console.log(data);
@@ -1164,7 +1164,7 @@ console.log(data);
 #### Endpoint
 
 ```sh
-https://api-anime-rouge.vercel.app/hianime/:query/:category?page=$(page)
+https://hianime-api-production.up.railway.app/api/v1/:query/:category?page=$(page)
 ```
 
 #### Query Parameters
@@ -1213,7 +1213,7 @@ https://api-anime-rouge.vercel.app/hianime/:query/:category?page=$(page)
 #### Request sample
 
 ```javascript
-const resp = await fetch("https://api-anime-rouge.vercel.app/hianime/genres/action?page=1");
+const resp = await fetch("https://hianime-api-production.up.railway.app/api/v1/genres/action?page=1");
 const data = await res.json();
 console.log(data);
 ```
@@ -1253,7 +1253,7 @@ console.log(data);
 #### Endpoint
 
 ```sh
-https://api-anime-rouge.vercel.app/hianime/episodes/:id
+https://hianime-api-production.up.railway.app/api/v1/episodes/:id
 ```
 
 #### Query Parameters
@@ -1273,7 +1273,7 @@ https://api-anime-rouge.vercel.app/hianime/episodes/:id
 #### Request sample
 
 ```javascript
-const resp = await fetch("https://api-anime-rouge.vercel.app/hianime/episodes/one-piece-100");
+const resp = await fetch("https://hianime-api-production.up.railway.app/api/v1/episodes/one-piece-100");
 const data = await res.json();
 console.log(data);
 ```
@@ -1301,7 +1301,7 @@ console.log(data);
 #### Endpoint
 
 ```sh
-https://api-anime-rouge.vercel.app/hianime/servers?episodeId=${id}
+https://hianime-api-production.up.railway.app/api/v1/servers?episodeId=${id}
 ```
 
 #### Query Parameters
@@ -1334,7 +1334,7 @@ one-piece-100?ep=84802
 
 ```javascript
 const resp = await fetch(
-   "https://api-anime-rouge.vercel.app/hianime/servers?episodeId=one-piece-100?ep=84802"
+   "https://hianime-api-production.up.railway.app/api/v1/servers?episodeId=one-piece-100?ep=84802"
 );
 const data = await res.json();
 console.log(data);
@@ -1399,7 +1399,7 @@ https://api-anime-rouge.vercel.app/anime/sources?episodeId={episodeId}&server={s
 
 ```javascript
 const resp = await fetch(
-   "https://api-anime-rouge.vercel.app/hianime/sources?episodeId=solo-leveling-18718?ep=120094&server=4&audio=sub"
+   "https://hianime-api-production.up.railway.app/api/v1/sources?episodeId=solo-leveling-18718?ep=120094&server=4&audio=sub"
 );
 const data = await resp.json();
 console.log(data);
