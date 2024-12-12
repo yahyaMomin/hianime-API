@@ -47,7 +47,6 @@ export const getHomePage = async (c) => {
 export const getInfo = async (c) => {
   try {
     const id = c.req.param("id");
-    console.log(id);
     const obj = await interceptor(`/${id}`);
     if (!obj.status) {
       return setError(c, 400, "make sure given endpoint is correct");
