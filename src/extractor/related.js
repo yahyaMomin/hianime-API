@@ -1,20 +1,30 @@
 import { load } from "cheerio";
 
 export const extractRelated = (html) => {
-   const $ = load(html);
-   const response = [];
-   $(".block_area.block_area_sidebar .cbox.cbox-list .ulclear li").each((i, el) => {
+  const $ = load(html);
+  const response = [];
+
+  const hasRelated = $(".block_area.block_area_sidebar.block_area-realtime");
+
+  if (!hasRelated.length > 1) {
+    return response;
+  }
+
+  hasRelated
+    .first()
+    .find(".block_area.block_area_sidebar .cbox.cbox-list .ulclear li")
+    .each((i, el) => {
       const obj = {
-         title: null,
-         alternativeTitle: null,
-         id: null,
-         poster: null,
-         type: null,
-         episodes: {
-            sub: null,
-            dub: null,
-            eps: null,
-         },
+        title: null,
+        alternativeTitle: null,
+        id: null,
+        poster: null,
+        type: null,
+        episodes: {
+          sub: null,
+          dub: null,
+          eps: null,
+        },
       };
 
       const titleEl = $(el).find(".film-name .dynamic-name");
@@ -25,25 +35,26 @@ export const extractRelated = (html) => {
       const infor = $(el).find(".fd-infor .tick");
 
       obj.type = infor
-         .contents()
-         .filter((i, el) => {
-            return el.type === "text" && $(el).text().trim() !== "";
-         })
-         .text()
-         .trim();
+        .contents()
+        .filter((i, el) => {
+          return el.type === "text" && $(el).text().trim() !== "";
+        })
+        .text()
+        .trim();
 
       obj.episodes.sub = Number(infor.find(".tick-sub").text());
       obj.episodes.dub = Number(infor.find(".tick-dub").text());
 
       const epsEl = infor.find(".tick-eps").length
-         ? infor.find(".tick-eps").text()
-         : infor.find(".tick-sub").text();
+        ? infor.find(".tick-eps").text()
+        : infor.find(".tick-sub").text();
 
       obj.episodes.eps = Number(epsEl);
 
       obj.poster = $(el).find(".film-poster .film-poster-img").attr("data-src");
 
       response.push(obj);
-   });
-   return response;
+    });
+
+  return response;
 };
