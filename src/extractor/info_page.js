@@ -30,11 +30,22 @@ export const extractInfoPage = (html) => {
     studios: null,
     producers: [],
     moreSeasons: [],
+    related: [],
+    mostPopular: [],
+    recommended: [],
   };
 
+  // all information elements
   const main = $("#ani_detail .anis-content");
   const moreSeasons = $("#main-content .block_area-seasons");
+  const relatedAndMostPopular = $(
+    ".block_area.block_area_sidebar.block_area-realtime"
+  );
+  const recommended = $(
+    ".block_area.block_area_category .tab-content .block_area-content .film_list-wrap .flw-item"
+  );
 
+  // extract about info
   obj.poster = main.find(".film-poster .film-poster-img").attr("src");
 
   const titleEl = main.find(".anisc-detail .film-name");
@@ -58,6 +69,7 @@ export const extractInfoPage = (html) => {
 
   const moreInfo = main.find(".anisc-info-wrap .anisc-info .item");
 
+  // extract imbalance info
   moreInfo.each((i, el) => {
     const name = $(el).find(".item-head").text();
 
@@ -116,29 +128,129 @@ export const extractInfoPage = (html) => {
     }
   });
 
-  if (!moreSeasons.length) return obj;
+  // extract moreseasons
+  if (moreSeasons.length) {
+    $(moreSeasons)
+      .find(".os-list .os-item")
+      .each((i, el) => {
+        const innerObj = {
+          title: null,
+          alternativeTitle: null,
+          id: null,
+          poster: null,
+          isActive: false,
+        };
+        innerObj.title = $(el).attr("title");
+        innerObj.id = $(el).attr("href").split("/").pop();
+        innerObj.alternativeTitle = $(el).find(".title").text();
+        const posterEl = $(el).find(".season-poster").attr("style");
 
-  $(moreSeasons)
-    .find(".os-list .os-item")
-    .each((i, el) => {
-      const innerObj = {
-        title: null,
-        alternativeTitle: null,
-        id: null,
-        poster: null,
-        isActive: false,
-      };
-      innerObj.title = $(el).attr("title");
-      innerObj.id = $(el).attr("href").split("/").pop();
-      innerObj.alternativeTitle = $(el).find(".title").text();
-      const posterEl = $(el).find(".season-poster").attr("style");
+        const match = posterEl.match(/url\((['"])?(.*?)\1\)/);
+        innerObj.poster = match ? match[2] : null;
 
-      const match = posterEl.match(/url\((['"])?(.*?)\1\)/);
-      innerObj.poster = match ? match[2] : null;
+        innerObj.isActive = $(el).hasClass("active");
 
-      innerObj.isActive = $(el).hasClass("active");
+        obj.moreSeasons.push(innerObj);
+      });
+  }
+  // extract related and most popular
+  const extractRelatedAndMostPopular = (index, array) => {
+    relatedAndMostPopular
+      .eq(index)
+      .find(".block_area.block_area_sidebar .cbox.cbox-list .ulclear li")
+      .each((i, el) => {
+        const innerObj = {
+          title: null,
+          alternativeTitle: null,
+          id: null,
+          poster: null,
+          type: null,
+          episodes: {
+            sub: null,
+            dub: null,
+            eps: null,
+          },
+        };
 
-      obj.moreSeasons.push(innerObj);
-    });
+        const titleEl = $(el).find(".film-name .dynamic-name");
+        innerObj.title = titleEl.attr("title");
+        innerObj.alternativeTitle = titleEl.attr("data-jname");
+        innerObj.id = titleEl.attr("href").split("/").pop();
+
+        const infor = $(el).find(".fd-infor .tick");
+
+        innerObj.type = infor
+          .contents()
+          .filter((i, el) => {
+            return el.type === "text" && $(el).text().trim() !== "";
+          })
+          .text()
+          .trim();
+
+        innerObj.episodes.sub = Number(infor.find(".tick-sub").text());
+        innerObj.episodes.dub = Number(infor.find(".tick-dub").text());
+
+        const epsEl = infor.find(".tick-eps").length
+          ? infor.find(".tick-eps").text()
+          : infor.find(".tick-sub").text();
+
+        innerObj.episodes.eps = Number(epsEl);
+
+        innerObj.poster = $(el)
+          .find(".film-poster .film-poster-img")
+          .attr("data-src");
+
+        array.push(innerObj);
+      });
+  };
+  if (relatedAndMostPopular.length > 1) {
+    extractRelatedAndMostPopular(0, obj.related);
+    extractRelatedAndMostPopular(1, obj.mostPopular);
+  } else {
+    extractRelatedAndMostPopular(0, obj.mostPopular);
+  }
+
+  recommended.each((i, el) => {
+    const innerObj = {
+      title: null,
+      alternativeTitle: null,
+      id: null,
+      poster: null,
+      type: null,
+      duration: null,
+      episodes: {
+        sub: null,
+        dub: null,
+        eps: null,
+      },
+      is18Plus: false,
+    };
+    const titleEl = $(el).find(".film-detail .film-name .dynamic-name");
+    innerObj.title = titleEl.text();
+    innerObj.alternativeTitle = titleEl.attr("data-jname");
+    innerObj.id = titleEl.attr("href").split("/").pop();
+    innerObj.type = $(el).find(".fd-infor .fdi-item").first().text();
+    innerObj.duration = $(el).find(".fd-infor .fdi-duration").text();
+
+    innerObj.poster = $(el)
+      .find(".film-poster .film-poster-img")
+      .attr("data-src");
+    innerObj.is18Plus = $(el).find(".film-poster").has(".tick-rate").length > 0;
+
+    innerObj.episodes.sub = Number(
+      $(el).find(".film-poster .tick .tick-sub").text()
+    );
+    innerObj.episodes.dub = Number(
+      $(el).find(".film-poster .tick .tick-dub").text()
+    );
+    const epsEl = $(el).find(".film-poster .tick .tick-eps").length
+      ? $(el).find(".film-poster .tick .tick-eps").text()
+      : $(el).find(".film-poster .tick .tick-sub").text();
+
+    innerObj.episodes.eps = Number(epsEl);
+
+    obj.recommended.push(innerObj);
+  });
+
   return obj;
 };

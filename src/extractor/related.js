@@ -6,7 +6,7 @@ export const extractRelated = (html) => {
 
   const hasRelated = $(".block_area.block_area_sidebar.block_area-realtime");
 
-  if (!hasRelated.length > 1) {
+  if (hasRelated.length > 2) {
     return response;
   }
 
