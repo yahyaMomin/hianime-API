@@ -9,7 +9,6 @@ import { extractInfoPage } from "../extractor/info_page.js";
 import { setResponse, setError } from "../helper/response.js";
 import { extractEpisodes } from "../extractor/episode_page.js";
 import { extractServers } from "../extractor/servers.js";
-import { extractSource } from "../extractor/episode_sources.js";
 import { extractRecommendation } from "../extractor/recommendation.js";
 import { extractCharacters } from "../extractor/characters.js";
 import { extractRelated } from "../extractor/related.js";
@@ -284,56 +283,57 @@ export const getServers = async (c) => {
     return setError(c, 500, "something went wrong");
   }
 };
-export const getSources = async (c) => {
-  try {
-    const { episodeId, server = 4, audio = "sub" } = c.req.query();
+// export const getSources = async (c) => {
+//   try {
+//     const { episodeId, server = 4, audio = "sub" } = c.req.query();
 
-    console.log(episodeId, server, audio);
+//     console.log(episodeId, server, audio);
 
-    const validServerIndexes = [4, 1];
+//     const validServerIndexes = [4, 1];
 
-    const integerIndex = Number(server);
+//     const integerIndex = Number(server);
 
-    if (!validServerIndexes.includes(integerIndex))
-      return setError(c, 400, "invalid server");
+//     if (!validServerIndexes.includes(integerIndex))
+//       return setError(c, 400, "invalid server");
 
-    if (!episodeId) return setError(c, 400, "episodeId is required");
+//     if (!episodeId) return setError(c, 400, "episodeId is required");
 
-    const episode = episodeId.includes("ep=");
-    if (!episode) return setError(c, 400, "episode  is required");
-    const serverIdsHTML = await fetchFromApi(
-      episodeId,
-      `/ajax/v2/episode/servers?episodeId=${episodeId.split("ep=").at(-1)}`
-    );
+//     const episode = episodeId.includes("ep=");
+//     if (!episode) return setError(c, 400, "episode  is required");
+//     const serverIdsHTML = await fetchFromApi(
+//       episodeId,
+//       `/ajax/v2/episode/servers?episodeId=${episodeId.split("ep=").at(-1)}`
+//     );
 
-    const serverIds = extractServers(serverIdsHTML.data);
+//     const serverIds = extractServers(serverIdsHTML.data);
 
-    const selectedServer = serverIds[audio].find(
-      (el) => el.index === integerIndex
-    );
+//     const selectedServer = serverIds[audio].find(
+//       (el) => el.index === integerIndex
+//     );
 
-    const obj = await fetchSources(
-      episodeId,
-      `/ajax/v2/episode/sources?id=${selectedServer.id}`
-    );
+//     const obj = await fetchSources(
+//       episodeId,
+//       `/ajax/v2/episode/sources?id=${selectedServer.id}`
+//     );
 
-    if (!obj.status) {
-      return setError(c, 400, "make sure given endpoint is correct");
-    }
+//     if (!obj.status) {
+//       return setError(c, 400, "make sure given endpoint is correct");
+//     }
 
-    const params = {
-      data: obj.data,
-      audio,
-      episodeId,
-      server,
-    };
-    const response = await extractSource(params);
-    return setResponse(c, 200, response);
-  } catch (error) {
-    console.log(error.message);
-    return setError(c, 500, "something went wrong");
-  }
-};
+//     const params = {
+//       data: obj.data,
+//       audio,
+//       episodeId,
+//       server,
+//     };
+
+//     const response = await extractSource(params);
+//     return setResponse(c, 200, response);
+//   } catch (error) {
+//     console.log(error.message);
+//     return setError(c, 500, "something went wrong");
+//   }
+// };
 
 export const getEpisodesInChunks = async (c) => {
   try {

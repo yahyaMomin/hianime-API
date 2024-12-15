@@ -1,16 +1,17 @@
 {
-   "name": "hianime",
-   "scripts": {
-      "dev": "bun run --hot index.js",
-      "start": "bun run index.js"
-   },
-   "dependencies": {
-      "axios": "^1.7.7",
-      "cheerio": "^1.0.0",
-      "hono": "^4.6.5"
-   },
-   "devDependencies": {
-      "@types/bun": "latest"
-   },
-   "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+  "name": "hianime",
+  "scripts": {
+    "build": "bun build index.js --outdir=dist --minify",
+    "start": "bun run dist/index.js",
+    "dev": "bun --watch run index.js"
+  },
+  "dependencies": {
+    "axios": "^1.7.7",
+    "cheerio": "^1.0.0",
+    "hono": "^4.6.5"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "esbuild": "^0.24.0"
+  }
 }
