@@ -1,8 +1,7 @@
 {
   "name": "hianime",
   "scripts": {
-    "build": "bun build index.js --outdir=dist --minify",
-    "start": "bun run dist/index.js",
+    "start": "bun run index.js",
     "dev": "bun --watch run index.js"
   },
   "dependencies": {
