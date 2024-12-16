@@ -16,6 +16,7 @@ import { extractCharacterInfo } from "../extractor/character_info.js";
 import { extractActor } from "../extractor/actor_info.js";
 import apiDocumentation from "../utils/documentation.js";
 import { extractEpisodesInChunks } from "../extractor/extractEpisodes.js";
+import { extractSuggestions } from "../extractor/extractSuggestions.js";
 
 export const home = async (c) => {
   try {
@@ -228,6 +229,32 @@ export const getSearchPage = async (c) => {
     }
 
     const response = extractListPage(obj.data);
+
+    return setResponse(c, 200, response);
+  } catch (error) {
+    console.log(error.message);
+    return setError(c, 500, "something went wrong");
+  }
+};
+export const getSuggestions = async (c) => {
+  try {
+    const keyword = c.req.query("keyword") || null;
+
+    if (!keyword) return setError(c, 404, "query is required");
+
+    const noSpaceKeyword = keyword.trim().toLowerCase().replace(/\s+/g, "+");
+
+    console.log(noSpaceKeyword);
+
+    const endpoint = `/ajax/search/suggest?keyword=${noSpaceKeyword}`;
+    const Referer = "/home";
+    const obj = await fetchFromApi(Referer, endpoint);
+
+    if (!obj.status) {
+      return setError(c, 400, "make sure given endpoint is correct");
+    }
+
+    const response = extractSuggestions(obj.data);
 
     return setResponse(c, 200, response);
   } catch (error) {

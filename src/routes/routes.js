@@ -12,6 +12,7 @@ import {
   getRelated,
   getSearchPage,
   getServers,
+  getSuggestions,
   home,
 } from "../parser/parser";
 
@@ -22,6 +23,7 @@ router.get("/home", getHomePage);
 router.get("/anime/:id", getInfo);
 router.get("/animes/:query/:category?", getListPage);
 router.get("/search", getSearchPage);
+router.get("/suggest", getSuggestions);
 router.get("/recommendation/:id", getRecommendation);
 router.get("/related/:id", getRelated);
 router.get("/characters/:id", getCharacters);
