@@ -173,7 +173,7 @@ export const extractInfoPage = (html) => {
         };
 
         const titleEl = $(el).find(".film-name .dynamic-name");
-        innerObj.title = titleEl.attr("title");
+        innerObj.title = titleEl.text();
         innerObj.alternativeTitle = titleEl.attr("data-jname");
         innerObj.id = titleEl.attr("href").split("/").pop();
 

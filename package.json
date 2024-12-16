@@ -10,7 +10,6 @@
     "hono": "^4.6.5"
   },
   "devDependencies": {
-    "@types/bun": "latest",
-    "esbuild": "^0.24.0"
+    "@types/bun": "latest"
   }
 }
