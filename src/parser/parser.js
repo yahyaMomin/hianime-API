@@ -1,8 +1,4 @@
-import {
-  fetchFromApi,
-  fetchSources,
-  interceptor,
-} from "../axiosInstances/interceptor.js";
+import { fetchFromApi, interceptor } from "../axiosInstances/interceptor.js";
 import { extractListPage } from "../extractor/list_page.js";
 import { extractHomePage } from "../extractor/home_page.js";
 import { extractInfoPage } from "../extractor/info_page.js";
@@ -15,7 +11,7 @@ import { extractRelated } from "../extractor/related.js";
 import { extractCharacterInfo } from "../extractor/character_info.js";
 import { extractActor } from "../extractor/actor_info.js";
 import apiDocumentation from "../utils/documentation.js";
-import { extractEpisodesInChunks } from "../extractor/extractEpisodes.js";
+import { extractEpisodesSources } from "../extractor/extractEpisodes.js";
 import { extractSuggestions } from "../extractor/extractSuggestions.js";
 
 export const home = async (c) => {
@@ -230,6 +226,10 @@ export const getSearchPage = async (c) => {
 
     const response = extractListPage(obj.data);
 
+    if (response.response.length < 1) {
+      return setError(c, 404, "page not found");
+    }
+
     return setResponse(c, 200, response);
   } catch (error) {
     console.log(error.message);
@@ -362,7 +362,7 @@ export const getServers = async (c) => {
 //   }
 // };
 
-export const getEpisodesInChunks = async (c) => {
+export const getEpisodesSourceInChunks = async (c) => {
   try {
     const id = c.req.param("id");
     if (!id) return setError(c, 400, "id is required");
@@ -370,14 +370,30 @@ export const getEpisodesInChunks = async (c) => {
     const obj = await interceptor(`/${id}`);
     if (!obj.status) return setError(c, 400, "make sure the id is correct");
 
-    const response = await extractEpisodesInChunks(obj.data);
+    const response = await extractEpisodesSources(obj.data);
 
-    if (!response.status)
-      return setError(
-        c,
-        400,
-        "some thing went wrong while fetching chunks episodes"
-      );
+    if (!response.status) return setError(c, 400, response.message);
+    console.log(response);
+
+    return setResponse(c, 200, response.data);
+  } catch (error) {
+    console.log(error.message);
+    return setError(c, 500, "something went wrong");
+  }
+};
+export const getEpisodesSource = async (c) => {
+  try {
+    const id = c.req.param("id");
+    const ep = parseInt(c.req.query("ep") || "1");
+
+    if (!id) return setError(c, 400, "id is required");
+
+    const obj = await interceptor(`/${id}`);
+    if (!obj.status) return setError(c, 400, "make sure the id is correct");
+
+    const response = await extractEpisodesSources(obj.data, ep);
+
+    if (!response.status) return setError(c, 400, response.message);
     return setResponse(c, 200, response.data);
   } catch (error) {
     console.log(error.message);
