@@ -15,12 +15,16 @@ export const extractEpisodesSources = async (html, episodeId = null) => {
   }
   const obj = JSON.parse(rawString.text());
 
+  console.log(obj);
+
   const name = obj.series_url.split("/").at(-1);
   const id = obj.anilist_id === "" ? obj.mal_id : obj.anilist_id;
 
   const newId = name.replace(/\d+$/, id);
 
   const url = `https://data.hiddenleaf.to/assets/${newId}.json`;
+
+  console.log(url);
 
   const reArangeString = (string) => {
     return string
@@ -74,10 +78,12 @@ export const extractEpisodesSources = async (html, episodeId = null) => {
                   }))
                 : [],
             },
-            captions: episode.captions.map((caption) => ({
-              lang: caption.lang,
-              url: caption.url,
-            })),
+            captions: episode.captions
+              ? episode.captions.map((caption) => ({
+                  lang: caption.lang,
+                  url: caption.url,
+                }))
+              : [],
             downloadLinks: {
               dubbed: episode.downloadLink.DUBBED,
               subbed: episode.downloadLink.SUBBED,
@@ -111,10 +117,12 @@ export const extractEpisodesSources = async (html, episodeId = null) => {
                 }))
               : [],
           },
-          captions: episode.captions.map((caption) => ({
-            lang: caption.lang,
-            url: caption.url,
-          })),
+          captions: episode.captions
+            ? episode.captions.map((caption) => ({
+                lang: caption.lang,
+                url: caption.url,
+              }))
+            : [],
           downloadLinks: {
             dubbed: episode.downloadLink.DUBBED,
             subbed: episode.downloadLink.SUBBED,

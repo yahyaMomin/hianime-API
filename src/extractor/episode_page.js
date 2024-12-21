@@ -13,7 +13,7 @@ export const extractEpisodes = (html) => {
     };
 
     obj.title = $(el).attr("title");
-    obj.id = Number($(el).attr("data-number"));
+    obj.id = $(el).attr("href");
     obj.isFiller = $(el).hasClass("ssl-item-filler");
 
     obj.alternativeTitle = $(el)
