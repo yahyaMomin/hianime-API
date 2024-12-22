@@ -18,6 +18,9 @@ import apiDocumentation from "../utils/documentation.js";
 import { extractEpisodesSources } from "../extractor/extractEpisodes.js";
 import { extractSuggestions } from "../extractor/extractSuggestions.js";
 import { extractSource } from "../extractor/episode_sources.js";
+import { HiAnime } from "aniwatch";
+
+const hianime = new HiAnime.Scraper();
 
 export const home = async (c) => {
   try {
@@ -274,17 +277,19 @@ export const getEpisodes = async (c) => {
 
     if (!id) return setError(c, 400, "id is required");
 
-    const Referer = `/watch/${id}`;
+    // const Referer = `/watch/${id}`;
 
-    const idNum = id.split("-").at(-1);
-    const obj = await fetchFromApi(Referer, `/ajax/v2/episode/list/${idNum}`);
+    // const idNum = id.split("-").at(-1);
+    // const obj = await fetchFromApi(Referer, `/ajax/v2/episode/list/${idNum}`);
 
-    if (!obj.status) {
-      return setError(c, 400, "make sure given endpoint is correct");
-    }
-    const response = extractEpisodes(obj.data);
+    // if (!obj.status) {
+    //   return setError(c, 400, "make sure given endpoint is correct");
+    // }
+    // const response = extractEpisodes(obj.data);
 
-    return setResponse(c, 200, response);
+    const episodes = await hianime.getEpisodes(id);
+
+    return setResponse(c, 200, episodes);
   } catch (error) {
     console.log(error.message);
     return setError(c, 500, "something went wrong");
@@ -297,19 +302,20 @@ export const getServers = async (c) => {
 
     if (!episodeId) return setError(c, 400, "episodeId is required");
 
-    const episode = episodeId.split("ep=").at(-1);
+    // const episode = episodeId.split("ep=").at(-1);
 
-    const obj = await fetchFromApi(
-      episodeId,
-      `/ajax/v2/episode/servers?episodeId=${episode}`
-    );
+    // const obj = await fetchFromApi(
+    //   episodeId,
+    //   `/ajax/v2/episode/servers?episodeId=${episode}`
+    // );
 
-    if (!obj.status) {
-      return setError(c, 400, "make sure given endpoint is correct");
-    }
-    const response = extractServers(obj.data);
+    // if (!obj.status) {
+    //   return setError(c, 400, "make sure given endpoint is correct");
+    // }
+    // const response = extractServers(obj.data);
 
-    return setResponse(c, 200, response);
+    const data = await hianime.getEpisodeServers(episodeId);
+    return setResponse(c, 200, data);
   } catch (error) {
     console.log(error.message);
     return setError(c, 500, "something went wrong");
@@ -317,50 +323,52 @@ export const getServers = async (c) => {
 };
 export const getSources = async (c) => {
   try {
-    const { episodeId, server = 4, audio = "sub" } = c.req.query();
+    const { episodeId, server = "hd-1", category = "sub" } = c.req.query();
 
-    console.log(episodeId, server, audio);
+    // console.log(episodeId, server, audio);
 
-    const validServerIndexes = [4, 1];
+    // const validServerIndexes = [4, 1];
 
-    const integerIndex = Number(server);
+    // const integerIndex = Number(server);
 
-    if (!validServerIndexes.includes(integerIndex))
-      return setError(c, 400, "invalid server");
+    // if (!validServerIndexes.includes(integerIndex))
+    //   return setError(c, 400, "invalid server");
 
-    if (!episodeId) return setError(c, 400, "episodeId is required");
+    // if (!episodeId) return setError(c, 400, "episodeId is required");
 
-    const episode = episodeId.includes("ep=");
-    if (!episode) return setError(c, 400, "episode  is required");
-    const serverIdsHTML = await fetchFromApi(
-      episodeId,
-      `/ajax/v2/episode/servers?episodeId=${episodeId.split("ep=").at(-1)}`
-    );
+    // const episode = episodeId.includes("ep=");
+    // if (!episode) return setError(c, 400, "episode  is required");
+    // const serverIdsHTML = await fetchFromApi(
+    //   episodeId,
+    //   `/ajax/v2/episode/servers?episodeId=${episodeId.split("ep=").at(-1)}`
+    // );
 
-    const serverIds = extractServers(serverIdsHTML.data);
+    // const serverIds = extractServers(serverIdsHTML.data);
 
-    const selectedServer = serverIds[audio].find(
-      (el) => el.index === integerIndex
-    );
+    // const selectedServer = serverIds[audio].find(
+    //   (el) => el.index === integerIndex
+    // );
 
-    const obj = await fetchSources(
-      episodeId,
-      `/ajax/v2/episode/sources?id=${selectedServer.id}`
-    );
+    // const obj = await fetchSources(
+    //   episodeId,
+    //   `/ajax/v2/episode/sources?id=${selectedServer.id}`
+    // );
 
-    if (!obj.status) {
-      return setError(c, 400, "make sure given endpoint is correct");
-    }
+    // if (!obj.status) {
+    //   return setError(c, 400, "make sure given endpoint is correct");
+    // }
 
-    const params = {
-      data: obj.data,
-      audio,
-      episodeId,
-      server,
-    };
+    // const params = {
+    //   data: obj.data,
+    //   audio,
+    //   episodeId,
+    //   server,
+    // };
 
-    const response = await extractSource(params);
-    return setResponse(c, 200, response);
+    // const response = await extractSource(params);
+
+    const data = await hianime.getEpisodeSources(episodeId, server, category);
+    return setResponse(c, 200, data);
   } catch (error) {
     console.log(error.message);
     return setError(c, 500, "something went wrong");
