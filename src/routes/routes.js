@@ -31,9 +31,9 @@ router.get("/related/:id", getRelated);
 router.get("/characters/:id", getCharacters);
 router.get("/character/:id", getCharacter_info);
 router.get("/actor/:id", getActor_info);
-router.get("/episodes/:id", getEpisodes);
-router.get("/servers", getServers);
-router.get("/sources", getSources);
+// router.get("/episodes/:id", getEpisodes);
+// router.get("/servers", getServers);
+// router.get("/sources", getSources);
 router.get("/episodes/source/all/:id", getEpisodesSourceInChunks);
 router.get("/episodes/source/single/:id", getEpisodesSource);
 
