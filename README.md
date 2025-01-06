@@ -3,28 +3,18 @@
 <p align="center">
   <img src="https://skillicons.dev/icons?i=js,bun,hono,docker" />
   <br/>
-  <a href="https://hianime-api-production.up.railway.app/api/v1"><kbd>https://hianime-api-production.up.railway.app/api/v1</kbd></a>
 </p>
 <br/><br/>
-
-Check it out at <a href="https://hianime-api-production.up.railway.app/api/v1"><kbd>https://hianime-api-production.up.railway.app/api/v1</kbd></a>.
 
 <break>
 
 ## ⚡ Web Scraping Status
 
-| Anime Websites | STATUS               |
-| -------------- | -------------------- |
-| hianime        | <b>DONE</b>          |
-| hiddenLeaf     | <b>WORKING ON IT</b> |
-
-> [!NOTE]
-> More Websites Will be Added in Future
-
 ## Index
 
-- [hianime](#hianime)
-<!-- - [GogoAnime](#gogoanime) -->
+# for use this api first you have to deploy this project on your server. than replace baseurl to your original server url
+
+# and replace this url `https://hianime-api-production.up.railway.app` with your baseurl
 
 ## <span id="hianime">hianime</span>
 
@@ -33,14 +23,14 @@ Check it out at <a href="https://hianime-api-production.up.railway.app/api/v1"><
 #### Endpoint
 
 ```url
-https://hianime-api-production.up.railway.app/api/v1/home
+https://yourBaseurl/api/v1/home
 ```
 
 #### Request sample
 
 ```javascript
 const resp = await fetch(
-  "https://hianime-api-production.up.railway.app/api/v1/home"
+  "yourBaseUrl/api/v1/home"
 );
 const data = await resp.json();
 console.log(data);
@@ -71,7 +61,7 @@ genres :	[ "action", "adventure", "cars", "comedy", "dementia", "demons", "drama
 #### Endpoint
 
 ```url
-https://hianime-api-production.up.railway.app/api/v1/animes/az-list?page=${page}
+https://yourbaseurl/api/v1/animes/az-list?page=${page}
 ```
 
 #### Query Parameters
@@ -84,7 +74,7 @@ https://hianime-api-production.up.railway.app/api/v1/animes/az-list?page=${page}
 
 ```typescript
 const resp = await fetch(
-  "https://hianime-api-production.up.railway.app/api/v1/animes/az-list?page=69"
+  "https://yourbaseurl/api/v1/animes/az-list?page=69"
 );
 const data = await resp.json();
 console.log(data);
