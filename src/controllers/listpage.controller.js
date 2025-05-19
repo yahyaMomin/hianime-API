@@ -1,0 +1,45 @@
+import { extractListPage } from '../extractor/extractListpage';
+import { axiosInstance } from '../services/axiosInstance';
+import { NotFoundError, validationError } from '../utils/errors';
+
+const listpageController = async (c) => {
+  const validateQueries = [
+    'top-airing',
+    'most-popular',
+    'most-favorite',
+    'completed',
+    'recently-added',
+    'recently-updated',
+    'top-upcoming',
+    'genre',
+    'az-list',
+    'subbed-anime',
+    'dubbed-anime',
+    'movie',
+    'tv',
+    'ova',
+    'ona',
+    'special',
+    'events',
+  ];
+  const query = c.req.param('query').toLowerCase() || null;
+
+  if (!validateQueries.includes(query))
+    throw new validationError('invalid query', { validateQueries });
+
+  const category = c.req.param('category') || null;
+  const page = c.req.query('page') || 1;
+  const endpoint = category ? `/${query}/${category}?page=${page}` : `/${query}?page=${page}`;
+
+  const result = await axiosInstance(endpoint);
+
+  if (!result.success) {
+    throw new validationError('make sure given endpoint is correct');
+  }
+  const response = extractListPage(result.data);
+
+  if (response.response.length < 1) throw new NotFoundError();
+  return response;
+};
+
+export default listpageController;

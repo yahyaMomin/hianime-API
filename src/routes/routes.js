@@ -1,40 +1,51 @@
-import { Hono } from "hono";
-import {
-  getActor_info,
-  getCharacter_info,
-  getCharacters,
-  getEpisodes,
-  getEpisodesSource,
-  getEpisodesSourceInChunks,
-  getHomePage,
-  getInfo,
-  getListPage,
-  getRecommendation,
-  getRelated,
-  getSearchPage,
-  getServers,
-  getSources,
-  getSuggestions,
-  home,
-} from "../parser/parser";
+import { Hono } from 'hono';
+// import {
+//   getActor_info,
+//   getCharacter_info,
+//   getCharacters,
+//   getEpisodes,
+//   getEpisodesSource,
+//   getEpisodesSourceInChunks,
+//   getHomePage,
+//   getInfo,
+//   getListPage,
+//   getRecommendation,
+//   getRelated,
+//   getSearchPage,
+//   getServers,
+//   getSources,
+//   getSuggestions,
+//   home,
+// } from '../parser/parser';
+import documentationController from '../controllers/documentation.controller';
+import handler from '../utils/handler';
+
+// controllers
+import homepageController from '../controllers/homepage.controller';
+import detailpageController from '../controllers/detailpage.controller';
+import listpageController from '../controllers/listpage.controller';
+import searchController from '../controllers/search.controller';
+import suggestionController from '../controllers/suggestion.controller';
+import charactersController from '../controllers/characters.controller';
+import characterDetailConroller from '../controllers/characterDetail.controller';
+import episodesController from '../controllers/episodes.controller';
+import serversController from '../controllers/serversController';
+import streamController from '../controllers/streamController';
 
 const router = new Hono();
 
-router.get("/", home);
-router.get("/home", getHomePage);
-router.get("/anime/:id", getInfo);
-router.get("/animes/:query/:category?", getListPage);
-router.get("/search", getSearchPage);
-router.get("/suggest", getSuggestions);
-router.get("/recommendation/:id", getRecommendation);
-router.get("/related/:id", getRelated);
-router.get("/characters/:id", getCharacters);
-router.get("/character/:id", getCharacter_info);
-router.get("/actor/:id", getActor_info);
-// router.get("/episodes/:id", getEpisodes);
-// router.get("/servers", getServers);
-// router.get("/sources", getSources);
-router.get("/episodes/source/all/:id", getEpisodesSourceInChunks);
-router.get("/episodes/source/single/:id", getEpisodesSource);
+router.get('/', handler(documentationController));
+router.get('/home', handler(homepageController));
+router.get('/anime/:id', handler(detailpageController));
+router.get('/animes/:query/:category?', handler(listpageController));
+router.get('/search', handler(searchController));
+router.get('/suggestion', handler(suggestionController));
+router.get('/characters/:id', handler(charactersController));
+router.get('/character/:id', handler(characterDetailConroller));
+router.get('/episodes/:id', handler(episodesController));
+router.get('/servers', handler(serversController));
+router.get('/stream', handler(streamController));
+// router.get('/episodes/source/all/:id', getEpisodesSourceInChunks);
+// router.get('/episodes/source/single/:id', getEpisodesSource);
 
 export default router;

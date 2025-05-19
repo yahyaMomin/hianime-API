@@ -1,17 +1,26 @@
 {
   "name": "hianime",
   "scripts": {
-    "start": "bun run index.js",
-    "dev": "bun --watch run index.js"
+    "start": "bun run src/app.js",
+    "dev": "bun --watch run src/app.js"
   },
   "dependencies": {
     "aniwatch": "^2.17.0",
     "axios": "^1.7.7",
     "cheerio": "^1.0.0",
+    "crypto-js": "^4.2.0",
     "dotenv": "^16.4.7",
-    "hono": "^4.6.5"
+    "hono": "^4.6.5",
+    "hono-rate-limiter": "^0.4.2",
+    "image-pixels": "^2.2.2"
   },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@eslint/js": "^9.27.0",
+    "@types/bun": "latest",
+    "eslint": "^9.27.0",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-import": "^2.31.0",
+    "globals": "^16.1.0",
+    "prettier": "^3.5.3"
   }
 }
