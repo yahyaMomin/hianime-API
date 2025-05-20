@@ -717,7 +717,6 @@ const decryptSource = async (embed_url) => {
 
   let { data: resp } = await axios.get(getSourcesUrl, {
     headers: {
-      'User-Agent': user_agent,
       Referrer: embed_url + '&autoPlay=1&oa=0&asi=1',
       'Accept-Language': 'en,bn;q=0.9,en-US;q=0.8',
       'sec-ch-ua': '"Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"',
@@ -725,8 +724,8 @@ const decryptSource = async (embed_url) => {
       'sec-ch-ua-platform': '"Android"',
       'Sec-Fetch-Dest': 'empty',
       'Sec-Fetch-Site': 'same-origin',
-      'X-Requested-With': 'XMLHttpRequest',
       'Sec-Fetch-Mode': 'cors',
+      ...config.headers,
     },
   });
 

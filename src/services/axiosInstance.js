@@ -9,8 +9,6 @@ export const axiosInstance = async (endpoint) => {
       },
     });
 
-    console.log(response.config.headers);
-
     return {
       success: true,
       data: response.data,

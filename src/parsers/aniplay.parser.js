@@ -73,6 +73,7 @@ class AniplayExtractor {
       const res = await axios.post(url, payload, {
         headers: {
           'Next-Action': nextAction.watch,
+          ...config.headers,
         },
       });
       const dataStr = res.data.split('1:')[1];
