@@ -717,6 +717,7 @@ const decryptSource = async (embed_url) => {
 
   let { data: resp } = await axios.get(getSourcesUrl, {
     headers: {
+      'User-Agent': user_agent,
       Referrer: embed_url + '&autoPlay=1&oa=0&asi=1',
       'Accept-Language': 'en,bn;q=0.9,en-US;q=0.8',
       'sec-ch-ua': '"Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"',
@@ -725,7 +726,7 @@ const decryptSource = async (embed_url) => {
       'Sec-Fetch-Dest': 'empty',
       'Sec-Fetch-Site': 'same-origin',
       'Sec-Fetch-Mode': 'cors',
-      ...config.headers,
+      'Accept-Encoding': config.headers['Accept-Encoding'],
     },
   });
 
@@ -750,6 +751,7 @@ export default async function decryptMegacloud(id, name, type, episodeId) {
         },
       }
     );
+
     const source = await decryptSource(sourcesData.link);
     return {
       id: id,
