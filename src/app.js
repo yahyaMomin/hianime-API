@@ -4,6 +4,8 @@ import { config } from 'dotenv';
 import { rateLimiter } from 'hono-rate-limiter';
 
 import hiAnimeRoutes from './routes/routes.js';
+import proxyRoutes from './routes/proxy.js';
+
 import { AppError } from './utils/errors.js';
 import { fail } from './utils/response.js';
 
@@ -39,6 +41,7 @@ app.use(
 // routes
 app.get('/', (c) => {
   c.status(200);
+
   return c.text('welcome to anime API 🎉 start by hitting /api/v1 for documentation');
 });
 app.get('/test', (c) => {
@@ -47,6 +50,7 @@ app.get('/test', (c) => {
   });
 });
 app.route('/api/v1', hiAnimeRoutes);
+app.route('/', proxyRoutes);
 
 app.onError((err, c) => {
   if (err instanceof AppError) {
