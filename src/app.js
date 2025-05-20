@@ -9,6 +9,14 @@ import { fail } from './utils/response.js';
 
 const app = new Hono();
 
+import zlib from 'zlib';
+
+const isBrotliSupported = typeof zlib.createBrotliDecompress === 'function';
+
+console.log(isBrotliSupported);
+
+console.log(Bun.version);
+
 config();
 // eslint-disable-next-line no-undef
 const origins = process.env.ORIGIN ? process.env.ORIGIN.split(',') : '*';
