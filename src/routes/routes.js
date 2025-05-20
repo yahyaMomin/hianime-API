@@ -1,22 +1,4 @@
 import { Hono } from 'hono';
-// import {
-//   getActor_info,
-//   getCharacter_info,
-//   getCharacters,
-//   getEpisodes,
-//   getEpisodesSource,
-//   getEpisodesSourceInChunks,
-//   getHomePage,
-//   getInfo,
-//   getListPage,
-//   getRecommendation,
-//   getRelated,
-//   getSearchPage,
-//   getServers,
-//   getSources,
-//   getSuggestions,
-//   home,
-// } from '../parser/parser';
 import documentationController from '../controllers/documentation.controller';
 import handler from '../utils/handler';
 
@@ -45,7 +27,5 @@ router.get('/character/:id', handler(characterDetailConroller));
 router.get('/episodes/:id', handler(episodesController));
 router.get('/servers', handler(serversController));
 router.get('/stream', handler(streamController));
-// router.get('/episodes/source/all/:id', getEpisodesSourceInChunks);
-// router.get('/episodes/source/single/:id', getEpisodesSource);
 
 export default router;
