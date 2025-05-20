@@ -3,13 +3,17 @@ import config from '../config/config.js';
 
 export const axiosInstance = async (endpoint) => {
   try {
-    const { data } = await axios.get(config.baseurl + endpoint, {
-      headers: config.headers,
+    const response = await axios.get(config.baseurl + endpoint, {
+      headers: {
+        ...config.headers,
+      },
     });
+
+    console.log(response.config.headers);
 
     return {
       success: true,
-      data,
+      data: response.data,
     };
   } catch (error) {
     return {

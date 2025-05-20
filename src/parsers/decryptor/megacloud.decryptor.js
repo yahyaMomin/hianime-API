@@ -8,9 +8,9 @@ const user_agent = 'Mozilla/5.0 (X11; Linux x86_64; rv:133.0) Gecko/20100101 Fir
 import { webcrypto } from 'crypto';
 const crypto = webcrypto;
 import config from '../../config/config.js';
+import { dataURL } from '../../config/dataUrl.js';
 
 let wasm;
-const dataURL = config.dataURL;
 
 let arr = new Array(128).fill(void 0);
 const dateNow = Date.now();
