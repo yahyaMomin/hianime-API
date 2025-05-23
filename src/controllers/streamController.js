@@ -6,7 +6,7 @@ import { extractStream } from '../extractor/extractStream';
 import extractSyncData from '../extractor/extractSyncData';
 
 const streamController = async (c) => {
-  const { id, server = 'hd-1', type = 'sub' } = c.req.query();
+  const { id, server = 'HD-1', type = 'sub' } = c.req.query();
 
   let syncData = null;
   const Referer = config.baseurl + id;
@@ -30,7 +30,7 @@ const streamController = async (c) => {
 
   const servers = await getServers(id);
 
-  const selectedServer = servers[type].find((el) => el.name.toLowerCase() === server);
+  const selectedServer = servers[type].find((el) => el.name === server);
   if (!selectedServer) throw new validationError('invalid or server not found', { server });
 
   const params = {

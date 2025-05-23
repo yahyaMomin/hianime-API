@@ -50,7 +50,7 @@ app.get('/test', (c) => {
   });
 });
 app.route('/api/v1', hiAnimeRoutes);
-app.route('/', proxyRoutes);
+app.route('/api/v1', proxyRoutes);
 
 app.onError((err, c) => {
   if (err instanceof AppError) {
