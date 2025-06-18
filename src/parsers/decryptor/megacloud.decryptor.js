@@ -1,5 +1,7 @@
 //inspired from https://github.com/drblgn/rabbit_wasm
 
+/* eslint-disable no-unused-vars */
+
 import util from 'util';
 import pixels from 'image-pixels';
 import cryptoJs from 'crypto-js';
@@ -7,11 +9,11 @@ import axios from 'axios';
 const user_agent = 'Mozilla/5.0 (X11; Linux x86_64; rv:133.0) Gecko/20100101 Firefox/133.0';
 import { webcrypto } from 'crypto';
 const crypto = webcrypto;
-import config from '../../config/config.js';
 import { dataURL } from '../../config/dataUrl.js';
+import { base_urls } from '../../utils/urls/baseurls.js';
 
+const v4_base_url = base_urls.v4;
 let wasm;
-
 let arr = new Array(128).fill(void 0);
 const dateNow = Date.now();
 let content;
@@ -36,7 +38,7 @@ const image_data = {
 };
 
 const canvas = {
-  baseurl: '',
+  baseUrl: '',
   width: 0,
   height: 0,
   style: {
@@ -649,6 +651,7 @@ const M = (a, P) => {
     var Q0 = cryptoJs.AES.decrypt(a, P);
     return JSON.parse(Q0.toString(cryptoJs.enc.Utf8));
   } catch (Q1) {
+    // eslint-disable-next-line no-redeclare
     var Q0 = cryptoJs.AES.decrypt(a, P);
   }
   return [];
@@ -659,18 +662,18 @@ function z(a) {
 }
 
 const decryptSource = async (embed_url) => {
-  referrer = embed_url.includes('mega') ? config.baseurl : new URL(embed_url).origin;
-  let regx = /([A-Z])\w+/;
+  referrer = embed_url.includes('mega') ? `https://${v4_base_url}` : new URL(embed_url).origin;
+  // let regx = /([A-Z])\w+/;
   let xrax = embed_url.split('/').pop().split('?').shift();
-  regx = /https:\/\/[a-zA-Z0-9.]*/;
-  let base_url = embed_url.match(regx)[0];
+  // regx = /https:\/\/[a-zA-Z0-9.]*/;
+  // let base_url = embed_url.match(regx)[0];
+  const base_url = new URL(embed_url).origin;
   nodeList.image.src = base_url + '/images/image.png?v=0.0.9';
   let data = new Uint8ClampedArray((await pixels(nodeList.image.src)).data);
   image_data.data = data;
   let test = embed_url.split('/');
-
   let browser_version = 1676800512;
-  canvas.baseurl = base_url;
+  canvas.baseUrl = base_url;
   fake_window.origin = base_url;
   fake_window.location.origin = base_url;
   fake_window.location.href = embed_url;
@@ -703,8 +706,8 @@ const decryptSource = async (embed_url) => {
       base_url +
       '/ajax/' +
       test[3] +
-      '/' +
-      test[4] +
+      // "/" +
+      // test[4] +
       '/getSources?id=' +
       fake_window.pid +
       '&v=' +
@@ -725,8 +728,8 @@ const decryptSource = async (embed_url) => {
       'sec-ch-ua-platform': '"Android"',
       'Sec-Fetch-Dest': 'empty',
       'Sec-Fetch-Site': 'same-origin',
+      'X-Requested-With': 'XMLHttpRequest',
       'Sec-Fetch-Mode': 'cors',
-      'Accept-Encoding': config.headers['Accept-Encoding'],
     },
   });
 
@@ -740,18 +743,12 @@ const decryptSource = async (embed_url) => {
   return resp;
 };
 
-export default async function decryptMegacloud(id, name, type, episodeId) {
+export default async function decryptMegacloud(id, name, type) {
   try {
     const { data: sourcesData } = await axios.get(
-      `${config.baseurl}/ajax/v2/episode/sources?id=${id}`,
-      {
-        headers: {
-          Referrer: config.baseurl + episodeId,
-          ...config.headers,
-        },
-      }
+      // `https://${v1_base_url}/ajax/v2/episode/sources?id=${id}`
+      `https://${v4_base_url}/ajax/episode/sources?id=${id}`
     );
-
     const source = await decryptSource(sourcesData.link);
     return {
       id: id,

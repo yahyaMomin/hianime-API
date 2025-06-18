@@ -2,7 +2,7 @@ import { axiosInstance } from '../services/axiosInstance';
 import { validationError } from '../utils/errors';
 import { extractHomepage } from '../extractor/extractHomepage';
 
-const homepageController = async (c) => {
+const homepageController = async () => {
   const result = await axiosInstance('/home');
 
   if (!result.success) {

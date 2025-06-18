@@ -1,28 +1,28 @@
 import { load } from 'cheerio';
 
-const characters = [
-  {
-    name: 'Ogino, Ayami',
-    url: '/character/ayami-ogino-111887',
-    imageUrl:
-      'https://cdn.noitatnemucod.net/thumbnail/100x100/100/1b809f8f795bf9c8c57c884ad206e626.jpg',
-    role: 'Supporting',
-    voiceActors: [
-      {
-        name: 'Tsuru, Hiromi',
-        url: '/people/hiromi-tsuru-523',
-        imageUrl:
-          'https://cdn.noitatnemucod.net/thumbnail/100x100/100/cc73ecda3f2f3b0867a6320fb37667bf.jpg',
-      },
-      {
-        name: 'Vadacca, Maddalena',
-        url: '/people/maddalena-vadacca-14312',
-        imageUrl:
-          'https://cdn.noitatnemucod.net/thumbnail/100x100/100/6804ace8508c40d3855707528ab9df90.jpg',
-      },
-    ],
-  },
-];
+// const characters = [
+//   {
+//     name: 'Ogino, Ayami',
+//     url: '/character/ayami-ogino-111887',
+//     imageUrl:
+//       'https://cdn.noitatnemucod.net/thumbnail/100x100/100/1b809f8f795bf9c8c57c884ad206e626.jpg',
+//     role: 'Supporting',
+//     voiceActors: [
+//       {
+//         name: 'Tsuru, Hiromi',
+//         url: '/people/hiromi-tsuru-523',
+//         imageUrl:
+//           'https://cdn.noitatnemucod.net/thumbnail/100x100/100/cc73ecda3f2f3b0867a6320fb37667bf.jpg',
+//       },
+//       {
+//         name: 'Vadacca, Maddalena',
+//         url: '/people/maddalena-vadacca-14312',
+//         imageUrl:
+//           'https://cdn.noitatnemucod.net/thumbnail/100x100/100/6804ace8508c40d3855707528ab9df90.jpg',
+//       },
+//     ],
+//   },
+// ];
 
 export const extractCharacters = (html) => {
   const $ = load(html);

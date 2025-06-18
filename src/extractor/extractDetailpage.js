@@ -81,11 +81,9 @@ export const extractDetailpage = (html) => {
       case 'Synonyms:':
         obj.synonyms = $(el).find('.name').text();
         break;
-      case 'Aired:':
-        const aired = $(el).find('.name').text().split('to');
-
+      case 'Aired:': {
+        let aired = $(el).find('.name').text().split('to');
         obj.aired.from = aired[0].trim();
-
         if (aired.length > 1) {
           const secondPart = aired[1].trim();
           obj.aired.to = secondPart === '?' ? null : secondPart; // Set to null if "?"
@@ -94,6 +92,7 @@ export const extractDetailpage = (html) => {
         }
 
         break;
+      }
       case 'Premiered:':
         obj.premiered = $(el).find('.name').text();
         break;

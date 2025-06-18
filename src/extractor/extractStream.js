@@ -1,5 +1,6 @@
 import AniplayExtractor from '../parsers/aniplay.parser';
-import decryptMegacloud from '../parsers/decryptor/megacloud.decryptor';
+// import decryptMegacloud from '../parsers/decryptor/megacloud.decryptor';
+import { decryptSources_v1 } from '../parsers/decryptor/megacloud_v1';
 
 export const extractStream = async ({ syncData, selectedServer, id, epNum }) => {
   if (selectedServer.name === 'HD-4') {
@@ -8,12 +9,18 @@ export const extractStream = async ({ syncData, selectedServer, id, epNum }) => 
     return { streamingLink: streamingLink.sources, servers: selectedServer.name };
   }
 
-  const streamingLink = await decryptMegacloud(
+  const streamingLink = await decryptSources_v1(
     selectedServer.id,
     selectedServer.name,
     selectedServer.type,
     id
   );
+  // const streamingLink = await decryptMegacloud(
+  //   selectedServer.id,
+  //   selectedServer.name,
+  //   selectedServer.type,
+  //   id
+  // );
   return { streamingLink, servers: selectedServer.name };
 
   // const { link } = res.data;
