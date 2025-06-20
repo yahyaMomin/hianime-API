@@ -1,13 +1,18 @@
 import axios from 'axios';
 import CryptoJS from 'crypto-js';
 import { base_urls } from '../../utils/urls/baseurls.js';
+import config from '../../config/config.js';
 
 const v1_base_url = base_urls.v1;
 
 export async function decryptSources_v1(id, name, type) {
   try {
     const [{ data: sourcesData }, { data: key }] = await Promise.all([
-      axios.get(`${v1_base_url}/ajax/v2/episode/sources?id=${id}`),
+      axios.get(`${v1_base_url}/ajax/v2/episode/sources?id=${id}`, {
+        headers: {
+          ...config.headers,
+        },
+      }),
       axios.get('https://raw.githubusercontent.com/itzzzme/megacloud-keys/refs/heads/main/key.txt'),
     ]);
 
