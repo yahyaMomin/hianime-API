@@ -1,6 +1,6 @@
 {
   "name": "hianime-api",
-  "module": "app.js",
+  "module": "index.js",
   "type": "module",
   "private": true,
   "peerDependencies": {
@@ -14,12 +14,12 @@
   },
   "scripts": {
     "prepare": "husky",
-    "lint": "eslint && prettier . --write",
-    "lint:fix": "eslint --fix",
-    "dev": "bun --watch src/app.js",
-    "dev:pm2": "pm2 start --interpreter ~/.bun/bin/bun src/app.js",
+    "lint": "eslint",
+    "lint:fix": "eslint --fix && prettier . --write",
+    "dev": "bun --watch index.js",
+    "dev:pm2": "pm2 start --interpreter ~/.bun/bin/bun index.js",
     "dev:stop": "pm2 stop all",
-    "start": "bun run src/app.js",
+    "start": "bun index.js",
     "test": "vitest"
   },
   "dependencies": {

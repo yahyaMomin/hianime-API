@@ -1,4 +1,3 @@
-import Bun from 'bun';
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
 import { config } from 'dotenv';
@@ -60,7 +59,4 @@ app.onError((err, c) => {
   return fail(c);
 });
 
-Bun.serve({
-  port: 3030,
-  fetch: app.fetch,
-});
+export default app;
