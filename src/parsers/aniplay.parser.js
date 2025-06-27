@@ -14,6 +14,8 @@ class AniplayExtractor {
   }
 
   async fetchHtml(url) {
+    console.log(url);
+
     const { data } = await axios.get(url, { headers: { ...config.headers } });
     return data;
   }

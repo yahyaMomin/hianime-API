@@ -2,8 +2,6 @@ import axios from 'axios';
 import config from '../config/config.js';
 
 export const axiosInstance = async (endpoint) => {
-  console.log(config.headers);
-
   try {
     const response = await axios.get(config.baseurl + endpoint, {
       headers: {

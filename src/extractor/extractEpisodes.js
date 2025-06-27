@@ -13,7 +13,7 @@ export const extractEpisodes = (html) => {
     };
 
     obj.title = $(el).attr('title');
-    obj.id = $(el).attr('href');
+    obj.id = $(el).attr('href').replace('/watch/', '').replace('?', '::');
     obj.isFiller = $(el).hasClass('ssl-item-filler');
 
     obj.alternativeTitle = $(el).find('.ep-name.e-dynamic-name').attr('data-jname');

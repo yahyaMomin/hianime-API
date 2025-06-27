@@ -1,12 +1,10 @@
-import AniplayExtractor from '../parsers/aniplay.parser';
 // import decryptMegacloud from '../parsers/decryptor/megacloud.decryptor';
 import { decryptSources_v1 } from '../parsers/decryptor/megacloud_v1';
 
-export const extractStream = async ({ syncData, selectedServer, id, epNum }) => {
+export const extractStream = async ({ selectedServer, id }) => {
   if (selectedServer.name === 'HD-4') {
-    const extractor = new AniplayExtractor();
-    const streamingLink = await extractor.fetchEpisode(syncData.anilist_id, epNum);
-    return { streamingLink: streamingLink.sources, servers: selectedServer.name };
+    const url = `https://megaplay.buzz/stream/s-2/${id.split('ep=').pop()}/${selectedServer.type}`;
+    return { streamingLink: url, servers: selectedServer.name };
   }
 
   const streamingLink = await decryptSources_v1(
@@ -21,7 +19,7 @@ export const extractStream = async ({ syncData, selectedServer, id, epNum }) => 
   //   selectedServer.type,
   //   id
   // );
-  return { streamingLink, servers: selectedServer.name };
+  return streamingLink;
 
   // const { link } = res.data;
   // const urlObj = new URL(link);

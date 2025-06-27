@@ -5,7 +5,3 @@ Bun.serve({
   port: 3030,
   fetch: app.fetch,
 });
-
-console.log('Running Bun version:', Bun.version);
-
-console.log('log server is running on PORT: ' + 'http://localhost:3030');

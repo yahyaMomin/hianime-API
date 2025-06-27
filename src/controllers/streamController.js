@@ -6,8 +6,10 @@ import { extractStream } from '../extractor/extractStream';
 import extractSyncData from '../extractor/extractSyncData';
 
 const streamController = async (c) => {
-  const { id, server = 'HD-1', type = 'sub' } = c.req.query();
+  let { id, server = 'HD-1', type = 'sub' } = c.req.query();
 
+  id = `/watch/${id.replace('::', '?')}`;
+  server = server.toUpperCase();
   let syncData = null;
   const Referer = config.baseurl + id;
   try {

@@ -27,9 +27,24 @@ const listpageController = async (c) => {
   if (!validateQueries.includes(query))
     throw new validationError('invalid query', { validateQueries });
 
-  const category = c.req.param('category') || null;
+  let category = c.req.param('category') || null;
+
   const page = c.req.query('page') || 1;
-  const endpoint = category ? `/${query}/${category}?page=${page}` : `/${query}?page=${page}`;
+
+  if ((query === 'genre' || query === 'az-list') && !category) {
+    throw new validationError(`category is require for query ${query}`);
+  }
+  if (query !== 'genre' && query !== 'az-list' && category) {
+    category = null;
+  }
+
+  let nromalizeCategory = category && category.replaceAll(' ', '-').toLowerCase();
+  if (nromalizeCategory === 'martial-arts') nromalizeCategory = 'marial-arts';
+  const endpoint = category
+    ? `/${query}/${nromalizeCategory}?page=${page}`
+    : `/${query}?page=${page}`;
+
+  console.log(endpoint);
 
   const result = await axiosInstance(endpoint);
 

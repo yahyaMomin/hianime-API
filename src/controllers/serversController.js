@@ -7,7 +7,7 @@ export const getServers = async (id) => {
   const episode = id.split('ep=').at(-1);
   const ajaxUrl = `/ajax/v2/episode/servers?episodeId=${episode}`;
   // "/ajax/v2/episode/servers?episodeId=${id}"
-  const Referer = `/watch/${id}`;
+  const Referer = `/watch/${id.replace('::', '?')}`;
 
   try {
     const { data } = await axios.get(config.baseurl + ajaxUrl, {

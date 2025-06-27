@@ -13,6 +13,7 @@ import characterDetailConroller from '../controllers/characterDetail.controller'
 import episodesController from '../controllers/episodes.controller';
 import serversController from '../controllers/serversController';
 import streamController from '../controllers/streamController';
+import allGenresController from '../controllers/allGenres.controller';
 
 const router = new Hono();
 
@@ -27,5 +28,6 @@ router.get('/character/:id', handler(characterDetailConroller));
 router.get('/episodes/:id', handler(episodesController));
 router.get('/servers', handler(serversController));
 router.get('/stream', handler(streamController));
+router.get('/genres', handler(allGenresController));
 
 export default router;
