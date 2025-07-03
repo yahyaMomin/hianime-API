@@ -683,7 +683,7 @@ console.log(data);
 #### Request Sample
 
 ```javascript
-const resp = await fetch('/api/v1/episode/servers?id=/watch/steinsgate-3?ep=213');
+const resp = await fetch('/api/v1/episode/servers?id=steinsgate-3::ep=213');
 const data = await resp.json();
 console.log(data);
 ```
@@ -728,7 +728,7 @@ console.log(data);
 #### Request Sample
 
 ```javascript
-const resp = await fetch('/api/v1/stream?server=HD-2&type=dub&id=/watch/steinsgate-3?ep=214');
+const resp = await fetch('/api/v1/stream?server=HD-2&type=dub&id=steinsgate-3::ep=214');
 const data = await resp.json();
 console.log(data);
 ```

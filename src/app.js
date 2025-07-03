@@ -2,11 +2,13 @@ import { Hono } from 'hono';
 import { cors } from 'hono/cors';
 import { config } from 'dotenv';
 import { rateLimiter } from 'hono-rate-limiter';
+import { swaggerUI } from '@hono/swagger-ui';
 
 import hiAnimeRoutes from './routes/routes.js';
 
 import { AppError } from './utils/errors.js';
 import { fail } from './utils/response.js';
+import hianimeApiDocs from './utils/swaggerUi.js';
 
 const app = new Hono();
 
@@ -38,6 +40,7 @@ app.use(
 // middlewares
 
 // routes
+
 app.get('/', (c) => {
   c.status(200);
 
@@ -50,6 +53,10 @@ app.get('/test', (c) => {
 });
 app.route('/api/v1', hiAnimeRoutes);
 
+app.get('/doc', (c) => c.json(hianimeApiDocs));
+
+// Use the middleware to serve Swagger UI at /ui
+app.get('/ui', swaggerUI({ url: '/doc' }));
 app.onError((err, c) => {
   if (err instanceof AppError) {
     return fail(c, err.message, err.statusCode, err.details);

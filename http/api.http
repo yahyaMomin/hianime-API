@@ -1,0 +1,83 @@
+### Base URL
+@baseUrl = http://localhost:3030/api/v1
+
+### 1. Home
+GET {{baseUrl}}/home
+
+### 2. A-Z List
+GET {{baseUrl}}/animes/az-list/a?page=2
+
+### 3. Top Airing
+GET {{baseUrl}}/animes/top-airing?page=1
+
+### 4. Most Popular
+GET {{baseUrl}}/animes/most-popular?page=1
+
+### 5. Most Favorite
+GET {{baseUrl}}/animes/most-favorite?page=1
+
+### 6. Completed
+GET {{baseUrl}}/animes/completed?page=1
+
+### 7. Recently Added
+GET {{baseUrl}}/animes/recently-added?page=1
+
+### 8. Recently Updated
+GET {{baseUrl}}/animes/recently-updated?page=1
+
+### 9. Top Upcoming
+GET {{baseUrl}}/animes/top-upcoming?page=1
+
+### 10. Genre
+GET {{baseUrl}}/animes/genre/action?page=1
+
+### 11. Subbed Anime
+GET {{baseUrl}}/animes/subbed-anime?page=1
+
+### 12. Dubbed Anime
+GET {{baseUrl}}/animes/dubbed-anime?page=1
+
+### 13. Movie
+GET {{baseUrl}}/animes/movie?page=1
+
+### 14. TV
+GET {{baseUrl}}/animes/tv?page=1
+
+### 15. OVA
+GET {{baseUrl}}/animes/ova?page=1
+
+### 16. ONA
+GET {{baseUrl}}/animes/ona?page=1
+
+### 17. Special
+GET {{baseUrl}}/animes/special?page=1
+
+### 18. Events
+GET {{baseUrl}}/animes/events?page=1
+
+### 19. Anime Details
+GET {{baseUrl}}/anime/one-piece-100
+
+### 20. Search
+GET {{baseUrl}}/search?keyword=death+note&page=2
+
+### 21. Search Suggestions
+GET {{baseUrl}}/suggestion?keyword=death+note&page=2
+
+### 22. Characters of Anime
+GET {{baseUrl}}/characters/one-piece-100?page=1
+
+### 23. Character Detail
+GET {{baseUrl}}/character/character:roronoa-zoro-7
+
+### 24. Actor Detail
+GET {{baseUrl}}/character/people:kana-hanazawa-1
+
+### 25. Episodes
+GET {{baseUrl}}/episodes/one-piece-100
+
+### 26. Servers (Episode Sources)
+GET {{baseUrl}}/servers?id=steinsgate-3::ep=213
+
+### 27. Stream (Episode Source)
+GET {{baseUrl}}/stream?type=dub&server=hd-4&id=steinsgate-3::ep=213
