@@ -10,8 +10,9 @@ export const extractEpisodes = (html) => {
       alternativeTitle: null,
       id: null,
       isFiller: false,
+      episodeNumber: null,
     };
-
+    obj.episodeNumber = i + 1;
     obj.title = $(el).attr('title');
     obj.id = $(el).attr('href').replace('/watch/', '').replace('?', '::');
     obj.isFiller = $(el).hasClass('ssl-item-filler');
