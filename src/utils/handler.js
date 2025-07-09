@@ -8,7 +8,6 @@ const handler = (fn) => {
       return success(c, result, null);
     } catch (error) {
       console.error(error.message);
-      console.error(error);
 
       if (error.statusCode) {
         return fail(c, error.message, error.statusCode, error.details);

@@ -10,8 +10,6 @@ const searchController = async (c) => {
 
   const noSpaceKeyword = keyword.trim().toLowerCase().replace(/\s+/g, '+');
 
-  console.log(noSpaceKeyword);
-
   const endpoint = `/search?keyword=${noSpaceKeyword}&page=${page}`;
   const result = await axiosInstance(endpoint);
 

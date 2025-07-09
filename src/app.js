@@ -9,6 +9,7 @@ import hiAnimeRoutes from './routes/routes.js';
 import { AppError } from './utils/errors.js';
 import { fail } from './utils/response.js';
 import hianimeApiDocs from './utils/swaggerUi.js';
+import { logger } from 'hono/logger';
 
 const app = new Hono();
 
@@ -40,6 +41,8 @@ app.use(
 // middlewares
 
 // routes
+
+app.use(logger());
 
 app.get('/', (c) => {
   c.status(200);

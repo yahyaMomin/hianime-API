@@ -10,8 +10,6 @@ const suggestionController = async (c) => {
 
   const noSpaceKeyword = keyword.trim().toLowerCase().replace(/\s+/g, '+');
 
-  console.log(noSpaceKeyword);
-
   const endpoint = `/ajax/search/suggest?keyword=${noSpaceKeyword}`;
   const Referer = `${config.baseurl}/home`;
   const { data } = await axios.get(config.baseurl + endpoint, {

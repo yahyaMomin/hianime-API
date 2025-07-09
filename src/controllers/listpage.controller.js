@@ -44,8 +44,6 @@ const listpageController = async (c) => {
     ? `/${query}/${nromalizeCategory}?page=${page}`
     : `/${query}?page=${page}`;
 
-  console.log(endpoint);
-
   const result = await axiosInstance(endpoint);
 
   if (!result.success) {
