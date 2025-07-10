@@ -42,17 +42,14 @@ app.use(
 
 // routes
 
-app.use(logger());
+app.use('/api/v1/*', logger());
 
 app.get('/', (c) => {
   c.status(200);
-
   return c.text('welcome to anime API 🎉 start by hitting /api/v1 for documentation');
 });
-app.get('/test', (c) => {
-  return c.json({
-    status: true,
-  });
+app.get('/ping', (c) => {
+  return c.text('pong');
 });
 app.route('/api/v1', hiAnimeRoutes);
 
