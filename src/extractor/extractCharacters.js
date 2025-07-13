@@ -50,7 +50,7 @@ export const extractCharacters = (html) => {
   };
 
   const characters = $('.bac-item');
-  if (!characters.length) throw new Error();
+  if (!characters.length) return { response };
   $(characters).each((i, el) => {
     const obj = {
       name: null,

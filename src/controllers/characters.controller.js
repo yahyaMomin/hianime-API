@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { NotFoundError, validationError } from '../utils/errors';
+import { validationError } from '../utils/errors';
 import config from '../config/config';
 import { extractCharacters } from '../extractor/extractCharacters';
 
@@ -22,7 +22,6 @@ const charactersController = async (c) => {
 
     const response = extractCharacters(data.html);
 
-    if (response.length < 1) throw new NotFoundError('characters not found');
     return response;
   } catch {
     throw new validationError('characters not found');
