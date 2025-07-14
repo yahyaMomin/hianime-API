@@ -66,13 +66,15 @@ export const extractCharacters = (html) => {
 
     obj.name = $(characterDetail).find('.pi-detail .pi-name a').text();
     obj.role = $(characterDetail).find('.pi-detail .pi-cast').text();
-    obj.id = $(characterDetail)
-      .find('.pi-avatar')
-      .attr('href')
-      .replace(/^\//, '')
-      .replace('/', ':');
+    obj.id = $(characterDetail).find('.pi-avatar').length
+      ? $(characterDetail).find('.pi-avatar').attr('href').replace(/^\//, '').replace('/', ':')
+      : null;
     obj.imageUrl = $(characterDetail).find('.pi-avatar img').attr('data-src');
 
+    if (!voiceActorsDetail.length) {
+      response.push(obj);
+      return;
+    }
     const hasMultiple = $(voiceActorsDetail).hasClass('per-info-xx');
 
     if (hasMultiple) {
@@ -98,11 +100,9 @@ export const extractCharacters = (html) => {
         imageUrl: null,
         cast: null,
       };
-      innerObj.id = $(voiceActorsDetail)
-        .find('.pi-avatar')
-        .attr('href')
-        .replace(/^\//, '')
-        .replace('/', ':');
+      innerObj.id = $(voiceActorsDetail).find('.pi-avatar').length
+        ? $(voiceActorsDetail).find('.pi-avatar').attr('href').replace(/^\//, '').replace('/', ':')
+        : null;
       innerObj.imageUrl = $(voiceActorsDetail).find('.pi-avatar img').attr('data-src');
       innerObj.name = $(voiceActorsDetail).find('.pi-avatar img').attr('alt');
       innerObj.cast = $(voiceActorsDetail).find('.pi-cast').text();

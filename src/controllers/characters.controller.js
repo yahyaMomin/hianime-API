@@ -23,7 +23,9 @@ const charactersController = async (c) => {
     const response = extractCharacters(data.html);
 
     return response;
-  } catch {
+  } catch (err) {
+    console.log(err);
+
     throw new validationError('characters not found');
   }
 };
