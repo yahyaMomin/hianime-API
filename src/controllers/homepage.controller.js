@@ -7,24 +7,34 @@ import { Redis } from '@upstash/redis';
 const homepageController = async () => {
   const result = await axiosInstance('/home');
 
-  const redis = Redis.fromEnv();
+  const isRedisEnv = Boolean(
+    process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN
+  );
+  if (isRedisEnv) {
+    const redis = Redis.fromEnv();
+    const homePageData = await redis.get('home');
 
-  const homePageData = await redis.get('home');
+    if (homePageData) {
+      console.log('CACHE HIT');
+      return homePageData;
+    }
+    console.log('CACHE MISS');
 
-  if (homePageData) {
-    console.log('CACHE HIT');
-    return homePageData;
+    if (!result.success) {
+      throw new validationError(result.message);
+    }
+    const response = extractHomepage(result.data);
+    await redis.set('home', JSON.stringify(response), {
+      ex: 60 * 60 * 24,
+    });
+    return response;
+  } else {
+    if (!result.success) {
+      throw new validationError(result.message);
+    }
+    const response = extractHomepage(result.data);
+    return response;
   }
-  console.log('CACHE MISS');
-
-  if (!result.success) {
-    throw new validationError(result.message);
-  }
-  const response = extractHomepage(result.data);
-  await redis.set('home', JSON.stringify(response), {
-    ex: 86400,
-  });
-  return response;
 };
 
 export default homepageController;
