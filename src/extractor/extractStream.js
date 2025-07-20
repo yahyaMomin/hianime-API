@@ -1,5 +1,5 @@
 // import decryptMegacloud from '../parsers/decryptor/megacloud.decryptor';
-import { decryptSources_v1 } from '../parsers/decryptor/megacloud_v1';
+import { megacloud } from '../parsers/decryptor/megacloud';
 
 export const extractStream = async ({ selectedServer, id }) => {
   if (selectedServer.name === 'HD-4') {
@@ -7,12 +7,7 @@ export const extractStream = async ({ selectedServer, id }) => {
     return { streamingLink: url, servers: selectedServer.name };
   }
 
-  const streamingLink = await decryptSources_v1(
-    selectedServer.id,
-    selectedServer.name,
-    selectedServer.type,
-    id
-  );
+  const streamingLink = await megacloud({ selectedServer, id });
   // const streamingLink = await decryptMegacloud(
   //   selectedServer.id,
   //   selectedServer.name,
