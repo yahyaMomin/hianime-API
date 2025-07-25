@@ -39,17 +39,17 @@ export async function megacloud({ selectedServer, id }) {
     let rawSourceData = {};
 
     try {
+      // throw new Error('skip for now');
       const token = await extractToken(`${baseUrl}/${sourceId}?k=1&autoPlay=0&oa=0&asi=1`);
       const { data } = await axios.get(`${baseUrl}/getSources?id=${sourceId}&_k=${token}`);
       rawSourceData = data;
       const encrypted = rawSourceData?.sources;
       if (!encrypted) throw new Error('Encrypted source missing');
+
       const decrypted = CryptoJS.AES.decrypt(encrypted, key.trim()).toString(CryptoJS.enc.Utf8);
       if (!decrypted) throw new Error('Failed to decrypt source');
       decryptedSources = JSON.parse(decrypted);
-    } catch (decryptionError) {
-      console.log(decryptionError.message);
-
+    } catch {
       try {
         const fallback = selectedServer.name.toLowerCase() === 'hd-1' ? fallback_1 : fallback_2;
 
