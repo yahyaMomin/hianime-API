@@ -7,6 +7,7 @@ export const axiosInstance = async (endpoint) => {
       headers: {
         ...(config.headers || {}),
       },
+      timeout: 30000,
     });
 
     return {
