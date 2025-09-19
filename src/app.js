@@ -52,7 +52,6 @@ app.get('/ping', (c) => {
   return c.text('pong');
 });
 app.route('/api/v1', hiAnimeRoutes);
-
 app.get('/doc', (c) => c.json(hianimeApiDocs));
 
 // Use the middleware to serve Swagger UI at /ui

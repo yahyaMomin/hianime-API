@@ -5,8 +5,6 @@ import { extractHomepage } from '../extractor/extractHomepage';
 import { Redis } from '@upstash/redis';
 
 const homepageController = async () => {
-  const result = await axiosInstance('/home');
-
   const isRedisEnv = Boolean(
     process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN
   );
@@ -18,7 +16,9 @@ const homepageController = async () => {
       console.log('CACHE HIT');
       return homePageData;
     }
+
     console.log('CACHE MISS');
+    const result = await axiosInstance('/home');
 
     if (!result.success) {
       throw new validationError(result.message);
@@ -29,6 +29,7 @@ const homepageController = async () => {
     });
     return response;
   } else {
+    const result = await axiosInstance('/home');
     if (!result.success) {
       throw new validationError(result.message);
     }

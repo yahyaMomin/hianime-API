@@ -1,4 +1,4 @@
-# <p align="center">📺 hianime-API</p>
+# 1. <p align="center">📺 hianime-API</p>
 
 <div align="center">
     hianime-API is a RESTful API that utilizes web scraping to fetch anime content from hianime.to. It provides endpoints to retrieve anime details, episodes, and streaming links.
@@ -11,11 +11,11 @@
 > 2. This API is just an unofficial API for [hianimez.to](https://hianimez.to) and is in no other way officially related to the same.
 > 3. The content that this API provides is not mine, nor is it hosted by me. These belong to their respective owners. This API just demonstrates how to build an API that scrapes websites and uses their content.
 
-## <span id="installation">💻 Installation</span>
+## 1.1. <span id="installation">💻 Installation</span>
 
-### # Prerequisites
+### 1.1.1. # Prerequisites
 
-make sure you have installed bun js and pnpm
+make sure you have installed bun js
 
 or you can download from here
 
@@ -31,7 +31,7 @@ https://bun.sh/docs/installation
 https://pnpm.io/installation
 ``` -->
 
-### Local
+### 1.1.2. Local
 
 1. Clone the repository and move into the directory.
 
@@ -59,25 +59,25 @@ https://pnpm.io/installation
 
    Now the server should be running on [http://localhost:3030](http://localhost:3030)
 
-### Render
+### 1.1.3. Render
 
 Deploy your own instance of hianime-API on Render.
 
 [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/yahyaMomin/hianime-API)
 
-## <span id="documentation">📚 Documentation</span>
+## 1.2. <span id="documentation">📚 Documentation</span>
 
 The endpoints exposed by the api are listed below with examples that uses the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API), but you can use any http library.
 
-### `GET` Anime Home Page
+### 1.2.1. `GET` Anime Home Page
 
-#### Endpoint
+#### 1.2.1.1. Endpoint
 
 ```bash
 /api/v1/home
 ```
 
-#### Request Sample
+#### 1.2.1.2. Request Sample
 
 ```javascript
 const resp = await fetch('/api/v1/home');
@@ -85,7 +85,7 @@ const data = await resp.json();
 console.log(data);
 ```
 
-#### Response Schema
+#### 1.2.1.3. Response Schema
 
 ```javascript
 {
@@ -399,15 +399,15 @@ console.log(data);
 }
 ```
 
-### `GET` Anime List page
+### 1.2.2. `GET` Anime List page
 
-#### Endpoint
+#### 1.2.2.1. Endpoint
 
 ```sh
 /api/v1/animes/{query}/{categpry}?page={page}
 ```
 
-#### Path Parameters
+#### 1.2.2.2. Path Parameters
 
 valid queries
 
@@ -434,7 +434,7 @@ valid queries
 
 ```
 
-#### Request Sample
+#### 1.2.2.3. Request Sample
 
 ```javascript
 const resp = await fetch('/api/v1/azlist/0-9?page=1');
@@ -442,7 +442,7 @@ const data = await resp.json();
 console.log(data);
 ```
 
-#### Response Schema
+#### 1.2.2.4. Response Schema
 
 ```javascript
 {
@@ -474,15 +474,15 @@ console.log(data);
 
 ```
 
-### `GET` Anime detailed Info
+### 1.2.3. `GET` Anime detailed Info
 
-#### Endpoint
+#### 1.2.3.1. Endpoint
 
 ```sh
 /api/v1/anime/{animeId}
 ```
 
-#### Request Sample
+#### 1.2.3.2. Request Sample
 
 ```javascript
 const resp = await fetch('/api/v1/anime/attack-on-titan-112');
@@ -490,7 +490,7 @@ const data = await resp.json();
 console.log(data);
 ```
 
-#### Response Schema
+#### 1.2.3.3. Response Schema
 
 ```javascript
 {
@@ -555,15 +555,15 @@ console.log(data);
 }
 ```
 
-### `GET` Search Results
+### 1.2.4. `GET` Search Results
 
-#### Endpoint
+#### 1.2.4.1. Endpoint
 
 ```sh
 /api/v1/search?keyword={query}&page={page}
 ```
 
-#### Request Sample
+#### 1.2.4.2. Request Sample
 
 ```javascript
 // basic example
@@ -572,7 +572,7 @@ const data = await resp.json();
 console.log(data);
 ```
 
-#### Response Schema
+#### 1.2.4.3. Response Schema
 
 ```javascript
 {
@@ -603,15 +603,15 @@ console.log(data);
 }
 ```
 
-### `GET` Search Suggestions
+### 1.2.5. `GET` Search Suggestions
 
-#### Endpoint
+#### 1.2.5.1. Endpoint
 
 ```sh
 /api/v1/search/suggestion?keyword={query}
 ```
 
-#### Request Sample
+#### 1.2.5.2. Request Sample
 
 ```javascript
 const resp = await fetch('/api/v1/suggestion?keyword=clannad');
@@ -619,7 +619,7 @@ const data = await resp.json();
 console.log(data);
 ```
 
-#### Response Schema
+#### 1.2.5.3. Response Schema
 
 ```javascript
 {
@@ -639,15 +639,15 @@ console.log(data);
 }
 ```
 
-### `GET` Anime Episodes
+### 1.2.6. `GET` Anime Episodes
 
-#### Endpoint
+#### 1.2.6.1. Endpoint
 
 ```sh
 /api/v1/episodes/{animeId}
 ```
 
-#### Request Sample
+#### 1.2.6.2. Request Sample
 
 ```javascript
 const resp = await fetch('/api/v1/episodes/steins-gate-3');
@@ -655,7 +655,7 @@ const data = await resp.json();
 console.log(data);
 ```
 
-#### Response Schema
+#### 1.2.6.3. Response Schema
 
 ```javascript
 {
@@ -672,15 +672,15 @@ console.log(data);
 }
 ```
 
-### `GET` Anime Episode Servers
+### 1.2.7. `GET` Anime Episode Servers
 
-#### Endpoint
+#### 1.2.7.1. Endpoint
 
 ```sh
 /api/v1/servers?id={id}
 ```
 
-#### Request Sample
+#### 1.2.7.2. Request Sample
 
 ```javascript
 const resp = await fetch('/api/v1/episode/servers?id=steinsgate-3::ep=213');
@@ -688,7 +688,7 @@ const data = await resp.json();
 console.log(data);
 ```
 
-#### Response Schema
+#### 1.2.7.3. Response Schema
 
 ```javascript
 {
@@ -717,15 +717,15 @@ console.log(data);
 }
 ```
 
-### `GET` Anime Episode Streaming Links
+### 1.2.8. `GET` Anime Episode Streaming Links
 
-#### Endpoint
+#### 1.2.8.1. Endpoint
 
 ```sh
 /api/v1/stream?id={id}?server={server}&type={dub || sub}
 ```
 
-#### Request Sample
+#### 1.2.8.2. Request Sample
 
 ```javascript
 const resp = await fetch('/api/v1/stream?server=HD-2&type=dub&id=steinsgate-3::ep=214');
@@ -733,7 +733,7 @@ const data = await resp.json();
 console.log(data);
 ```
 
-#### Response Schema
+#### 1.2.8.3. Response Schema
 
 ```javascript
 {
@@ -768,32 +768,32 @@ console.log(data);
 }
 ```
 
-## <span id="development">👨‍💻 Development</span>
+## 1.3. <span id="development">👨‍💻 Development</span>
 
 Pull requests and stars are always welcome. If you encounter any bug or want to add a new feature to this api, consider creating a new [issue](https://github.com/yahyamomin/hianime-API/issues). If you wish to contribute to this project feel free to make pull request
 
-### refer tnis repo to build your frontend
+### 1.3.1. refer tnis repo to build your frontend
 
 - [watanuki](https://github.com/yahyamomin/watanuki)
 
-## <span id="contributors">✨ Contributors</span>
+## 1.4. <span id="contributors">✨ Contributors</span>
 
 Thanks to the following people for keeping this project alive and relevant.
 
 [![](https://contrib.rocks/image?repo=yahyamomin/hianime-API)](https://github.com/yahyamomin/hianime-API/graphs/contributors)
 
-## <span id="thanks">🤝 Thanks</span>
+## 1.5. <span id="thanks">🤝 Thanks</span>
 
 - [consumet.ts](https://github.com/consumet/consumet.ts)
 - [api.consumet.org](https://github.com/consumet/api.consumet.org)
 
-## <span id="support">🙌 Support</span>
+## 1.6. <span id="support">🙌 Support</span>
 
 Don't forget to leave a star 🌟.
 
 <br/>
 
-## <span id="star-history">🌟 Star History</span>
+## 1.7. <span id="star-history">🌟 Star History</span>
 
 <img
   id="star-history" 

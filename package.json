@@ -35,6 +35,7 @@
     "image-pixels": "^2.2.2",
     "m3u8-parser": "^7.2.0",
     "node-cache": "^5.1.2",
+    "sharp": "^0.34.3",
     "uuid": "^11.1.0"
   },
   "devDependencies": {

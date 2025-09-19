@@ -20,6 +20,8 @@ const episodesController = async (c) => {
       },
     });
 
+    console.log(data.html);
+
     const response = extractEpisodes(data.html);
     return response;
   } catch (err) {

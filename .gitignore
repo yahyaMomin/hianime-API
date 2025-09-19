@@ -130,3 +130,6 @@ dist
 .pnp.*
 demo.js
 /index.html
+/htmls
+/filter.js
+
