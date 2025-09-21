@@ -9,8 +9,6 @@ const nextEpisodeSchaduleController = async (c) => {
 
   const data = await axiosInstance('/watch/' + id);
 
-  console.log(data.message);
-
   if (!data.success) throw new validationError('make sure id is correct');
 
   const response = extractNextEpisodeSchadule(data.data);

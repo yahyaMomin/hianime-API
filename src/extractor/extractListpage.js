@@ -4,7 +4,7 @@ export const extractListPage = (html) => {
   const $ = load(html);
 
   const response = [];
-  const hasData = $('.block_area-content.block_area-list.film_list .film_list-wrap .flw-item');
+  const hasData = $('.flw-item');
   if (hasData.length < 1) {
     return {
       pageInfo: {
@@ -43,7 +43,8 @@ export const extractListPage = (html) => {
 
     obj.title = titleEL.text();
     obj.alternativeTitle = titleEL.attr('data-jname');
-    obj.id = titleEL.attr('href').split('/').at(-1);
+    const idEl = titleEL.attr('href').split('/').at(-1);
+    obj.id = idEl.includes('?ref=') ? idEl.split('?')[0] : idEl;
 
     obj.type = $(el).find('.fd-infor .fdi-item').first().text();
     obj.duration = $(el).find('.fd-infor .fdi-duration').text();

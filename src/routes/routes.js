@@ -16,6 +16,8 @@ import streamController from '../controllers/streamController';
 import allGenresController from '../controllers/allGenres.controller';
 import schaduleController from '../controllers/schedule.controller';
 import nextEpisodeSchaduleController from '../controllers/nextEpisodeSchadule.controller';
+import filterController from '../controllers/filter.controller';
+import filterOptions from '../utils/filter';
 
 const router = new Hono();
 
@@ -26,6 +28,11 @@ router.get('schadule/next/:id', handler(nextEpisodeSchaduleController));
 router.get('/anime/:id', handler(detailpageController));
 router.get('/animes/:query/:category?', handler(listpageController));
 router.get('/search', handler(searchController));
+router.get(
+  '/filter/options',
+  handler(() => filterOptions)
+);
+router.get('/filter', handler(filterController));
 router.get('/suggestion', handler(suggestionController));
 router.get('/characters/:id', handler(charactersController));
 router.get('/character/:id', handler(characterDetailConroller));
