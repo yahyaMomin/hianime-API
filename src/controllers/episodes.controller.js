@@ -19,9 +19,7 @@ const episodesController = async (c) => {
         ...config.headers,
       },
     });
-
-    console.log(data.html);
-
+    
     const response = extractEpisodes(data.html);
     return response;
   } catch (err) {
