@@ -10,8 +10,6 @@ export const extractCharacterDetail = (html) => {
   const whoIsHe =
     $('nav .breadcrumb .active').prev().find('a').text() === 'People' ? 'people' : 'character';
 
-  console.log(whoIsHe);
-
   const obj = {
     name: null,
     type: null,
@@ -27,8 +25,6 @@ export const extractCharacterDetail = (html) => {
   obj.japanese = allDetails.find('.sub-name').text();
 
   obj.bio = allDetails.find('.tab-content #bio .bio').html().trim();
-
-  console.log(whoIsHe === 'character');
 
   if (whoIsHe === 'character') {
     obj.animeAppearances = [];

@@ -64,14 +64,17 @@ const filterController = async (c) => {
   const endpoint = keyword ? '/search' : '/filter';
   const queryString = params.toString();
   const url = queryString ? `${endpoint}?${queryString}` : endpoint;
+
   const result = await axiosInstance(url);
 
-  if (!result.success) throw new validationError('something wrong will query');
+  console.log(result.message);
+
+  if (!result.success) throw new validationError('something went wrong will queries');
   const response = extractListPage(result.data);
   return response;
 };
 
-const formatKeyword = (v) => v.toLowerCase().replaceAll(' ', '+');
+const formatKeyword = (v) => v.toLowerCase();
 
 const formatSort = (v) => {
   const index = filterOptions.sort.indexOf(v.toLowerCase().replace(' ', '_'));
