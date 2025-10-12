@@ -46,7 +46,7 @@ export const extractDetailpage = (html) => {
 
   // extract about info
   obj.poster = main.find('.film-poster .film-poster-img').attr('src');
-  obj.is18Plus = Boolean(main.find('.film-poster .tick-rate'));
+  obj.is18Plus = Boolean(main.find('.film-poster .tick-rate').length > 0);
 
   const titleEl = main.find('.anisc-detail .film-name');
   obj.title = titleEl.text();
