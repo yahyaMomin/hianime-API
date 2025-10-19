@@ -23,8 +23,8 @@ const router = new Hono();
 
 router.get('/', handler(documentationController));
 router.get('/home', handler(homepageController));
-router.get('schadule', handler(schaduleController));
-router.get('schadule/next/:id', handler(nextEpisodeSchaduleController));
+router.get('/schadule', handler(schaduleController));
+router.get('/schadule/next/:id', handler(nextEpisodeSchaduleController));
 router.get('/anime/:id', handler(detailpageController));
 router.get('/animes/:query/:category?', handler(listpageController));
 router.get('/search', handler(searchController));
