@@ -28,6 +28,7 @@ export const extractListPage = (html) => {
       },
       type: null,
       duration: null,
+      is18Plus: false,
     };
 
     obj.poster = $(el).find('.film-poster .film-poster-img').attr('data-src');
@@ -48,6 +49,7 @@ export const extractListPage = (html) => {
 
     obj.type = $(el).find('.fd-infor .fdi-item').first().text();
     obj.duration = $(el).find('.fd-infor .fdi-duration').text();
+    obj.is18Plus = $(el).find('.film-poster').has('.tick-rate').length > 0;
 
     response.push(obj);
   });
