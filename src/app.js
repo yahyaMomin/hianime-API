@@ -30,10 +30,10 @@ app.use(
 // Apply the rate limiting middleware to all requests.
 app.use(
   rateLimiter({
-    windowMs: process.env.RATE_LIMIT_WINDOW_MS || 60000,
-    limit: process.env.RATE_LIMIT_LIMIT || 100,
+    windowMs: process.env.RATE_LIMIT_WINDOW_MS || 60 * 1000,
+    limit: process.env.RATE_LIMIT_LIMIT || 20,
     standardHeaders: 'draft-6', // draft-6: `RateLimit-*` headers; draft-7: combined `RateLimit` header
-    keyGenerator: () => '<unique_key>', // Method to generate custom identifiers for clients.
+    keyGenerator: (req) => req.ip, // Method to generate custom identifiers for clients.
     // store: ... , // Redis, MemoryStore, etc. See below.
   })
 );
