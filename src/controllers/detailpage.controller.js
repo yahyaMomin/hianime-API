@@ -12,22 +12,22 @@ const detailpageController = async (c) => {
   );
   if (isRedisEnv) {
     const redis = Redis.fromEnv();
-    const detail = redis.get(id);
+    const detail = await redis.get(id);
 
     if (detail) {
       console.log(`CACHE FOUND ${id}`);
       return detail;
-    } else {
-      const result = await axiosInstance(`/${id}`);
-      if (!result.success) {
-        throw new validationError(result.message, 'maybe id is incorrect : ' + id);
-      }
-      const response = extractDetailpage(result.data);
-      await redis.set(id, JSON.stringify(response), {
-        ex: 60 * 60 * 24,
-      });
-      return response;
     }
+
+    const result = await axiosInstance(`/${id}`);
+    if (!result.success) {
+      throw new validationError(result.message, 'maybe id is incorrect : ' + id);
+    }
+    const response = extractDetailpage(result.data);
+    await redis.set(id, JSON.stringify(response), {
+      ex: 60 * 60 * 24,
+    });
+    return response;
   } else {
     const result = await axiosInstance(`/${id}`);
     if (!result.success) {
