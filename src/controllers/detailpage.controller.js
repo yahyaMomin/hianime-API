@@ -15,7 +15,6 @@ const detailpageController = async (c) => {
     const detail = await redis.get(id);
 
     if (detail) {
-      console.log(`CACHE FOUND ${id}`);
       return detail;
     }
 

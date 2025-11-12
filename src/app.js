@@ -10,6 +10,7 @@ import { AppError } from './utils/errors.js';
 import { fail } from './utils/response.js';
 import hianimeApiDocs from './utils/swaggerUi.js';
 import { logger } from 'hono/logger';
+import protect from './middlewares/protect.js';
 
 const app = new Hono();
 
@@ -33,20 +34,22 @@ app.use(
     windowMs: process.env.RATE_LIMIT_WINDOW_MS || 60 * 1000,
     limit: process.env.RATE_LIMIT_LIMIT || 20,
     standardHeaders: 'draft-6', // draft-6: `RateLimit-*` headers; draft-7: combined `RateLimit` header
-    keyGenerator: (req) => req.ip, // Method to generate custom identifiers for clients.
-    // store: ... , // Redis, MemoryStore, etc. See below.
+    keyGenerator: (c) => {
+      const ip = (c.req.header('x-forwarded-for') || '').split(',')[0].trim();
+      return ip;
+    },
   })
 );
 
 // middlewares
-
+app.use('/api/v1/*', protect);
 // routes
 
 app.use('/api/v1/*', logger());
 
 app.get('/', (c) => {
   c.status(200);
-  return c.text('welcome to anime API 🎉 start by hitting /api/v1 for documentation');
+  return c.text('welcome to anime API 🎉 goto /ui for docs');
 });
 app.get('/ping', (c) => {
   return c.text('pong');

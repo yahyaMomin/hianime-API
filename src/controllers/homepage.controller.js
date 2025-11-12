@@ -13,11 +13,9 @@ const homepageController = async () => {
     const homePageData = await redis.get('home');
 
     if (homePageData) {
-      console.log('CACHE HIT');
       return homePageData;
     }
 
-    console.log('CACHE MISS');
     const result = await axiosInstance('/home');
 
     if (!result.success) {
