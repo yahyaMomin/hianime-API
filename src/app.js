@@ -10,7 +10,6 @@ import { AppError } from './utils/errors.js';
 import { fail } from './utils/response.js';
 import hianimeApiDocs from './utils/swaggerUi.js';
 import { logger } from 'hono/logger';
-import protect from './middlewares/protect.js';
 
 const app = new Hono();
 
@@ -42,7 +41,7 @@ app.use(
 );
 
 // middlewares
-app.use('/api/v1/*', protect);
+// app.use('/api/v1/*', protect);
 // routes
 
 app.use('/api/v1/*', logger());
