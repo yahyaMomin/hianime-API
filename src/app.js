@@ -8,8 +8,10 @@ import hiAnimeRoutes from './routes/routes.js';
 
 import { AppError } from './utils/errors.js';
 import { fail } from './utils/response.js';
-import hianimeApiDocs from './utils/swaggerUi.js';
 import { logger } from 'hono/logger';
+import apiDocs from './controllers/apiDocs.controller.js';
+import clearCache from './controllers/clearCache.controller.js';
+import handler from './utils/handler.js';
 
 const app = new Hono();
 
@@ -54,10 +56,14 @@ app.get('/ping', (c) => {
   return c.text('pong');
 });
 app.route('/api/v1', hiAnimeRoutes);
-app.get('/doc', (c) => c.json(hianimeApiDocs));
+
+app.get('/doc', apiDocs);
 
 // Use the middleware to serve Swagger UI at /ui
 app.get('/ui', swaggerUI({ url: '/doc' }));
+
+app.get('/clear/cache', handler(clearCache));
+
 app.onError((err, c) => {
   if (err instanceof AppError) {
     return fail(c, err.message, err.statusCode, err.details);

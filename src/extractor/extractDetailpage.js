@@ -28,7 +28,7 @@ export const extractDetailpage = (html) => {
     status: null,
     MAL_score: null,
     genres: [],
-    studios: null,
+    studios: [],
     producers: [],
     moreSeasons: [],
     related: [],
@@ -114,7 +114,10 @@ export const extractDetailpage = (html) => {
           .get();
         break;
       case 'Studios:':
-        obj.studios = $(el).find('a').text();
+        obj.studios = $(el)
+          .find('a')
+          .map((i, studio) => $(studio).attr('href').split('/').at(-1))
+          .get();
         break;
       case 'Producers:':
         obj.producers = $(el)

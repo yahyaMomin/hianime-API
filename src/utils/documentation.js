@@ -1,3 +1,4 @@
+// deprecated
 const apiDocumentation = {
   generalInfo: {
     baseUrl: 'https://hianime-api-production.up.railway.app/api/v1',

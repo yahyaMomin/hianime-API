@@ -21,6 +21,7 @@ const listpageController = async (c) => {
     'ona',
     'special',
     'events',
+    'producer',
   ];
   const query = c.req.param('query').toLowerCase() || null;
 
@@ -31,10 +32,10 @@ const listpageController = async (c) => {
 
   const page = c.req.query('page') || 1;
 
-  if (query === 'genre' && !category) {
+  if ((query === 'genre' || query === 'producer') && !category) {
     throw new validationError(`category is require for query ${query}`);
   }
-  if (query !== 'genre' && query !== 'az-list' && category) {
+  if (query !== 'genre' && query !== 'az-list' && query !== 'producer' && category) {
     category = null;
   }
 
@@ -43,6 +44,8 @@ const listpageController = async (c) => {
   const endpoint = category
     ? `/${query}/${nromalizeCategory}?page=${page}`
     : `/${query}?page=${page}`;
+
+  console.log(endpoint);
 
   const result = await axiosInstance(endpoint);
 
