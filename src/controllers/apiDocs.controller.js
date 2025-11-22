@@ -1,7 +1,7 @@
 const apiDocs = async (c) => {
-  const url = c.req.url.split('/');
-  const base_url = url.slice(0, url.length - 1).join('/');
-  console.log(base_url);
+  const proto = c.req.header('x-forwarded-proto') || c.req.url.split(':')[0];
+  const host = c.req.header('x-forwarded-host') || c.req.header('host');
+  const base_url = `${proto}://${host}`;
 
   const docs = {
     openapi: '3.0.0',
