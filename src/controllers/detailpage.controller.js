@@ -5,7 +5,7 @@ import { validationError } from '../utils/errors';
 import { Redis } from '@upstash/redis';
 
 const detailpageController = async (c) => {
-  const id = c.req.param('id');
+  const { id } = c.req.valid('param');
 
   const isRedisEnv = Boolean(
     process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN

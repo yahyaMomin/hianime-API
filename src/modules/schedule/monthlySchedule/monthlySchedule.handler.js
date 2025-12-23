@@ -1,9 +1,10 @@
 import axios from 'axios';
-import { validationError } from '../utils/errors';
-import config from '../config/config';
-import extractSchadule from '../extractor/extractSchadule';
+import { validationError } from '@/utils/errors';
+import config from '@/config/config';
+// import monthlyScheduleExtract from './monthlySchedule.extarct';
+import monthlyScheduleExtract from './monthlySchedule.extract';
 
-async function scheduleController(c) {
+export default async function monthyScheduleHandler(c) {
   const today = new Date(Date.now());
 
   let todaysMonth = today.getMonth() + 1;
@@ -40,12 +41,10 @@ async function scheduleController(c) {
       currentDate: `${todaysYear}-${todaysMonth}-${todaysDate}`,
       lastDate: `${todaysYear}-${todaysMonth}-${lastDateOfMonth}`,
     };
-    const response = extractSchadule(data.html);
+    const response = monthlyScheduleExtract(data.html);
     return { meta, response };
   } catch (error) {
     console.error(error.message);
     throw new validationError('page not found');
   }
 }
-
-export default scheduleController;

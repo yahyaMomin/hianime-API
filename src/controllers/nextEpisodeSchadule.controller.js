@@ -2,10 +2,8 @@ import extractNextEpisodeSchadule from '../extractor/extractNextEpisodeSchadule'
 import { axiosInstance } from '../services/axiosInstance';
 import { validationError } from '../utils/errors';
 
-const nextEpisodeSchaduleController = async (c) => {
-  const id = c.req.param('id');
-
-  if (!id) throw new validationError('id is required');
+const nextEpScheduleController = async (c) => {
+  const { id } = c.req.valid('param');
 
   const data = await axiosInstance('/watch/' + id);
 
@@ -16,4 +14,4 @@ const nextEpisodeSchaduleController = async (c) => {
   return response;
 };
 
-export default nextEpisodeSchaduleController;
+export default nextEpScheduleController;

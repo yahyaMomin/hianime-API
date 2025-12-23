@@ -16,14 +16,19 @@
     "prepare": "husky",
     "lint": "eslint",
     "lint:fix": "eslint --fix && prettier . --write",
-    "dev": "bun --watch index.js",
-    "dev:pm2": "pm2 start --interpreter ~/.bun/bin/bun index.js",
-    "dev:stop": "pm2 stop all",
-    "start": "bun index.js",
+    "start:bun": "bun out/bun.js",
+    "dev:bun": "bun --hot entry/bun.js",
+    "build:bun": "bun build entry/bun.js --outdir out  --target=bun",
+    "start:node": "node dist/node.js",
+    "build:node": "tsup entry/node.js --format esm --out-dir dist --clean",
+    "build": "bun build entry/bun.js --outdir out  --target=bun && tsup entry/node.js --format esm --out-dir dist --clean",
     "test": "vitest"
   },
   "dependencies": {
+    "@hono/node-server": "^1.19.7",
     "@hono/swagger-ui": "^0.5.2",
+    "@hono/zod-openapi": "^1.1.5",
+    "@scalar/hono-api-reference": "^0.9.30",
     "@upstash/redis": "^1.35.0",
     "aniwatch": "^2.17.0",
     "axios": "^1.7.7",
@@ -36,7 +41,8 @@
     "m3u8-parser": "^7.2.0",
     "node-cache": "^5.1.2",
     "sharp": "^0.34.3",
-    "uuid": "^11.1.0"
+    "uuid": "^11.1.0",
+    "zod": "^4.2.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.27.0",
@@ -48,6 +54,7 @@
     "globals": "^16.1.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.1.2",
-    "prettier": "^3.5.3"
+    "prettier": "^3.5.3",
+    "tsup": "^8.5.1"
   }
 }

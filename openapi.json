@@ -1,0 +1,2437 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Hinaime API"
+  },
+  "components": {
+    "schemas": {},
+    "parameters": {}
+  },
+  "paths": {
+    "/api/v1/home": {
+      "get": {
+        "description": "Retrieve The HomePage Data",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "spotlight": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "title": {
+                                "type": "string"
+                              },
+                              "alternativeTitle": {
+                                "type": "string"
+                              },
+                              "id": {
+                                "type": "string"
+                              },
+                              "poster": {
+                                "type": "string",
+                                "format": "uri"
+                              },
+                              "episodes": {
+                                "type": "object",
+                                "properties": {
+                                  "sub": {
+                                    "type": "number"
+                                  },
+                                  "dub": {
+                                    "type": "number"
+                                  },
+                                  "eps": {
+                                    "type": "number"
+                                  }
+                                },
+                                "required": ["sub", "dub", "eps"]
+                              },
+                              "rank": {
+                                "type": "number"
+                              },
+                              "type": {
+                                "type": "string"
+                              },
+                              "quality": {
+                                "type": "string"
+                              },
+                              "duration": {
+                                "type": "string"
+                              },
+                              "aired": {
+                                "type": "string"
+                              },
+                              "synopsis": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "title",
+                              "alternativeTitle",
+                              "id",
+                              "poster",
+                              "episodes",
+                              "rank",
+                              "type",
+                              "quality",
+                              "duration",
+                              "aired",
+                              "synopsis"
+                            ]
+                          }
+                        },
+                        "trending": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "title": {
+                                "type": "string"
+                              },
+                              "alternativeTitle": {
+                                "type": "string"
+                              },
+                              "id": {
+                                "type": "string"
+                              },
+                              "poster": {
+                                "type": "string",
+                                "format": "uri"
+                              },
+                              "rank": {
+                                "type": "number"
+                              }
+                            },
+                            "required": ["title", "alternativeTitle", "id", "poster", "rank"]
+                          }
+                        },
+                        "topAiring": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "title": {
+                                "type": "string"
+                              },
+                              "alternativeTitle": {
+                                "type": "string"
+                              },
+                              "id": {
+                                "type": "string"
+                              },
+                              "poster": {
+                                "type": "string",
+                                "format": "uri"
+                              },
+                              "episodes": {
+                                "type": "object",
+                                "properties": {
+                                  "sub": {
+                                    "type": "number"
+                                  },
+                                  "dub": {
+                                    "type": "number"
+                                  },
+                                  "eps": {
+                                    "type": "number"
+                                  }
+                                },
+                                "required": ["sub", "dub", "eps"]
+                              },
+                              "type": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "title",
+                              "alternativeTitle",
+                              "id",
+                              "poster",
+                              "episodes",
+                              "type"
+                            ]
+                          }
+                        },
+                        "mostPopular": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "title": {
+                                "type": "string"
+                              },
+                              "alternativeTitle": {
+                                "type": "string"
+                              },
+                              "id": {
+                                "type": "string"
+                              },
+                              "poster": {
+                                "type": "string",
+                                "format": "uri"
+                              },
+                              "episodes": {
+                                "type": "object",
+                                "properties": {
+                                  "sub": {
+                                    "type": "number"
+                                  },
+                                  "dub": {
+                                    "type": "number"
+                                  },
+                                  "eps": {
+                                    "type": "number"
+                                  }
+                                },
+                                "required": ["sub", "dub", "eps"]
+                              },
+                              "type": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "title",
+                              "alternativeTitle",
+                              "id",
+                              "poster",
+                              "episodes",
+                              "type"
+                            ]
+                          }
+                        },
+                        "mostFavorite": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "title": {
+                                "type": "string"
+                              },
+                              "alternativeTitle": {
+                                "type": "string"
+                              },
+                              "id": {
+                                "type": "string"
+                              },
+                              "poster": {
+                                "type": "string",
+                                "format": "uri"
+                              },
+                              "episodes": {
+                                "type": "object",
+                                "properties": {
+                                  "sub": {
+                                    "type": "number"
+                                  },
+                                  "dub": {
+                                    "type": "number"
+                                  },
+                                  "eps": {
+                                    "type": "number"
+                                  }
+                                },
+                                "required": ["sub", "dub", "eps"]
+                              },
+                              "type": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "title",
+                              "alternativeTitle",
+                              "id",
+                              "poster",
+                              "episodes",
+                              "type"
+                            ]
+                          }
+                        },
+                        "latestCompleted": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "title": {
+                                "type": "string"
+                              },
+                              "alternativeTitle": {
+                                "type": "string"
+                              },
+                              "id": {
+                                "type": "string"
+                              },
+                              "poster": {
+                                "type": "string",
+                                "format": "uri"
+                              },
+                              "episodes": {
+                                "type": "object",
+                                "properties": {
+                                  "sub": {
+                                    "type": "number"
+                                  },
+                                  "dub": {
+                                    "type": "number"
+                                  },
+                                  "eps": {
+                                    "type": "number"
+                                  }
+                                },
+                                "required": ["sub", "dub", "eps"]
+                              },
+                              "type": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "title",
+                              "alternativeTitle",
+                              "id",
+                              "poster",
+                              "episodes",
+                              "type"
+                            ]
+                          }
+                        },
+                        "latestEpisode": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "title": {
+                                "type": "string"
+                              },
+                              "alternativeTitle": {
+                                "type": "string"
+                              },
+                              "id": {
+                                "type": "string"
+                              },
+                              "poster": {
+                                "type": "string",
+                                "format": "uri"
+                              },
+                              "episodes": {
+                                "type": "object",
+                                "properties": {
+                                  "sub": {
+                                    "type": "number"
+                                  },
+                                  "dub": {
+                                    "type": "number"
+                                  },
+                                  "eps": {
+                                    "type": "number"
+                                  }
+                                },
+                                "required": ["sub", "dub", "eps"]
+                              }
+                            },
+                            "required": ["title", "alternativeTitle", "id", "poster", "episodes"]
+                          }
+                        },
+                        "newAdded": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "title": {
+                                "type": "string"
+                              },
+                              "alternativeTitle": {
+                                "type": "string"
+                              },
+                              "id": {
+                                "type": "string"
+                              },
+                              "poster": {
+                                "type": "string",
+                                "format": "uri"
+                              },
+                              "episodes": {
+                                "type": "object",
+                                "properties": {
+                                  "sub": {
+                                    "type": "number"
+                                  },
+                                  "dub": {
+                                    "type": "number"
+                                  },
+                                  "eps": {
+                                    "type": "number"
+                                  }
+                                },
+                                "required": ["sub", "dub", "eps"]
+                              }
+                            },
+                            "required": ["title", "alternativeTitle", "id", "poster", "episodes"]
+                          }
+                        },
+                        "topUpcoming": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "title": {
+                                "type": "string"
+                              },
+                              "alternativeTitle": {
+                                "type": "string"
+                              },
+                              "id": {
+                                "type": "string"
+                              },
+                              "poster": {
+                                "type": "string",
+                                "format": "uri"
+                              },
+                              "episodes": {
+                                "type": "object",
+                                "properties": {
+                                  "sub": {
+                                    "type": "number"
+                                  },
+                                  "dub": {
+                                    "type": "number"
+                                  },
+                                  "eps": {
+                                    "type": "number"
+                                  }
+                                },
+                                "required": ["sub", "dub", "eps"]
+                              }
+                            },
+                            "required": ["title", "alternativeTitle", "id", "poster", "episodes"]
+                          }
+                        },
+                        "topTen": {
+                          "type": "object",
+                          "properties": {
+                            "today": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "title": {
+                                    "type": "string"
+                                  },
+                                  "alternativeTitle": {
+                                    "type": "string"
+                                  },
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "poster": {
+                                    "type": "string",
+                                    "format": "uri"
+                                  },
+                                  "episodes": {
+                                    "type": "object",
+                                    "properties": {
+                                      "sub": {
+                                        "type": "number"
+                                      },
+                                      "dub": {
+                                        "type": "number"
+                                      },
+                                      "eps": {
+                                        "type": "number"
+                                      }
+                                    },
+                                    "required": ["sub", "dub", "eps"]
+                                  }
+                                },
+                                "required": [
+                                  "title",
+                                  "alternativeTitle",
+                                  "id",
+                                  "poster",
+                                  "episodes"
+                                ]
+                              }
+                            },
+                            "week": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "title": {
+                                    "type": "string"
+                                  },
+                                  "alternativeTitle": {
+                                    "type": "string"
+                                  },
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "poster": {
+                                    "type": "string",
+                                    "format": "uri"
+                                  },
+                                  "episodes": {
+                                    "type": "object",
+                                    "properties": {
+                                      "sub": {
+                                        "type": "number"
+                                      },
+                                      "dub": {
+                                        "type": "number"
+                                      },
+                                      "eps": {
+                                        "type": "number"
+                                      }
+                                    },
+                                    "required": ["sub", "dub", "eps"]
+                                  }
+                                },
+                                "required": [
+                                  "title",
+                                  "alternativeTitle",
+                                  "id",
+                                  "poster",
+                                  "episodes"
+                                ]
+                              }
+                            },
+                            "month": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "title": {
+                                    "type": "string"
+                                  },
+                                  "alternativeTitle": {
+                                    "type": "string"
+                                  },
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "poster": {
+                                    "type": "string",
+                                    "format": "uri"
+                                  },
+                                  "episodes": {
+                                    "type": "object",
+                                    "properties": {
+                                      "sub": {
+                                        "type": "number"
+                                      },
+                                      "dub": {
+                                        "type": "number"
+                                      },
+                                      "eps": {
+                                        "type": "number"
+                                      }
+                                    },
+                                    "required": ["sub", "dub", "eps"]
+                                  }
+                                },
+                                "required": [
+                                  "title",
+                                  "alternativeTitle",
+                                  "id",
+                                  "poster",
+                                  "episodes"
+                                ]
+                              }
+                            }
+                          },
+                          "required": ["today", "week", "month"]
+                        },
+                        "genres": {
+                          "type": "array",
+                          "items": {
+                            "nullable": true
+                          }
+                        }
+                      },
+                      "required": [
+                        "spotlight",
+                        "trending",
+                        "topAiring",
+                        "mostPopular",
+                        "mostFavorite",
+                        "latestCompleted",
+                        "latestEpisode",
+                        "newAdded",
+                        "topUpcoming",
+                        "topTen",
+                        "genres"
+                      ]
+                    }
+                  },
+                  "required": ["status", "data"]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/spotlight": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "title": {
+                            "type": "string"
+                          },
+                          "alternativeTitle": {
+                            "type": "string"
+                          },
+                          "id": {
+                            "type": "string"
+                          },
+                          "poster": {
+                            "type": "string",
+                            "format": "uri"
+                          },
+                          "episodes": {
+                            "type": "object",
+                            "properties": {
+                              "sub": {
+                                "type": "number"
+                              },
+                              "dub": {
+                                "type": "number"
+                              },
+                              "eps": {
+                                "type": "number"
+                              }
+                            },
+                            "required": ["sub", "dub", "eps"]
+                          },
+                          "rank": {
+                            "type": "number"
+                          },
+                          "type": {
+                            "type": "string"
+                          },
+                          "quality": {
+                            "type": "string"
+                          },
+                          "duration": {
+                            "type": "string"
+                          },
+                          "aired": {
+                            "type": "string"
+                          },
+                          "synopsis": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "title",
+                          "alternativeTitle",
+                          "id",
+                          "poster",
+                          "episodes",
+                          "rank",
+                          "type",
+                          "quality",
+                          "duration",
+                          "aired",
+                          "synopsis"
+                        ]
+                      }
+                    }
+                  },
+                  "required": ["status", "data"]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/topten": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "today": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "title": {
+                                "type": "string"
+                              },
+                              "alternativeTitle": {
+                                "type": "string"
+                              },
+                              "id": {
+                                "type": "string"
+                              },
+                              "poster": {
+                                "type": "string",
+                                "format": "uri"
+                              },
+                              "episodes": {
+                                "type": "object",
+                                "properties": {
+                                  "sub": {
+                                    "type": "number"
+                                  },
+                                  "dub": {
+                                    "type": "number"
+                                  },
+                                  "eps": {
+                                    "type": "number"
+                                  }
+                                },
+                                "required": ["sub", "dub", "eps"]
+                              }
+                            },
+                            "required": ["title", "alternativeTitle", "id", "poster", "episodes"]
+                          }
+                        },
+                        "week": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "title": {
+                                "type": "string"
+                              },
+                              "alternativeTitle": {
+                                "type": "string"
+                              },
+                              "id": {
+                                "type": "string"
+                              },
+                              "poster": {
+                                "type": "string",
+                                "format": "uri"
+                              },
+                              "episodes": {
+                                "type": "object",
+                                "properties": {
+                                  "sub": {
+                                    "type": "number"
+                                  },
+                                  "dub": {
+                                    "type": "number"
+                                  },
+                                  "eps": {
+                                    "type": "number"
+                                  }
+                                },
+                                "required": ["sub", "dub", "eps"]
+                              }
+                            },
+                            "required": ["title", "alternativeTitle", "id", "poster", "episodes"]
+                          }
+                        },
+                        "month": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "title": {
+                                "type": "string"
+                              },
+                              "alternativeTitle": {
+                                "type": "string"
+                              },
+                              "id": {
+                                "type": "string"
+                              },
+                              "poster": {
+                                "type": "string",
+                                "format": "uri"
+                              },
+                              "episodes": {
+                                "type": "object",
+                                "properties": {
+                                  "sub": {
+                                    "type": "number"
+                                  },
+                                  "dub": {
+                                    "type": "number"
+                                  },
+                                  "eps": {
+                                    "type": "number"
+                                  }
+                                },
+                                "required": ["sub", "dub", "eps"]
+                              }
+                            },
+                            "required": ["title", "alternativeTitle", "id", "poster", "episodes"]
+                          }
+                        }
+                      },
+                      "required": ["today", "week", "month"]
+                    }
+                  },
+                  "required": ["status", "data"]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/anime/{id}": {
+      "get": {
+        "description": "Retrieve The DetailPage Data By Id example: one-piece-100",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "examples": [
+                "steins-gate-3",
+                "baccano-129",
+                "code-geass-lelouch-of-the-rebellion-41",
+                "attack-on-titan-112"
+              ]
+            },
+            "required": true,
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "title": {
+                          "type": "string"
+                        },
+                        "alternativeTitle": {
+                          "type": "string"
+                        },
+                        "id": {
+                          "type": "string"
+                        },
+                        "poster": {
+                          "type": "string",
+                          "format": "uri"
+                        },
+                        "episodes": {
+                          "type": "object",
+                          "properties": {
+                            "sub": {
+                              "type": "number"
+                            },
+                            "dub": {
+                              "type": "number"
+                            },
+                            "eps": {
+                              "type": "number"
+                            }
+                          },
+                          "required": ["sub", "dub", "eps"]
+                        },
+                        "rating": {
+                          "type": "string"
+                        },
+                        "type": {
+                          "type": "string"
+                        },
+                        "is18Plus": {
+                          "type": "boolean"
+                        },
+                        "synopsis": {
+                          "type": "string"
+                        },
+                        "synonyms": {
+                          "type": "string"
+                        },
+                        "aired": {
+                          "type": "object",
+                          "properties": {
+                            "from": {
+                              "type": "string"
+                            },
+                            "to": {
+                              "type": "string"
+                            }
+                          },
+                          "required": ["from", "to"]
+                        },
+                        "premiered": {
+                          "type": "string"
+                        },
+                        "duration": {
+                          "type": "string"
+                        },
+                        "status": {
+                          "type": "string"
+                        },
+                        "MAL_score": {
+                          "type": "string"
+                        },
+                        "genres": {
+                          "type": "array",
+                          "items": {
+                            "nullable": true
+                          }
+                        },
+                        "studios": {
+                          "type": "array",
+                          "items": {
+                            "nullable": true
+                          }
+                        },
+                        "producers": {
+                          "type": "array",
+                          "items": {
+                            "nullable": true
+                          }
+                        },
+                        "related": {
+                          "type": "array",
+                          "items": {
+                            "nullable": true
+                          }
+                        },
+                        "mostPopular": {
+                          "type": "array",
+                          "items": {
+                            "nullable": true
+                          }
+                        },
+                        "recommended": {
+                          "type": "array",
+                          "items": {
+                            "nullable": true
+                          }
+                        }
+                      },
+                      "required": [
+                        "title",
+                        "alternativeTitle",
+                        "id",
+                        "poster",
+                        "episodes",
+                        "rating",
+                        "type",
+                        "is18Plus",
+                        "synopsis",
+                        "synonyms",
+                        "aired",
+                        "premiered",
+                        "duration",
+                        "status",
+                        "MAL_score",
+                        "genres",
+                        "studios",
+                        "producers",
+                        "related",
+                        "mostPopular",
+                        "recommended"
+                      ]
+                    }
+                  },
+                  "required": ["status", "data"]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/search": {
+      "get": {
+        "description": "Retrieve The list Of Anime By keyword example: ?keyworld=attack+on+titan",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "examples": ["one", "death", "baccano", "steins+gate", "code+geass", "clanned"]
+            },
+            "required": true,
+            "name": "keyword",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "number",
+              "nullable": true,
+              "default": 1,
+              "example": 1
+            },
+            "required": false,
+            "name": "page",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "pageInfo": {
+                          "type": "object",
+                          "properties": {
+                            "currentPage": {
+                              "type": "number",
+                              "default": 1
+                            },
+                            "hasNextPage": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "totalPages": {
+                              "type": "number",
+                              "default": 1
+                            }
+                          }
+                        },
+                        "response": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "title": {
+                                "type": "string"
+                              },
+                              "alternativeTitle": {
+                                "type": "string"
+                              },
+                              "id": {
+                                "type": "string"
+                              },
+                              "poster": {
+                                "type": "string",
+                                "format": "uri"
+                              },
+                              "episodes": {
+                                "type": "object",
+                                "properties": {
+                                  "sub": {
+                                    "type": "number"
+                                  },
+                                  "dub": {
+                                    "type": "number"
+                                  },
+                                  "eps": {
+                                    "type": "number"
+                                  }
+                                },
+                                "required": ["sub", "dub", "eps"]
+                              },
+                              "type": {
+                                "type": "string"
+                              },
+                              "duration": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "title",
+                              "alternativeTitle",
+                              "id",
+                              "poster",
+                              "episodes",
+                              "type",
+                              "duration"
+                            ]
+                          }
+                        }
+                      },
+                      "required": ["pageInfo", "response"]
+                    }
+                  },
+                  "required": ["status", "data"]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/suggestion": {
+      "get": {
+        "description": "Retrieve The Search Suggestions by keywords",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "examples": ["one", "death", "baccano", "steins+gate", "code+geass", "clanned"]
+            },
+            "required": true,
+            "name": "keyword",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "title": {
+                            "type": "string"
+                          },
+                          "alternativeTitle": {
+                            "type": "string"
+                          },
+                          "id": {
+                            "type": "string"
+                          },
+                          "poster": {
+                            "type": "string",
+                            "format": "uri"
+                          },
+                          "aired": {
+                            "type": "string"
+                          },
+                          "type": {
+                            "type": "string"
+                          },
+                          "duration": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "title",
+                          "alternativeTitle",
+                          "id",
+                          "poster",
+                          "aired",
+                          "type",
+                          "duration"
+                        ]
+                      }
+                    }
+                  },
+                  "required": ["status", "data"]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/characters/{id}": {
+      "get": {
+        "description": "Retrieve The characters Of An Anime By ID",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "examples": [
+                "steins-gate-3",
+                "baccano-129",
+                "code-geass-lelouch-of-the-rebellion-41",
+                "attack-on-titan-112"
+              ]
+            },
+            "required": true,
+            "name": "id",
+            "in": "path"
+          },
+          {
+            "schema": {
+              "type": "number",
+              "nullable": true,
+              "default": 1,
+              "example": 1
+            },
+            "required": false,
+            "name": "page",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "pageInfo": {
+                          "type": "object",
+                          "properties": {
+                            "currentPage": {
+                              "type": "number",
+                              "default": 1
+                            },
+                            "hasNextPage": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "totalPages": {
+                              "type": "number",
+                              "default": 1
+                            }
+                          }
+                        },
+                        "response": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "name": {
+                                "type": "string"
+                              },
+                              "id": {
+                                "type": "string"
+                              },
+                              "imageUrl": {
+                                "type": "string",
+                                "format": "uri"
+                              },
+                              "role": {
+                                "type": "string"
+                              },
+                              "voiceActors": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "name": {
+                                      "type": "string"
+                                    },
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "imageUrl": {
+                                      "type": "string"
+                                    },
+                                    "cast": {
+                                      "type": "string",
+                                      "nullable": true
+                                    }
+                                  },
+                                  "required": ["name", "id", "imageUrl", "cast"]
+                                }
+                              }
+                            },
+                            "required": ["name", "id", "imageUrl", "role", "voiceActors"]
+                          }
+                        }
+                      },
+                      "required": ["pageInfo", "response"]
+                    }
+                  },
+                  "required": ["status", "data"]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/character/{id}": {
+      "get": {
+        "description": "Retrieve The character Details Of An Anime Character By ID",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "examples": [
+                "character:mayuri-shiina-151",
+                "character:kurisu-makise-14",
+                "character:suzuha-amane-605",
+                "character:rintarou-okabe-8"
+              ]
+            },
+            "required": true,
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "type": {
+                          "type": "string"
+                        },
+                        "japanese": {
+                          "type": "string"
+                        },
+                        "imageUrl": {
+                          "type": "string",
+                          "format": "uri"
+                        },
+                        "bio": {
+                          "type": "string"
+                        },
+                        "animeApearances": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "title": {
+                                "type": "string"
+                              },
+                              "alternativeTitle": {
+                                "type": "string"
+                              },
+                              "id": {
+                                "type": "string"
+                              },
+                              "poster": {
+                                "type": "string",
+                                "format": "uri"
+                              },
+                              "role": {
+                                "type": "string"
+                              },
+                              "type": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "title",
+                              "alternativeTitle",
+                              "id",
+                              "poster",
+                              "role",
+                              "type"
+                            ]
+                          }
+                        }
+                      },
+                      "required": ["name", "type", "japanese", "imageUrl", "bio", "animeApearances"]
+                    }
+                  },
+                  "required": ["status", "data"]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actor/{id}": {
+      "get": {
+        "description": "Retrieve The character Details Of An Anime VoiceActor By ID",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "examples": [
+                "people:yukari-tamura-77",
+                "people:kana-hanazawa-1",
+                "people:mamoru-miyano-3"
+              ]
+            },
+            "required": true,
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "type": {
+                          "type": "string"
+                        },
+                        "japanese": {
+                          "type": "string"
+                        },
+                        "imageUrl": {
+                          "type": "string",
+                          "format": "uri"
+                        },
+                        "bio": {
+                          "type": "string"
+                        },
+                        "voiceActingRoles": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "title": {
+                                "type": "string"
+                              },
+                              "poster": {
+                                "type": "string",
+                                "format": "uri"
+                              },
+                              "id": {
+                                "type": "string"
+                              },
+                              "typeAndYear": {
+                                "type": "string"
+                              }
+                            },
+                            "required": ["title", "poster", "id", "typeAndYear"]
+                          }
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "type",
+                        "japanese",
+                        "imageUrl",
+                        "bio",
+                        "voiceActingRoles"
+                      ]
+                    }
+                  },
+                  "required": ["status", "data"]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/genre/{genre}": {
+      "get": {
+        "description": "Retrieve The list Of Anime By genre example: action",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "action",
+                "adventure",
+                "cars",
+                "comedy",
+                "dementia",
+                "demons",
+                "drama",
+                "ecchi",
+                "fantasy",
+                "game",
+                "harem",
+                "historical",
+                "horror",
+                "isekai",
+                "josei",
+                "kids",
+                "magic",
+                "martial arts",
+                "mecha",
+                "military",
+                "music",
+                "mystery",
+                "parody",
+                "police",
+                "psychological",
+                "romance",
+                "samurai",
+                "school",
+                "sci-fi",
+                "seinen",
+                "shoujo",
+                "shoujo ai",
+                "shounen",
+                "shounen ai",
+                "slice of life",
+                "space",
+                "sports",
+                "super power",
+                "supernatural",
+                "thriller",
+                "vampire"
+              ],
+              "examples": [
+                "action",
+                "adventure",
+                "cars",
+                "comedy",
+                "dementia",
+                "demons",
+                "drama",
+                "ecchi",
+                "fantasy",
+                "game",
+                "harem",
+                "historical",
+                "horror",
+                "isekai",
+                "josei",
+                "kids",
+                "magic",
+                "martial arts",
+                "mecha",
+                "military",
+                "music",
+                "mystery",
+                "parody",
+                "police",
+                "psychological",
+                "romance",
+                "samurai",
+                "school",
+                "sci-fi",
+                "seinen",
+                "shoujo",
+                "shoujo ai",
+                "shounen",
+                "shounen ai",
+                "slice of life",
+                "space",
+                "sports",
+                "super power",
+                "supernatural",
+                "thriller",
+                "vampire"
+              ]
+            },
+            "required": true,
+            "name": "genre",
+            "in": "path"
+          },
+          {
+            "schema": {
+              "type": "number",
+              "nullable": true,
+              "default": 1,
+              "example": 1
+            },
+            "required": false,
+            "name": "page",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "pageInfo": {
+                          "type": "object",
+                          "properties": {
+                            "currentPage": {
+                              "type": "number",
+                              "default": 1
+                            },
+                            "hasNextPage": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "totalPages": {
+                              "type": "number",
+                              "default": 1
+                            }
+                          }
+                        },
+                        "response": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "title": {
+                                "type": "string"
+                              },
+                              "alternativeTitle": {
+                                "type": "string"
+                              },
+                              "id": {
+                                "type": "string"
+                              },
+                              "poster": {
+                                "type": "string",
+                                "format": "uri"
+                              },
+                              "episodes": {
+                                "type": "object",
+                                "properties": {
+                                  "sub": {
+                                    "type": "number"
+                                  },
+                                  "dub": {
+                                    "type": "number"
+                                  },
+                                  "eps": {
+                                    "type": "number"
+                                  }
+                                },
+                                "required": ["sub", "dub", "eps"]
+                              },
+                              "type": {
+                                "type": "string"
+                              },
+                              "duration": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "title",
+                              "alternativeTitle",
+                              "id",
+                              "poster",
+                              "episodes",
+                              "type",
+                              "duration"
+                            ]
+                          }
+                        }
+                      },
+                      "required": ["pageInfo", "response"]
+                    }
+                  },
+                  "required": ["status", "data"]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/az-list/{letter}": {
+      "get": {
+        "description": "Retrieve The list Of Anime By letter example: A to Z or 0-9",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "all",
+                "other",
+                "0-9",
+                "a",
+                "b",
+                "c",
+                "d",
+                "e",
+                "f",
+                "g",
+                "h",
+                "i",
+                "j",
+                "k",
+                "l",
+                "m",
+                "n",
+                "o",
+                "p",
+                "q",
+                "r",
+                "s",
+                "t",
+                "u",
+                "v",
+                "w",
+                "x",
+                "y",
+                "z"
+              ],
+              "examples": [
+                "all",
+                "other",
+                "0-9",
+                "a",
+                "b",
+                "c",
+                "d",
+                "e",
+                "f",
+                "g",
+                "h",
+                "i",
+                "j",
+                "k",
+                "l",
+                "m",
+                "n",
+                "o",
+                "p",
+                "q",
+                "r",
+                "s",
+                "t",
+                "u",
+                "v",
+                "w",
+                "x",
+                "y",
+                "z"
+              ]
+            },
+            "required": true,
+            "name": "letter",
+            "in": "path"
+          },
+          {
+            "schema": {
+              "type": "number",
+              "nullable": true,
+              "default": 1,
+              "example": 1
+            },
+            "required": false,
+            "name": "page",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "pageInfo": {
+                          "type": "object",
+                          "properties": {
+                            "currentPage": {
+                              "type": "number",
+                              "default": 1
+                            },
+                            "hasNextPage": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "totalPages": {
+                              "type": "number",
+                              "default": 1
+                            }
+                          }
+                        },
+                        "response": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "title": {
+                                "type": "string"
+                              },
+                              "alternativeTitle": {
+                                "type": "string"
+                              },
+                              "id": {
+                                "type": "string"
+                              },
+                              "poster": {
+                                "type": "string",
+                                "format": "uri"
+                              },
+                              "episodes": {
+                                "type": "object",
+                                "properties": {
+                                  "sub": {
+                                    "type": "number"
+                                  },
+                                  "dub": {
+                                    "type": "number"
+                                  },
+                                  "eps": {
+                                    "type": "number"
+                                  }
+                                },
+                                "required": ["sub", "dub", "eps"]
+                              },
+                              "type": {
+                                "type": "string"
+                              },
+                              "duration": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "title",
+                              "alternativeTitle",
+                              "id",
+                              "poster",
+                              "episodes",
+                              "type",
+                              "duration"
+                            ]
+                          }
+                        }
+                      },
+                      "required": ["pageInfo", "response"]
+                    }
+                  },
+                  "required": ["status", "data"]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/filter": {
+      "get": {
+        "description": "Retrieve The list Of Anime with filters",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "required": false,
+            "name": "keyword",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": ["all", "movie", "tv", "ova", "special", "music"]
+            },
+            "required": false,
+            "name": "type",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": ["all", "finished_airing", "currently_airing", "not_yet_aired"]
+            },
+            "required": false,
+            "name": "status",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": ["all", "g", "pg", "pg-13", "r", "r+", "rx"]
+            },
+            "required": false,
+            "name": "rated",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "all",
+                "appalling",
+                "horrible",
+                "very_bad",
+                "bad",
+                "average",
+                "fine",
+                "good",
+                "very_good",
+                "great",
+                "masterpiece"
+              ]
+            },
+            "required": false,
+            "name": "score",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": ["all", "spring", "summer", "fall", "winter"]
+            },
+            "required": false,
+            "name": "season",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": ["all", "sub", "dub", "sub_dub"]
+            },
+            "required": false,
+            "name": "language",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "default",
+                "recently_added",
+                "recently_updated",
+                "score",
+                "name_az",
+                "release_date",
+                "most_watched"
+              ]
+            },
+            "required": false,
+            "name": "sort",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "action",
+                "adventure",
+                "cars",
+                "comedy",
+                "dementia",
+                "demons",
+                "mystery",
+                "drama",
+                "ecchi",
+                "fantasy",
+                "game",
+                "historical",
+                "horror",
+                "kids",
+                "magic",
+                "martial_arts",
+                "mecha",
+                "music",
+                "parody",
+                "samurai",
+                "romance",
+                "school",
+                "sci-fi",
+                "shoujo",
+                "shoujo_ai",
+                "shounen",
+                "shounen_ai",
+                "space",
+                "sports",
+                "super_power",
+                "vampire",
+                "harem",
+                "slice_of_life",
+                "supernatural",
+                "military",
+                "police",
+                "psychological",
+                "thriller",
+                "seinen",
+                "josei",
+                "isekai"
+              ]
+            },
+            "required": false,
+            "name": "genres",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "number",
+              "nullable": true,
+              "default": 1,
+              "example": 1
+            },
+            "required": false,
+            "name": "page",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "pageInfo": {
+                          "type": "object",
+                          "properties": {
+                            "currentPage": {
+                              "type": "number",
+                              "default": 1
+                            },
+                            "hasNextPage": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "totalPages": {
+                              "type": "number",
+                              "default": 1
+                            }
+                          }
+                        },
+                        "response": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "title": {
+                                "type": "string"
+                              },
+                              "alternativeTitle": {
+                                "type": "string"
+                              },
+                              "id": {
+                                "type": "string"
+                              },
+                              "poster": {
+                                "type": "string",
+                                "format": "uri"
+                              },
+                              "episodes": {
+                                "type": "object",
+                                "properties": {
+                                  "sub": {
+                                    "type": "number"
+                                  },
+                                  "dub": {
+                                    "type": "number"
+                                  },
+                                  "eps": {
+                                    "type": "number"
+                                  }
+                                },
+                                "required": ["sub", "dub", "eps"]
+                              },
+                              "type": {
+                                "type": "string"
+                              },
+                              "duration": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "title",
+                              "alternativeTitle",
+                              "id",
+                              "poster",
+                              "episodes",
+                              "type",
+                              "duration"
+                            ]
+                          }
+                        }
+                      },
+                      "required": ["pageInfo", "response"]
+                    }
+                  },
+                  "required": ["status", "data"]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/episodes/{id}": {
+      "get": {
+        "description": "Retrieve The list Of Episodes By ID",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "examples": [
+                "steins-gate-3",
+                "baccano-129",
+                "code-geass-lelouch-of-the-rebellion-41",
+                "attack-on-titan-112"
+              ]
+            },
+            "required": true,
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "title": {
+                            "type": "string"
+                          },
+                          "alternativeTitle": {
+                            "type": "string"
+                          },
+                          "id": {
+                            "type": "string"
+                          },
+                          "isFiller": {
+                            "type": "boolean"
+                          },
+                          "episodeNumber": {
+                            "type": "number"
+                          }
+                        },
+                        "required": ["title", "alternativeTitle", "id", "isFiller", "episodeNumber"]
+                      }
+                    }
+                  },
+                  "required": ["status", "data"]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/schedule": {
+      "get": {
+        "description": "Retrieve Schedule Anime By Date example: ?date=21. Default is CurrentDate",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "name": "date",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "meta": {
+                          "type": "object",
+                          "properties": {
+                            "date": {
+                              "type": "string",
+                              "format": "date"
+                            },
+                            "currentDate": {
+                              "type": "string",
+                              "format": "date"
+                            },
+                            "lastDate": {
+                              "type": "string",
+                              "format": "date"
+                            }
+                          },
+                          "required": ["date", "currentDate", "lastDate"]
+                        },
+                        "response": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "title": {
+                                "type": "string"
+                              },
+                              "alternativeTitle": {
+                                "type": "string"
+                              },
+                              "id": {
+                                "type": "string"
+                              },
+                              "time": {
+                                "type": "string"
+                              },
+                              "episode": {
+                                "type": "number"
+                              }
+                            },
+                            "required": ["title", "alternativeTitle", "id", "time", "episode"]
+                          }
+                        }
+                      },
+                      "required": ["meta", "response"]
+                    }
+                  },
+                  "required": ["status", "data"]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/schedule/next/{id}": {
+      "get": {
+        "description": "Retrieve Next Episode Schedule Of An Anime By ID example: one-piece-100",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "example": "one-piece-100"
+            },
+            "required": true,
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "time": {
+                          "type": "string"
+                        }
+                      },
+                      "required": ["time"]
+                    }
+                  },
+                  "required": ["status", "data"]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/{query}": {
+      "get": {
+        "description": "Retrieve The list Of Anime By Query example: top-airing",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "top-airing",
+                "most-popular",
+                "most-favorite",
+                "completed",
+                "recently-added",
+                "recently-updated",
+                "top-upcoming",
+                "subbed-anime",
+                "dubbed-anime",
+                "movie",
+                "tv",
+                "ova",
+                "ona",
+                "special"
+              ]
+            },
+            "required": true,
+            "examples": [
+              "top-airing",
+              "most-popular",
+              "most-favorite",
+              "completed",
+              "recently-added",
+              "recently-updated",
+              "top-upcoming",
+              "subbed-anime",
+              "dubbed-anime",
+              "movie",
+              "tv",
+              "ova",
+              "ona",
+              "special"
+            ],
+            "name": "query",
+            "in": "path"
+          },
+          {
+            "schema": {
+              "type": "number",
+              "nullable": true,
+              "default": 1,
+              "example": 1
+            },
+            "required": false,
+            "name": "page",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "pageInfo": {
+                          "type": "object",
+                          "properties": {
+                            "currentPage": {
+                              "type": "number",
+                              "default": 1
+                            },
+                            "hasNextPage": {
+                              "type": "boolean",
+                              "default": false
+                            },
+                            "totalPages": {
+                              "type": "number",
+                              "default": 1
+                            }
+                          }
+                        },
+                        "response": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "title": {
+                                "type": "string"
+                              },
+                              "alternativeTitle": {
+                                "type": "string"
+                              },
+                              "id": {
+                                "type": "string"
+                              },
+                              "poster": {
+                                "type": "string",
+                                "format": "uri"
+                              },
+                              "episodes": {
+                                "type": "object",
+                                "properties": {
+                                  "sub": {
+                                    "type": "number"
+                                  },
+                                  "dub": {
+                                    "type": "number"
+                                  },
+                                  "eps": {
+                                    "type": "number"
+                                  }
+                                },
+                                "required": ["sub", "dub", "eps"]
+                              },
+                              "type": {
+                                "type": "string"
+                              },
+                              "duration": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "title",
+                              "alternativeTitle",
+                              "id",
+                              "poster",
+                              "episodes",
+                              "type",
+                              "duration"
+                            ]
+                          }
+                        }
+                      },
+                      "required": ["pageInfo", "response"]
+                    }
+                  },
+                  "required": ["status", "data"]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
