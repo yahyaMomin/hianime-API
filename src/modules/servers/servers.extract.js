@@ -12,7 +12,7 @@ export default function serversExtract(html) {
       .each((i, element) => {
         const serverType = $(element).attr('data-type');
         const serverId = Number($(element).attr('data-id'));
-        const serverName = $(element).find('a').text().trim();
+        const serverName = $(element).find('a').text().trim().toLowerCase();
         const serverIndex = $(element).attr('data-server-id');
 
         //     HD-1         ---> 4
@@ -28,6 +28,14 @@ export default function serversExtract(html) {
         });
       });
 
+    ['megaplay', 'vidwish'].forEach((name) => {
+      servers.push({
+        index: null,
+        type: block.includes('sub') ? 'sub' : 'dub',
+        id: null,
+        name: name,
+      });
+    });
     return servers;
   };
 

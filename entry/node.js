@@ -8,4 +8,4 @@ serve({
   port,
 });
 
-console.log(`Server running on http://localhost:${port}`);
+console.log(`Server running visit http://localhost:${port}/doc for docs`);

@@ -18,6 +18,8 @@ const someAnimes = {
     'baccano-129::ep=3809',
     'code-geass-lelouch-of-the-rebellion-41::ep=1158',
   ],
+
+  servers: ['hd-1', 'hd-2', 'hd-3', 'megaplay', 'vidwish'],
 };
 
 export default someAnimes;
