@@ -1,4 +1,3 @@
-import axios from 'axios';
 import config from '@/config/config';
 import serversExtract from './servers.extract';
 import { NotFoundError } from '@/utils/errors';
@@ -18,13 +17,13 @@ export async function getServers(id) {
   const Referer = `/watch/${id.replace('::', '?')}`;
 
   try {
-    const { data } = await axios.get(config.baseurl + ajaxUrl, {
+    const res = await fetch(config.baseurl + ajaxUrl, {
       headers: {
         Referer: config.baseurl + Referer,
         ...config.headers,
       },
     });
-
+    const data = await res.json();
     const response = serversExtract(data.html);
     return response;
   } catch (err) {

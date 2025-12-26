@@ -1,4 +1,3 @@
-import axios from 'axios';
 import config from '@/config/config';
 import episodesExtract from './episodes.extract';
 import { NotFoundError } from '@/utils/errors';
@@ -11,13 +10,14 @@ export default async function episodesHandler(c) {
   const ajaxUrl = `/ajax/v2/episode/list/${idNum}`;
 
   try {
-    const { data } = await axios.get(config.baseurl + ajaxUrl, {
+    const res = await fetch(config.baseurl + ajaxUrl, {
       headers: {
         Referer: Referer,
         ...config.headers,
       },
     });
 
+    const data = await res.json();
     const response = episodesExtract(data.html);
     return response;
   } catch (err) {

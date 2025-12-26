@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { validationError } from '@/utils/errors';
 import config from '@/config/config';
 // import monthlyScheduleExtract from './monthlySchedule.extarct';
@@ -27,20 +26,21 @@ export default async function monthyScheduleHandler(c) {
 
   const ajaxUrl = `/ajax/schedule/list?tzOffset=-330&date=${formattedDate}`;
 
+  const meta = {
+    date: formattedDate,
+    currentDate: `${todaysYear}-${todaysMonth}-${todaysDate}`,
+    lastDate: `${todaysYear}-${todaysMonth}-${lastDateOfMonth}`,
+  };
   try {
-    const { data } = await axios.get(config.baseurl + ajaxUrl, {
+    const res = await fetch(config.baseurl + ajaxUrl, {
       headers: {
         ...config.headers,
         Referer: config.baseurl + '/home',
       },
-      timeout: 10000,
     });
 
-    const meta = {
-      date: formattedDate,
-      currentDate: `${todaysYear}-${todaysMonth}-${todaysDate}`,
-      lastDate: `${todaysYear}-${todaysMonth}-${lastDateOfMonth}`,
-    };
+    const data = await res.json();
+
     const response = monthlyScheduleExtract(data.html);
     return { meta, response };
   } catch (error) {

@@ -1,7 +1,7 @@
 import app from '@/app.js';
 import { serve } from 'bun';
 
-const port = 3030;
+const port = process.env.PORT || 3030;
 const bunApp = serve({
   port,
   fetch: app.fetch,

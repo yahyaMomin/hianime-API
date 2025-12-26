@@ -107,7 +107,7 @@ export default async function megacloud({ selectedServer, id }, retry = 0) {
       usedFallback,
     });
   } catch (err) {
-    console.error(err.message);
+    console.error(err);
     if (retry < MAX_RETRIES) {
       await backoff(retry);
       return megacloud({ selectedServer, id }, retry + 1);
@@ -234,7 +234,7 @@ const getDecryptionKey = async () => {
   }
 
   try {
-    const data = await fetchText(KEY_URL, { timeout: 5000 });
+    const data = await fetchText(KEY_URL);
     cachedKey = data.trim();
     keyLastFetched = now;
     return cachedKey;

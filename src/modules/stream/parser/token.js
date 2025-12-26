@@ -1,4 +1,3 @@
-import axios from 'axios';
 import * as cheerio from 'cheerio';
 import config from '@/config/config.js';
 
@@ -43,15 +42,26 @@ export default async function extractToken(url, retry = 0) {
 ======================= */
 
 const fetchHTML = async (url) => {
-  const { data } = await axios.get(url, {
-    headers: {
-      Referer: `${baseurl}/`,
-      'User-Agent': 'Mozilla/5.0',
-      Accept: 'text/html',
-    },
-    timeout: TIMEOUT,
-  });
-  return data;
+  const controller = new AbortController();
+
+  const id = setTimeout(() => controller.abort(), TIMEOUT);
+  try {
+    const res = await fetch(url, {
+      headers: {
+        Referer: `${baseurl}/`,
+        'User-Agent': config.headers['User-Agent'],
+        Accept: 'text/html',
+      },
+      signal: controller.signal,
+    });
+
+    if (!res.ok) {
+      throw new Error(`HTTP ${res.status}`);
+    }
+    return await res.text();
+  } finally {
+    clearTimeout(id);
+  }
 };
 
 /* =======================

@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { NotFoundError } from '@/utils/errors';
 import config from '@/config/config';
 import charactersExtract from './characters.extract';
@@ -11,13 +10,15 @@ export default async function charactersHandler(c) {
   const endpoint = `/ajax/character/list/${idNum}?page=${page}`;
   try {
     const Referer = `${config.baseurl}/home`;
-    const { data } = await axios.get(config.baseurl + endpoint, {
+
+    const res = await fetch(config.baseurl + endpoint, {
       headers: {
         ...config.headers,
         Referer,
       },
     });
 
+    const data = await res.json();
     const response = charactersExtract(data.html);
 
     return response;

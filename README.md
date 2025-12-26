@@ -5,9 +5,9 @@ It provides endpoints for anime discovery, details, episodes, servers, and strea
 
 > ⚠️ **Important**
 >
-> - This API is **unofficial** and not affiliated with hianimez.to  
+> - This API is **unofficial** and not affiliated with hianimez.to
 > - No hosted instance exists — **deploy your own**
-> - All content belongs to its original owners  
+> - All content belongs to its original owners
 > - This project is for **educational and personal use only**
 
 ---
@@ -47,13 +47,20 @@ Server runs at:
 ```
 http://localhost:3030
 ```
+
+now vist /doc for intrective docs
+
+```bash
+http://localhost:3030/doc
+```
+
 ### OR You Can Also Run This Project With NodeJs
 
 ```bash
 git clone https://github.com/yahyaMomin/hianime-API.git
 cd hianime-API
 bun install
-bun run build:node 
+bun run build:node
 bun run start:node
 ```
 
