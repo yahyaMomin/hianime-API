@@ -107,7 +107,7 @@ export default async function megacloud({ selectedServer, id }, retry = 0) {
       usedFallback,
     });
   } catch (err) {
-    console.error(err);
+    console.error(err.message);
     if (retry < MAX_RETRIES) {
       await backoff(retry);
       return megacloud({ selectedServer, id }, retry + 1);

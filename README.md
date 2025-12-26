@@ -54,22 +54,6 @@ now vist /doc for intrective docs
 http://localhost:3030/doc
 ```
 
-### OR You Can Also Run This Project With NodeJs
-
-```bash
-git clone https://github.com/yahyaMomin/hianime-API.git
-cd hianime-API
-bun install
-bun run build:node
-bun run start:node
-```
-
-Server runs at:
-
-```
-http://localhost:3040
-```
-
 > ⚠️ **Important**
 >
 > - You Cannot Run this Projct Directly Using Nodemon or node

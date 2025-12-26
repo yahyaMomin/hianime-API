@@ -1,4 +1,4 @@
-import { validationError } from '@/utils/errors.js';
+import { NotFoundError, validationError } from '@/utils/errors.js';
 import { getServers } from '../servers/servers.handler.js';
 import streamExtract from './stream.extract.js';
 
@@ -11,5 +11,6 @@ export default async function streamHandler(c) {
   if (!selectedServer) throw new validationError('invalid or server not found', { server });
 
   const response = await streamExtract({ selectedServer, id });
+  if (!response) throw NotFoundError('Something Went Wtong While Decryption');
   return response;
 }

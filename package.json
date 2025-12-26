@@ -1,6 +1,6 @@
 {
   "name": "hianime-api",
-  "module": "entry/bun.js",
+  "module": "index.js",
   "type": "module",
   "private": true,
   "peerDependencies": {
@@ -16,23 +16,16 @@
     "prepare": "husky",
     "lint": "eslint",
     "lint:fix": "eslint --fix && prettier . --write",
-    "dev": "bun --hot entry/bun.js",
-    "start": "bun out/bun.js",
-    "build": "bun build entry/bun.js --outdir out  --target=bun",
-    "start:node": "node dist/node.js",
-    "build:node": "tsup entry/node.js --format esm --out-dir dist --clean",
-    "build:all": "bun build entry/bun.js --outdir out  --target=bun && tsup entry/node.js --format esm --out-dir dist --clean",
+    "dev": "bun --hot index.js",
+    "start": "bun index.js",
     "test": "vitest"
   },
   "dependencies": {
-    "@hono/node-server": "^1.19.7",
     "@hono/zod-openapi": "^1.2.0",
     "@scalar/hono-api-reference": "^0.9.30",
     "@upstash/redis": "^1.35.8",
-    "axios": "^1.13.2",
     "cheerio": "^1.1.2",
     "crypto-js": "^4.2.0",
-    "dotenv": "^16.6.1",
     "hono": "^4.11.1",
     "hono-rate-limiter": "^0.4.2",
     "zod": "^4.2.1"
@@ -47,7 +40,6 @@
     "globals": "^16.5.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
-    "prettier": "^3.7.4",
-    "tsup": "^8.5.1"
+    "prettier": "^3.7.4"
   }
 }
